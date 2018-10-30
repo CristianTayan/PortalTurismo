@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar color='danger'>
+    <ion-title>Categorías</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content> 
+  <ion-card *ngFor="let categoria of categorias" (click)="getCategoria(Categoria)" style="margin-left:0%; margin-top: 0%; margin-bottom: 0%; width: 100%">
+    <img src="{{categoria.atr_img}}"/>
+    <div class="card-title">
+        <strong>
+          {{categoria.atr_nombre_tipo}}
+        </strong>
+      </div>
+    <div class="card-subtitle"><ion-badge item-center color="danger">Lugares</ion-badge></div>
+  </ion-card>  
+</ion-content>
+
+

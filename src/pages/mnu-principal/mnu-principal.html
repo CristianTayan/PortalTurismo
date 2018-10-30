@@ -1,0 +1,66 @@
+<ion-header >
+  <ion-navbar color='danger'>
+    <ion-title *ngIf="!isSerarchbarOpened">IBARRA ES TURISMO</ion-title>
+    <ion-searchbar *ngIf="isSerarchbarOpened" (search)="onSearch($event)" showCancelButton="true" (ionCancel)="isSerarchbarOpened=false"></ion-searchbar>
+    <ion-buttons end>
+        <button ion-button icon-only color="royal" *ngIf="!isSerarchbarOpened" (click)="isSerarchbarOpened=true">
+          <ion-icon name="search"></ion-icon>
+        </button>
+      </ion-buttons>
+      <!-- <ion-buttons end>
+        <button ion-button icon-only color="royal">
+          <ion-icon name="person-add"></ion-icon>
+        </button>
+      </ion-buttons> -->
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="background-color: #DDDEDF;" >
+    <ion-slides pager style="height: 40%;">
+      <ion-slide style="background-image: url('https://ibarraesturismo.files.wordpress.com/2018/01/obelisco.jpg?w=500&h=334');background-size: 100% 100%;background-repeat: no-repeat;"> 
+      </ion-slide>
+      <ion-slide style="background-image: url('https://ibarraesturismo.files.wordpress.com/2018/01/tren.jpg?w=685');background-position-y: 100% 100%;background-size: 100%;background-repeat: no-repeat;">  
+      </ion-slide>
+      <ion-slide style="background-image: url('https://ibarraesturismo.files.wordpress.com/2018/01/esq-elcoco.gif?w=685');background-position-y: 100% 100%;background-size: 100%;background-repeat: no-repeat;">
+      </ion-slide>
+    </ion-slides>
+  <div class="menuCategorias">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <p>Categorias</p>
+        </ion-col>
+        <ion-col>
+        </ion-col>
+        <ion-col>
+          <ion-buttons end>
+            <button ion-button small>
+              Ver todos
+            </button>
+          </ion-buttons> 
+        </ion-col>
+      </ion-row>
+    </ion-grid> 
+    <ion-scroll scrollX="true" style="width: 100%; height: 200px;">
+        <div class="inner">
+          <ion-card *ngFor="let menu of  menus" (click)="AbrirAtractivos()" style="width: 180px">
+            <img src="{{menu.cmp_ruta_imagen}}" height="140"/>
+            <ion-card-content>
+              <strong>
+                  <ion-icon name="{{menu.cmp_icono}}"></ion-icon> {{menu.cmp_titulo}}
+              </strong>
+            </ion-card-content>
+          </ion-card>        
+        </div>
+      </ion-scroll>      
+  </div>
+
+  
+  
+
+
+  
+</ion-content>
+
+
+
