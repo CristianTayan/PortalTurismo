@@ -1,11 +1,16 @@
-<ion-header>
-  <ion-navbar color='danger'>
-    <ion-title>Categorías</ion-title>
+<ion-header no-border>
+  <ion-navbar color='danger' transparent>
+      <ion-buttons style="display: inline-block;">
+          <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </ion-buttons>
+    <ion-title style="display: inline-block; margin-top: 10px">CATEGORÍAS</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content> 
-  <ion-card *ngFor="let categoria of categorias" (click)="getCategoria(Categoria)" style="margin-left:0%; margin-top: 0%; margin-bottom: 0%; width: 100%">
-    <img src="{{categoria.atr_img}}"/>
+<ion-content style="margin-top: -17%; height: 109.5vh;"> 
+  <ion-card *ngFor="let categoria of categorias" (click)="getAtractivoporCategoria(categoria.atr_id_tipo)" style="margin-left:0%; margin-top: -1%; margin-bottom: 0%; width: 100%">
+    <img src="{{categoria.atr_img}}" style="border-radius: 1px ; filter : brightness( 80% ); height: 35vh;"/>
     <div class="card-title">
         <strong>
           {{categoria.atr_nombre_tipo}}

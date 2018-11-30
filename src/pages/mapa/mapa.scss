@@ -1,0 +1,25 @@
+page-mapa {
+
+    ion-header ion-icon.back-button-icon.icon {
+        color: #C40319;
+        font-size: 1.3em;
+        text-align: center;
+    }
+    
+    .bar-buttons,
+    .toolbar-title {
+       font-size: 1.2em;
+        color: #C40319;
+    }
+    .container-map {
+        position: relative;
+        top: 0px;
+        bottom: 0px;
+        width: 100%;
+        height: 100%;
+    }
+    
+    
+
+
+}

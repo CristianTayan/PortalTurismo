@@ -1,25 +1,40 @@
-<!--
-  Generated template for the AtractivosTuristicosPage page.
+<ion-header no-border>
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar color='danger'>
-    <ion-title center>Atractivos</ion-title>
-  </ion-navbar>
+  <ion-navbar >
+      <!-- <ion-buttons>
+          <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </ion-buttons> -->
+        <ion-title >ATRACTIVOS TURÍSTICOS</ion-title>
+      </ion-navbar>
 
 </ion-header>
 
 
-<ion-content style="background-color: #DDDEDF;">
-    <ion-card *ngFor="let atractivo of atractivos" style="background-color: rgb(241, 244, 247);">
-        <img src="{{atractivo.at_img_atractivo}}" height="175"/>
+<ion-content >
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+    <ion-card *ngFor="let atractivo of atractivos" (click)="AbrirAtractivos(atractivo.at_id)" style="background-color: rgb(254, 254, 255);">
+        <img src="{{atractivo.at_img_atractivo}}" style="height: 35vh;"/>
         <ion-card-content>
-          <ion-card-title style="font-size: 1.0em;" color='danger'>
+          <ion-card-title style="font-size: 1.0em;">
             <strong>{{atractivo.at_nombre}}</strong>
             </ion-card-title>
+            <rating [(ngModel)]="atractivo.at_rating" 
+                        readOnly="true"
+                        max="5"
+                        emptyStarIconName="star-outline" 
+                        halfStarIconName="star-half" 
+                        starIconName="star" 
+                        nullable="false"> 
+                </rating>
           <p style="text-align : justify;">
             {{atractivo.at_descripcion_corta}}
           </p>
@@ -37,10 +52,10 @@
               </p>
             </div>
         </ion-card-content>
-        <div style="padding-left: 5%;padding-bottom: 10px">
-            <button ion-button round small padding color="danger" (click)="atractivoDetalle(atractivo.at_id, atractivo.at_nombre, atractivo.at_descripcion_corta, atractivo.at_img_atractivo, atractivo.at_contacto, atractivo.at_descripcion_larga, atractivo.at_email, atractivo.at_direccion,  atractivo.at_longitud, atractivo.at_latitud, atractivo.at_comollegar, atractivo.at_red_social, atractivo.at_video_atractivo)">
+        <!-- <div style="padding-left: 5%;padding-bottom: 10px">
+            <button ion-button round small padding color="danger" (click)="AbrirAtractivos(atractivo.at_id)">
             Ver lugar.</button>
-        </div>
+        </div> -->
       </ion-card>
 
       

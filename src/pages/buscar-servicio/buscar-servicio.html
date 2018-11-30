@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar color="danger">
+     <ion-title>Lista de servicios</ion-title>
+     <ion-buttons end>
+        <button ion-button (click)="allServicios()">
+        <ion-icon name="map"></ion-icon>Todos</button>
+      </ion-buttons> 
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-searchbar [(ngModel)]="terms"></ion-searchbar>  
+    <!-- <map-hotel></map-hotel>   -->
+<ion-list>
+    <ion-item *ngFor="let item of servicioList | search : terms | sort: {property: column, order: order}" (click)="AbrirServicio(item.st_id, item.st_pagina_web, item.st_latitud, item.st_longitud)">
+        <h2><ion-icon ios="ios-pin" md="md-pin"></ion-icon>{{ item.st_nombre }}  </h2>
+        <p>Dirección: {{item.st_direccion}}</p>
+        <p style="font-size: 10px">({{item.cat_id}})</p>        
+    </ion-item>
+</ion-list>
+</ion-content>

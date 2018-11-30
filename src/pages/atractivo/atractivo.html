@@ -1,0 +1,137 @@
+<ion-header no-border>
+
+  <ion-navbar color='danger' transparent>
+    <ion-title *ngFor="let atractivo of  atractivos" >Ibarra - Imbabura</ion-title>
+    <ion-buttons end>
+        <button style="font-size: 10px; margin-top: -5px" ion-button icon-only >
+          <ion-icon name="share"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-buttons end>
+          <button *ngFor="let atractivo of  atractivos" style="font-size: 10px; margin-top: -5px" ion-button icon-only  (click)="pasarCoordenadas(atractivo.at_longitud, atractivo.at_latitud, atractivo.at_nombre)">
+            <ion-icon name="pin"></ion-icon>
+          </button>
+        </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+ 
+<ion-content style="margin-top: -17%; height: 109.5vh;">
+    <ion-card *ngFor="let atractivo of  atractivos" style="background-color: rgb(255, 255, 255);margin-left:0%; margin-top: 0%; margin-bottom: 0%; width: 100%; ">
+      <ion-slides autoplay="3000" loop="true" speed="2000" effect="fade">
+        <ion-slide>
+          <img src="{{atractivo.at_img_atractivo}}" style="filter : brightness( 75% ); width: 100%; height: 300px; position: relative;
+          display: inline-block;
+          text-align: center;"/>
+          <p style="position: absolute;top: 90%;left: 10px; color:white">{{atractivo.at_nombre}}</p>  
+
+        </ion-slide>
+        <ion-slide *ngFor="let imagen of imagenes">
+          <img src="{{imagen.img_ruta}}" style="filter : brightness( 75% ); width: 100%; height: 300px; position: relative;
+          display: inline-block;
+          text-align: center;">
+          <p style="position: absolute;top: 90%;left: 10px; color:white">{{imagen.img_descripcion}}  </p>  
+        </ion-slide>
+      </ion-slides>   
+      <ion-card-content>
+        <div>
+          <ion-segment [(ngModel)]="atractivs" color='danger'>
+            <ion-segment-button value="historia">
+              HISTORIA
+            </ion-segment-button>
+            <ion-segment-button value="llegar">
+              COMO LLEGAR
+            </ion-segment-button>
+            <ion-segment-button value="contacto">
+              CONTACTO
+            </ion-segment-button>
+          </ion-segment>
+        </div>
+          
+          
+          <div [ngSwitch]="atractivs" >
+            <ion-list *ngSwitchCase="'historia'">
+              <br>
+                <b padding-left color='danger'>{{atractivo.at_nombre}}</b>
+                <rating [(ngModel)]="atractivo.at_rating" 
+                        readOnly="true"
+                        max="5"
+                        emptyStarIconName="star-outline" 
+                        halfStarIconName="star-half" 
+                        starIconName="star" 
+                        nullable="false"> 
+                </rating>
+              <p style="text-align : justify;" padding>
+                {{atractivo.at_descripcion_larga}}
+              </p>
+            </ion-list>
+              
+            <ion-list *ngSwitchCase="'llegar'"  >
+              <div style="width: 100%; height: 60vh;" padding> 
+                  <ion-row>
+                    <ion-col col-4>
+                        <p> <b>Como llegar:</b>  </p>
+                    </ion-col>
+                    <ion-col col-8>
+                      <p>{{atractivo.at_comollegar}}</p>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col col-8>
+                        <p> <b>Dirección:</b>  </p>
+                    </ion-col>
+                    <ion-col col-8>
+                      <p style="padding-top: 15px">{{atractivo.at_direccion}}</p>
+                    </ion-col>
+                  </ion-row>                
+              </div>
+            </ion-list>
+            <ion-list *ngSwitchCase="'contacto'" style="width: 100%; height: 60vh;">
+                <ion-grid padding>
+                    <ion-row>
+                      <ion-col col-4>
+                        <p> <b>Teléfono:</b>  </p>
+                      </ion-col>
+                      <ion-col col-7>
+                        <p>{{atractivo.at_contacto}}</p>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-4>
+                            <p> <b>E-mail:</b>  </p>
+                        </ion-col>
+                        <ion-col col-8>
+                          <p>{{atractivo.at_email}}</p>
+                        </ion-col>
+                      </ion-row>
+                        <ion-row>
+                            <ion-col col-1>
+                            </ion-col>
+                            <ion-col col-2>
+                              <ion-icon name="logo-facebook" style="color: #4e6bca"></ion-icon>
+                            </ion-col>
+                            <ion-col col-9>
+                              
+                              <a href="{{atractivo.at_red_social}}">{{atractivo.at_red_social}}</a>
+                            </ion-col>
+                          </ion-row>
+                          <ion-row>
+                              <ion-col col-1>
+                              </ion-col>
+                              <ion-col col-2>
+                                <ion-icon name="logo-youtube" style="color: #f30d0d"></ion-icon>
+                              </ion-col>
+                              <ion-col col-9>
+                                
+                                <a href="{{atractivo.at_video_atractivo}}">{{atractivo.at_video_atractivo}}</a>
+                              </ion-col>
+                            </ion-row>
+                        
+                  </ion-grid>
+               
+            </ion-list>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+</ion-content>

@@ -1,0 +1,20 @@
+page-servicio {
+  ion-header ion-icon.back-button-icon.icon {
+      color: white;
+      font-size: 1.3em;
+  }
+  ul {
+      margin-top: 0px;
+      padding: 0px;
+    
+      &.rating li {
+        padding: 0px 0px !important;
+        background: none;
+        color: #FFF;
+              
+        ion-icon {
+          font-size: 12px;
+        }
+      }
+    }
+}

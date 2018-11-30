@@ -36,6 +36,41 @@ export class AtractivosTuristicosServiceProvider {
         .subscribe(
           data  =>{
             resolve(data);
+            console.log(data);
+            
+          },
+          err=>{
+            console.log(err);            
+          }
+        )
+      } 
+    );
+  }
+
+  getCategoriaAtractivo(id){
+    return new Promise(
+      resolve => {
+        this.http.get("http://127.0.0.1/servidorPortalTuristico/getAtractivoCategoria/"+id)
+        .subscribe(
+          data =>{
+            resolve(data);
+          },
+          err=>{
+            console.log(err);            
+          }
+        )
+      } 
+    );
+  }
+
+  getImagenesAtractivo(at_id){
+    return new Promise(
+      resolve => {
+        this.http.get("http://127.0.0.1/servidorPortalTuristico/getImagenes/"+at_id)
+        .subscribe(
+          data  =>{
+            resolve(data);
+            console.log(data); 
           },
           err=>{
             console.log(err);            

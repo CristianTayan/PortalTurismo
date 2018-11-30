@@ -1,12 +1,89 @@
 page-mnu-principal {
+  h1{
+    font-size: 1em;
+    text-align: right;
+  }
   .inner{
     width: 2000px;
-    height: 100%;
+    height: 110%;
     ion-card{
-      display: table-cell;
-      border: 1px solid #ccc;
+      display: inline-block;
+      // box-shadow: none;
     }
-  } 
+  }
 
+  ion-header ion-icon.back-button-icon.icon {
+    color: white;
+    font-size: 1.3em;
+}
+
+.bar-buttons,
+.toolbar-title {
+   font-size: 1.2em;
+    color: #fff;
+    text-align: center;
+}
+
+  p{
+    text-align: left;
+    margin-left: 0%;
+  }
+
+  p  strong{
+    font-size: 0.8em;
+    text-align: left;
+  }
+
+  h1{
+    color: rgb(128, 122, 122);
+    margin-right: 5px;
+  }
+  #btnContador{
+    background-color: #8b0000;
+    color: white;
+  }
+  b{
+    font-size: 0.7em;
+    color: #212121;
+    margin-bottom: 0%
+
+  }
+  ul {
+    margin-top: 0px;
+    padding: 0px;
+    height: 15px;
+  
+    &.rating li {
+      padding: 0px 0px !important;
+      background: none;
+      color: #FF6565;
+      height: 15px;
+
+  
+      ion-icon {
+        font-size: 13px;
+      }
+    }
+  }
+  ion-col{
+    height: 40px;
+  }
+
+  shrinking-segment-header {
+ 
+    background-color: #363636;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        border-radius: 50%;
+        width: 75px;
+        height: auto;
+        margin-right: 15px;
+    }
+
+}
   
 }

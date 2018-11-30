@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar color='danger'>
+    <ion-buttons style="display: inline-block">
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-buttons>
+    <ion-title *ngIf="!isSerarchbarOpened" style="display: inline-block; margin-top: 10px">MAPA DE IBARRA</ion-title>
+    <ion-searchbar *ngIf="isSerarchbarOpened" autofocus (search)="onSearch($event)" showCancelButton="true" (ionCancel)="isSerarchbarOpened=false"></ion-searchbar>
+    <ion-buttons end>
+        <button ion-button icon-only color="royal" *ngIf="!isSerarchbarOpened" (click)="isSerarchbarOpened=true">
+          <ion-icon name="search"></ion-icon>
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+<ion-content >
+  <div class="container-map">
+    <div id="mapId" style="width: 100%; height:100%; position: absolute; z-index: 1;">
+    
+    </div>  
+  </div> 
+</ion-content>

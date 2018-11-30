@@ -1,0 +1,39 @@
+page-mapa-detalle {
+    .leaflet-control-container .leaflet-routing-container-hide {
+        background-color: black;
+        opacity: 0.5;
+        width: 80%;
+        font-size: 0.72em;
+        color: white;
+        padding: 2%;
+        vertical-align: bottom;
+        display : none;
+    }
+    .leaflet-routing-container h2 {
+        font-size: 12px;
+        color: white;
+        font-weight: bold;
+        text-align: end
+    }
+    .leaflet-routing-container h3 {
+        font-size: 11px;
+        font-weight: bold;
+        color: #C40319;
+        text-align: end
+    }
+
+    ion-header ion-icon.back-button-icon.icon {
+        color: #C40319;
+        font-size: 1.3em;
+        text-align: center;
+    }
+    
+    .bar-buttons,
+    .toolbar-title {
+       font-size: 1.2em;
+        color: #C40319;
+    }
+
+    
+
+}

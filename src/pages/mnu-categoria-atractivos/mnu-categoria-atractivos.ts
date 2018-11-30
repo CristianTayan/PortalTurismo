@@ -1,7 +1,8 @@
+import { AtractivosTuristicosPage } from './../atractivos-turisticos/atractivos-turisticos';
+import { AtractivosTuristicosServiceProvider } from './../../providers/atractivos-turisticos-service/atractivos-turisticos-service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CategoriaAtractivoServiceProvider } from '../../providers/categoria-atractivo-service/categoria-atractivo-service';
-import { AtractivosTuristicosPage } from '../atractivos-turisticos/atractivos-turisticos';
 
 /**
  * Generated class for the MnuCategoriaAtractivosPage page.
@@ -18,12 +19,11 @@ import { AtractivosTuristicosPage } from '../atractivos-turisticos/atractivos-tu
 })
 export class MnuCategoriaAtractivosPage {
   categorias;
-  Categoria;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public categoriaService: CategoriaAtractivoServiceProvider) {
+  atractivos;
+  constructor(public navCtrl: NavController, public atractivosService: AtractivosTuristicosServiceProvider, public navParams: NavParams, public categoriaService: CategoriaAtractivoServiceProvider) {
     this.categoriaService.getCategorias()
       .then(
         data => {
-          // console.log(data);
           this.categorias = data;
         }
       )
@@ -36,12 +36,9 @@ export class MnuCategoriaAtractivosPage {
 
   }
 
-    getCategoria(Categoria){
-      this.navCtrl.push(AtractivosTuristicosPage, {
-        idCategoria: Categoria,
-      })
-      
-    } 
-
-
+  getAtractivoporCategoria(at_id){
+    this.navCtrl.push(AtractivosTuristicosPage,{
+      ta_id : at_id
+    })   
+ }
 }
