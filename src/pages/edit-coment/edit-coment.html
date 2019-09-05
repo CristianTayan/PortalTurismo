@@ -1,0 +1,52 @@
+<ion-header>
+
+    <ion-navbar color='primary'>
+      <ion-title>Calificar servicio</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content >
+  
+    <ion-list no-lines> 
+      <ion-item>
+          <ion-avatar item-start>
+            <img [src]="image">
+          </ion-avatar>
+          <h6>{{username}}</h6>
+          <p style="font-size: 0.7em">Publicado de forma pública</p>
+          <!-- <p style="font-size: 0.7em">{{sigm_fecha}}</p> -->
+        </ion-item>
+    
+      <!-- <rating [(ngModel)]="sigm_rating" 
+        readOnly="false"
+        max="5"
+        emptyStarIconName="star-outline" 
+        halfStarIconName="star-half" 
+        starIconName="star" 
+        nullable="true"> 
+      </rating> -->
+      <ion-item >
+        <ion-input type="text" placeholder="Comparte detalles de tu experiencia" [(ngModel)]="simg_descripcion" ></ion-input>
+      </ion-item>
+      <ion-item >
+          <img src="{{simg_ruta}}" alt="">
+      </ion-item>
+      <ion-item >
+        <img src="{{simg_ruta}}" alt="">
+        <!-- <ion-item> -->
+            <ion-input placeholder="Your photo here"type="file" required [(ngModel)]="simg_ruta"></ion-input>
+        <!-- <button ion-button outline color='secondary'><ion-icon name="camera" style="padding-right: 10px"></ion-icon>Agregar foto</button> -->
+      </ion-item>
+    
+    <ion-item>
+      <br>
+      <button ion-button block (click)='deleteComment()' color="secondary" >Actualizar</button>
+
+      <button ion-button block (click)='presentConfirm()' color="danger">Borrar</button>
+    </ion-item>
+  
+    
+    </ion-list> 
+  </ion-content>

@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar color='secondary'>
+    <ion-buttons >
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title *ngIf="!isSerarchbarOpened" style="display: inline-block; margin-top: 10px" >{{cat_nombre}}</ion-title>
+    <ion-searchbar *ngIf="isSerarchbarOpened" [(ngModel)]="terms" autofocus (search)="onSearch($event)" showCancelButton="true" (ionCancel)="isSerarchbarOpened=false"></ion-searchbar>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" *ngIf="!isSerarchbarOpened" (click)="isSerarchbarOpened=true">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>     
+</ion-header>
+
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-card *ngFor="let servicio of services | search : terms | sort: {property: column, order: order}"  style="background-color: rgb(254, 254, 255);">
+        <img [src]="'http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/servicios/' + servicio.st_img_servicio" *ngIf="servicio.st_img_servicio" (click)="AbrirServicio(servicio.st_id, servicio.st_nombre, servicio.st_pagina_web, servicio.st_latitud, servicio.st_longitud, servicio.st_celular, servicio.st_img_servicio)" style="height: 35vh;" />
+        <img src="assets/img/noimage.jpg" *ngIf="!servicio.st_img_servicio" (click)="AbrirServicio(servicio.st_id, servicio.st_nombre, servicio.st_pagina_web, servicio.st_latitud, servicio.st_longitud, servicio.st_celular, servicio.st_img_servicio)" style="height: 35vh;" />
+        <ion-card-content>
+            <ion-card-title style="font-size: 1.0em;">
+                <strong style="margin-right: 12px">{{servicio.st_nombre}}</strong>
+            </ion-card-title>
+            <rating [(ngModel)]="servicio.st_rating" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false">
+            </rating>
+            
+                <!-- <ion-icon name="paper" color='primary' style="margin-right: 10px"></ion-icon> -->
+                <div [innerHTML]="servicio.st_descripcion"></div>
+            <hr>
+            <button ion-button color='whatsapp' (click)=" pasarCoordenadasRuta(servicio.st_latitud, servicio.st_longitud,servicio.st_nombre)">Como llegar
+                <ion-icon name="pin" style="margin-left: 10px"></ion-icon>
+            </button>
+            <button ion-button color='danger' (click)="AbrirServicio(servicio.st_id, servicio.st_nombre, servicio.st_pagina_web, servicio.st_latitud, servicio.st_longitud, servicio.st_celular, servicio.st_img_servicio)">Ver más
+                <ion-icon name="map" style="margin-left: 10px"></ion-icon>
+            </button>
+
+            <div *ngIf="ocultar">
+                <p>
+                  {{servicio.st_img_servicio}}{{servicio.st_contacto}} {{servicio.st_descripcion_larga}} {{servicio.st_longitud}} {{servicio.st_latitud}} {{servicio.st_email}} {{servicio.st_direccion}} {{servicio.st_comollegar}} {{servicio.st_red_social}} {{servicio.st_video_atractivo}}
+                </p>
+            </div>
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>

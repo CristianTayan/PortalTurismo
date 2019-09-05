@@ -3,7 +3,7 @@ page-atractivos-turisticos {
         background-color: #DDDEDF;
     }
     ion-header ion-icon.back-button-icon.icon {
-        color: #C40319;
+        color: white;
         font-size: 1.3em;
         text-align: center;
     }
@@ -11,7 +11,7 @@ page-atractivos-turisticos {
     .bar-buttons,
     .toolbar-title {
        font-size: 1.2em;
-        color: #C40319;
+        color: white;
     }   
     ul {
         margin-top: 0px;
@@ -21,8 +21,8 @@ page-atractivos-turisticos {
         &.rating li {
           padding: 0px 0px !important;
           background: none;
-          color: #ffd307;
-        height: 15px;
+          color: #33B5E5;
+        height: 10px;
     
       
           ion-icon {

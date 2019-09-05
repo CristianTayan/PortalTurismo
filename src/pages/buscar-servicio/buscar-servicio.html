@@ -1,21 +1,33 @@
-<ion-header>
-  <ion-navbar color="danger">
+<ion-header no-border>
+  <ion-navbar color="light" transparent>
      <ion-title>Lista de servicios</ion-title>
-     <ion-buttons end>
-        <button ion-button (click)="allServicios()">
-        <ion-icon name="map"></ion-icon>Todos</button>
-      </ion-buttons> 
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-    <ion-searchbar [(ngModel)]="terms"></ion-searchbar>  
+<ion-content style="background-color: #f7f7f7">
+    <ion-searchbar style="border-radius: 25px" [(ngModel)]="terms"></ion-searchbar>  
     <!-- <map-hotel></map-hotel>   -->
-<ion-list>
-    <ion-item *ngFor="let item of servicioList | search : terms | sort: {property: column, order: order}" (click)="AbrirServicio(item.st_id, item.st_pagina_web, item.st_latitud, item.st_longitud)">
+    <ion-card *ngFor="let item of servicioList | search : terms | sort: {property: column, order: order}" (click)="AbrirServicio(item.st_id, item.st_nombre, item.st_pagina_web, item.st_latitud, item.st_longitud,item.st_celular, item.st_red_social, item.st_video_servicio, item.st_img_servicio)" style="border-radius: 15px"> 
+
+        <ion-item >
+          <ion-avatar item-start>
+            <img item-start [src]="'http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/servicios/' + item.st_img_servicio" *ngIf="item.st_img_servicio">            
+            <img item-start src="assets/img/noimage1.jpg" *ngIf="!item.st_img_servicio">
+          </ion-avatar>
+          <h5 style="font-weight: bold">{{ item.st_nombre }}</h5>
+          <p style="font-size: 0.7em">Dirección: {{item.st_direccion}}</p>
+          <p> ({{item.cat_id}})</p>
+        </ion-item>
+
+    </ion-card>
+
+
+      
+<!-- <ion-list>
+    <ion-item *ngFor="let item of servicioList | search : terms | sort: {property: column, order: order}" (click)="AbrirServicio(item.st_id, item.st_nombre, item.st_pagina_web, item.st_latitud, item.st_longitud,item.st_celular, item.st_img_servicio)">
         <h2><ion-icon ios="ios-pin" md="md-pin"></ion-icon>{{ item.st_nombre }}  </h2>
         <p>Dirección: {{item.st_direccion}}</p>
         <p style="font-size: 10px">({{item.cat_id}})</p>        
     </ion-item>
-</ion-list>
+</ion-list> -->
 </ion-content>

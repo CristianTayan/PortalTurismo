@@ -1,0 +1,30 @@
+page-calificar-servicio {
+    ion-header ion-icon.back-button-icon.icon {
+        color: white;
+        font-size: 1.3em;
+    }
+    ul {
+        margin-top: 0px;
+        padding: 0px;
+        padding-left: 10%;
+      
+        &.rating li {
+          padding: 0px 12px !important;
+          background: none;
+          color: orange;
+                
+          ion-icon {
+            font-size: 30px;
+          }
+        }
+      }
+      .text-input{
+          font-size: 0.85em;
+      }
+            
+      .text-input::-webkit-input-placeholder {
+        text-indent: 0;
+        font-size: 0.85em;
+      }
+
+}

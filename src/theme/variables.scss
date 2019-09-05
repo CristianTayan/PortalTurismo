@@ -13,7 +13,7 @@ $app-direction: ltr;
 
 
 @import "ionic.globals";
-@import "../node_modules/ionic-header-parallax/dist/parallax.scss";
+// @import "../node_modules/ionic-header-parallax/dist/parallax.scss";
 
 
 // Shared Variables
@@ -41,9 +41,16 @@ $colors: (
   light:      #f4f4f4,
   dark:       #222,
   yellow:   rgb(241, 226, 16),
-  blank:      #fff
+  blank:      #fff,
+  facebook:#3b5998,
+  whatsapp:#25d366,
+  
   
 );
+.facebook-btn {
+  text-transform: none !important;
+  background-color: #4267b2 !important;
+}
 
 
 // App iOS Variables

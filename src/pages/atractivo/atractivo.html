@@ -1,137 +1,195 @@
-<ion-header no-border>
+<ion-header >
 
-  <ion-navbar color='danger' transparent>
-    <ion-title *ngFor="let atractivo of  atractivos" >Ibarra - Imbabura</ion-title>
-    <ion-buttons end>
-        <button style="font-size: 10px; margin-top: -5px" ion-button icon-only >
-          <ion-icon name="share"></ion-icon>
-        </button>
-      </ion-buttons>
-      <ion-buttons end>
-          <button *ngFor="let atractivo of  atractivos" style="font-size: 10px; margin-top: -5px" ion-button icon-only  (click)="pasarCoordenadas(atractivo.at_longitud, atractivo.at_latitud, atractivo.at_nombre)">
-            <ion-icon name="pin"></ion-icon>
-          </button>
-        </ion-buttons>
+  <ion-navbar color="secondary">
+    <ion-title>{{nombre_atractivo}}</ion-title>
   </ion-navbar>
 
 </ion-header>
- 
-<ion-content style="margin-top: -17%; height: 109.5vh;">
-    <ion-card *ngFor="let atractivo of  atractivos" style="background-color: rgb(255, 255, 255);margin-left:0%; margin-top: 0%; margin-bottom: 0%; width: 100%; ">
-      <ion-slides autoplay="3000" loop="true" speed="2000" effect="fade">
-        <ion-slide>
-          <img src="{{atractivo.at_img_atractivo}}" style="filter : brightness( 75% ); width: 100%; height: 300px; position: relative;
-          display: inline-block;
-          text-align: center;"/>
-          <p style="position: absolute;top: 90%;left: 10px; color:white">{{atractivo.at_nombre}}</p>  
 
-        </ion-slide>
-        <ion-slide *ngFor="let imagen of imagenes">
-          <img src="{{imagen.img_ruta}}" style="filter : brightness( 75% ); width: 100%; height: 300px; position: relative;
-          display: inline-block;
-          text-align: center;">
-          <p style="position: absolute;top: 90%;left: 10px; color:white">{{imagen.img_descripcion}}  </p>  
-        </ion-slide>
-      </ion-slides>   
-      <ion-card-content>
-        <div>
-          <ion-segment [(ngModel)]="atractivs" color='danger'>
-            <ion-segment-button value="historia">
-              HISTORIA
-            </ion-segment-button>
-            <ion-segment-button value="llegar">
-              COMO LLEGAR
-            </ion-segment-button>
-            <ion-segment-button value="contacto">
-              CONTACTO
-            </ion-segment-button>
-          </ion-segment>
-        </div>
-          
-          
-          <div [ngSwitch]="atractivs" >
-            <ion-list *ngSwitchCase="'historia'">
-              <br>
-                <b padding-left color='danger'>{{atractivo.at_nombre}}</b>
-                <rating [(ngModel)]="atractivo.at_rating" 
-                        readOnly="true"
-                        max="5"
-                        emptyStarIconName="star-outline" 
-                        halfStarIconName="star-half" 
-                        starIconName="star" 
-                        nullable="false"> 
-                </rating>
-              <p style="text-align : justify;" padding>
-                {{atractivo.at_descripcion_larga}}
-              </p>
-            </ion-list>
-              
-            <ion-list *ngSwitchCase="'llegar'"  >
-              <div style="width: 100%; height: 60vh;" padding> 
-                  <ion-row>
-                    <ion-col col-4>
-                        <p> <b>Como llegar:</b>  </p>
-                    </ion-col>
-                    <ion-col col-8>
-                      <p>{{atractivo.at_comollegar}}</p>
-                    </ion-col>
-                  </ion-row>
-                  <ion-row>
-                    <ion-col col-8>
-                        <p> <b>Dirección:</b>  </p>
-                    </ion-col>
-                    <ion-col col-8>
-                      <p style="padding-top: 15px">{{atractivo.at_direccion}}</p>
-                    </ion-col>
-                  </ion-row>                
-              </div>
-            </ion-list>
-            <ion-list *ngSwitchCase="'contacto'" style="width: 100%; height: 60vh;">
-                <ion-grid padding>
-                    <ion-row>
-                      <ion-col col-4>
-                        <p> <b>Teléfono:</b>  </p>
-                      </ion-col>
-                      <ion-col col-7>
-                        <p>{{atractivo.at_contacto}}</p>
-                      </ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-4>
-                            <p> <b>E-mail:</b>  </p>
-                        </ion-col>
-                        <ion-col col-8>
-                          <p>{{atractivo.at_email}}</p>
-                        </ion-col>
-                      </ion-row>
-                        <ion-row>
-                            <ion-col col-1>
-                            </ion-col>
-                            <ion-col col-2>
-                              <ion-icon name="logo-facebook" style="color: #4e6bca"></ion-icon>
-                            </ion-col>
-                            <ion-col col-9>
-                              
-                              <a href="{{atractivo.at_red_social}}">{{atractivo.at_red_social}}</a>
-                            </ion-col>
-                          </ion-row>
-                          <ion-row>
-                              <ion-col col-1>
-                              </ion-col>
-                              <ion-col col-2>
-                                <ion-icon name="logo-youtube" style="color: #f30d0d"></ion-icon>
-                              </ion-col>
-                              <ion-col col-9>
-                                
-                                <a href="{{atractivo.at_video_atractivo}}">{{atractivo.at_video_atractivo}}</a>
-                              </ion-col>
-                            </ion-row>
-                        
-                  </ion-grid>
-               
-            </ion-list>
+<ion-content>
+  <ion-card style="margin-left:0%; margin-top: -1%; margin-bottom: 0%; width: 100%">
+    <div parallax>
+      <img src="http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/atractivos/{{img_atractivo}}" imageViewer>
+    </div>
+  </ion-card>
+  <ion-card *ngFor="let atractivo of atractivos"
+    style="background-color: rgb(253, 252, 252);margin-left:0%; margin-top: 0%; margin-bottom: 0%; width: 100%; ">
+    <!-- <img src="{{atractivo.at_img_servicio}}" style="filter : brightness( 75% ); width: 100%; width: 100%; height: 300px; position: relative;
+    display: inline-block;
+    text-align: center;"/> -->
+    <ion-item>
+      <h2 style=" color:black">{{atractivo.at_nombre}}</h2>
+
+      <p style=" color:rgb(7, 7, 7); font-size: 0.9em">{{distance}} km</p>
+    </ion-item>
+    <rating [(ngModel)]="atractivo.at_rating" readOnly="true" max="5" emptyStarIconName="star-outline"
+      halfStarIconName="star-half" starIconName="star" nullable="true">
+    </rating>
+    <ion-card-content>
+      <div padding style="padding-top: 0%">
+        <ion-segment color='secondary' [(ngModel)]="menus">
+          <ion-segment-button value="Informacion">
+            Información
+          </ion-segment-button>
+          <ion-segment-button value="Comentarios">
+            Comentarios
+          </ion-segment-button>
+          <ion-segment-button value="Fotos">
+            Galería
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+
+      <div [ngSwitch]="menus">
+        <ion-list *ngSwitchCase="'Fotos'">
+          <div class="images">
+            <div class="one-image" *ngFor="let item of comentarios">
+              <img *ngIf="item.img_ruta"
+                [src]="'http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/atractivos/' + item.img_ruta"
+                height="130" imageViewer>
+            </div>
+            <div class="one-image" *ngFor="let item of comentarios">
+              <img *ngIf="item.img_base64" src="{{item.img_base64}}" style="filter : brightness( 75% );" height="130"
+                imageViewer>
+            </div>
           </div>
-        </ion-card-content>
-      </ion-card>
+        </ion-list>
 
+        <ion-list *ngSwitchCase="'Informacion'">
+          <ion-row>
+            <ion-col col-3 style="text-align: center"
+              (click)=" pasarCoordenadasRuta(atractivo.at_latitud, atractivo.at_longitud,atractivo.at_nombre)">
+              <ion-icon name="compass" color='secondary' style="font-size: 25px" item-center></ion-icon>
+              <p>Ubicación</p>
+            </ion-col>
+            <ion-col col-3 style="text-align: center" (click)="compartir()">
+              <ion-icon name="logo-whatsapp" color='secondary' style="font-size: 25px" item-center></ion-icon>
+              <p>Compartir</p>
+            </ion-col>
+            <ion-col col-3 style="text-align: center" *ngIf="!at_video_atractivo" (click)="nofile()">
+              <ion-icon name="logo-youtube" color='secondary' style="font-size: 25px" item-center></ion-icon>
+              <p>Video</p>
+            </ion-col>
+            <ion-col col-3 style="text-align: center" *ngIf="at_video_atractivo" (click)="openLink()">
+              <ion-icon name="logo-youtube" color='secondary' style="font-size: 25px" item-center></ion-icon>
+              <p>Video</p>
+            </ion-col>
+            <ion-col col-3 style="text-align: center" *ngIf="!at_contacto" (click)="nofile()">
+              <ion-icon name="call" color='secondary' style="font-size: 25px" item-center></ion-icon>
+              <p>Llamar</p>
+            </ion-col>
+            <ion-col col-3 style="text-align: center" *ngIf="at_contacto" (click)="callJoint()">
+              <ion-icon name="call" color='secondary' style="font-size: 25px" item-center></ion-icon>
+              <p>Llamar</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <!-- <button ion-button outline block>Reservar una habitación</button> -->
+          </ion-row>
+          <hr>
+          <ion-row>
+            <ion-col col-12>
+              <div [innerHTML]="atractivo.at_descripcion_larga"></div>
+              <!-- <p style="text-align : justify;font-size: 1em">{{atractivo.at_descripcion_larga}}</p>                   -->
+            </ion-col>
+          </ion-row>
+          <hr *ngIf="atractivo.at_direccion">
+          <ion-row *ngIf="atractivo.at_direccion">
+            <ion-col col-2>
+              <ion-icon name="pin" color='secondary' item-start small></ion-icon>
+            </ion-col>
+            <ion-col col-10>
+              <p style="text-align : justify;">{{atractivo.at_direccion}}</p>
+            </ion-col>
+          </ion-row>
+          <hr *ngIf="atractivo.at_contacto">
+          <ion-row *ngIf="atractivo.at_contacto">
+            <ion-col col-2>
+              <ion-icon name="call" color='secondary' item-start small></ion-icon>
+            </ion-col>
+            <ion-col col-10>
+              <p style="text-align : justify;">{{atractivo.at_contacto}}</p>
+            </ion-col>
+          </ion-row>
+          <hr *ngIf="atractivo.at_email">
+          <ion-row *ngIf="atractivo.at_email">
+            <ion-col col-2>
+              <ion-icon name="mail" color='yellow' item-start small></ion-icon>
+            </ion-col>
+            <ion-col col-10>
+              <p style="text-align : justify;">{{atractivo.at_email}}</p>
+            </ion-col>
+          </ion-row>
+          <hr *ngIf="atractivo.at_red_social">
+          <ion-row *ngIf="atractivo.at_red_social">
+            <ion-col col-2>
+              <ion-icon name="logo-facebook" color='primary' item-start small></ion-icon>
+            </ion-col>
+            <ion-col col-10>
+              <p style="text-align : justify;">{{atractivo.at_red_social}}</p>
+            </ion-col>
+          </ion-row>
+          <hr *ngIf="atractivo.at_video_atractivo">
+          <ion-row *ngIf="atractivo.at_video_atractivo">
+            <ion-col col-2>
+              <ion-icon name="logo-youtube" color='danger' item-start small></ion-icon>
+            </ion-col>
+            <ion-col col-10>
+              <p style="text-align : justify;">{{atractivo.at_video_atractivo}}</p>
+            </ion-col>
+          </ion-row>
+          <map-hotel></map-hotel>
+          <!-- <div id="map" #map  style="margin-left:-5%; margin-bottom: 0%; width: 110%; "></div> -->
+
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'Comentarios'">
+          <ion-item *ngIf="!usuarioEstaConectado">
+            <h6 style="color:#b1b2b4">Para comentar por favor inicie sesión</h6>
+            <button ion-button block round (click)="iniciarSesion()">Iniciar Sesión</button>
+          </ion-item>
+          <ion-item *ngIf="usuarioEstaConectado">
+            <ion-avatar item-start *ngIf="image">
+              <img src="{{image}}">
+            </ion-avatar>
+            <ion-avatar item-start *ngIf="image == null">
+              <img src="assets/img/nouser.png" (click)="getPictureGallery()" alt="">
+            </ion-avatar>
+
+            <h6 padding>{{username}}</h6>
+            <rating [(ngModel)]="atractivo.at_rating" readOnly="false" max="5" emptyStarIconName="star-outline"
+              halfStarIconName="star-half" starIconName="star" nullable="true">
+            </rating>
+            <button color="secondary" ion-button block
+              (click)='calificarAtractivo(atractivo.at_id, atractivo.at_nombre)'>Describir tu experiencia</button>
+          </ion-item>
+          <!-- <h6>{{atractivo.at_id}}</h6> -->
+          <hr>
+          <ion-item>
+            <b ion-start>Reseñas</b>
+          </ion-item>
+          <ion-card *ngFor="let com of comentarios" style="border-radius: 2%">
+
+            <ion-item *ngIf="com.img_base64">
+              <ion-avatar item-start>
+                <!-- <img *ngIf="!item.user_image" src="assets/img/nouser.png"> -->
+                <img src="{{com.user_image}}">
+              </ion-avatar>
+              <ion-icon *ngIf="com.user_image == image" item-end name="more"
+                (click)="deleteComment(com.img_id,com.img_descripcion,com.img_fecha,com.img_ruta)"></ion-icon>
+              <h6>{{com.username}}</h6>
+              <p style="font-size: 0.7em">{{com.img_fecha}}</p>
+            </ion-item>
+
+            <img *ngIf="com.img_base64 != null" src="{{com.img_base64}}" style="filter : brightness( 75% );"
+              imageViewer>
+
+            <ion-card-content *ngIf="com.img_base64">
+              <p style="font-size: 0.8em">{{com.img_descripcion}}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-list>
+      </div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

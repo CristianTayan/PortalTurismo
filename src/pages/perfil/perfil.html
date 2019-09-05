@@ -1,0 +1,58 @@
+<ion-header no-border>
+  <ion-navbar transparent>
+      <ion-buttons style="display: inline-block">
+          <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </ion-buttons>
+    <ion-title style="display: inline-block; margin-top: 10px">Perfil</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <form #formulario="ngForm" [formGroup]="registerForm"  >
+        <ion-item style="text-align: center" no-lines>
+          <div align="center">
+              <img [src]="image" [(ngModel)]="image" *ngIf="image" style="width: 150px; height: 150px; border-radius: 50%">
+          </div>
+          <div align="center" *ngIf="image == null">
+            <button ion-button round *ngIf="!image" (click)="getPictureGallery()" >Selecciona una imagen</button>
+            <!-- <img src="assets/img/addphoto.png" *ngIf="image == null" (click)="getPictureGallery()" alt="" style="width: 150px; height: 150px;"> -->
+          </div>
+        </ion-item>
+        <ion-item class="itemlogin">
+          <ion-label floating>Nombre</ion-label>
+          <ion-input type="text" required name="nombre" [(ngModel)]="nombre"
+          formControlName="nombre" [class.invalid]="!registerForm.controls.nombre.valid && blur"></ion-input>
+        </ion-item>
+        <ion-item class="itemlogin">
+          <ion-label floating>Apellido</ion-label>
+          <ion-input type="text" required name="apellido" [(ngModel)]="apellido"
+          formControlName="apellido" [class.invalid]="!registerForm.controls.apellido.valid && blur"></ion-input>
+        </ion-item>
+        <ion-item class="itemlogin">
+            <ion-label floating>Username</ion-label>
+            <ion-input type="text" required name="username" [(ngModel)]="username"
+            formControlName="username" [class.invalid]="!registerForm.controls.username.valid && blur"></ion-input>
+          </ion-item>
+        <ion-item no-lines> 
+          <button ion-button round large *ngIf="perfil === null" [disabled]="registerForm.invalid" no-padding no-margin style="background:#df0c0c; color:#ffffff; font-family: Roboto; width:100%;" (click)="crearPerfil()">
+                Registrarse
+          </button>
+        </ion-item>
+        <ion-item no-lines> 
+          <button ion-button round large *ngIf="perfil" [disabled]="registerForm.invalid" no-padding no-margin style="background:#4addac; color:#ffffff; font-family: Roboto; width:100%;" (click)="crearPerfil()">
+                Actualizar Datos
+          </button>
+        </ion-item>
+      </form>
+
+      <ion-list *ngIf="perfil == undefined || perfil.length == 0" >
+        <ion-item *ngFor="let item of perfil"  >
+          {{item.nombre}} hola
+          <p>{{item.apellido}}</p>
+          <img src="{{item.image}}" alt="">
+        </ion-item>
+      </ion-list>
+</ion-content>

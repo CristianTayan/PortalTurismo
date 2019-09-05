@@ -1,0 +1,22 @@
+<ion-header no-border>
+  <ion-navbar color='danger' transparent>
+      <ion-buttons style="display: inline-block;">
+          <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </ion-buttons>
+    <ion-title style="display: inline-block; margin-top: 10px">SERVICIOS</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content style="margin-top: -17%; height: 109.5vh;"> 
+  <ion-card *ngFor="let categoria of categorias" (click)="serviciosPorCategoria(categoria.cat_id, categoria.cat_nombre)" style="margin-left:0%; margin-top: -1%; margin-bottom: 0%; width: 100%">
+    <img [src]="'http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/servicios/' + categoria.cat_img" *ngIf="categoria.cat_img" style="border-radius: 1px ; filter : brightness( 80% ); height: 35vh;"/>
+    <img src="assets/img/noimage.jpg" *ngIf="!categoria.cat_img" style="border-radius: 1px ; filter : brightness( 80% ); height: 35vh;"/>
+    <div class="card-title">
+        <strong>
+          {{categoria.cat_nombre}}
+        </strong>
+      </div>
+    <div class="card-subtitle"><ion-badge item-center color="danger">Lugares</ion-badge></div>
+  </ion-card>  
+</ion-content>

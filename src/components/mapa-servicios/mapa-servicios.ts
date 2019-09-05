@@ -27,10 +27,11 @@ export class MapaServiciosComponent {
         this.restaurantes= data;
         var miubic = {
           lat: 0.3504234,
-          lng: -78.1235737
+          lng: -78.1235737,
+          zoom: 18,
       };
         var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 14,
+        zoom: 18,
         center: miubic,
         disableDefaultUI: true
         });

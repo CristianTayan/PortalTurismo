@@ -18,13 +18,13 @@ export class CategoriaAtractivoServiceProvider {
   getCategorias(){
     return new Promise(
       resolve => {
-        this.http.get("http://127.0.0.1/servidorPortalTuristico/getCategorias")
+        this.http.get("http://desarrollosigm.ibarra.gob.ec/servidorPortalTuristico/index.php/getCategorias")
         .subscribe(
           data =>{    
             resolve(data);
           },
           err=>{
-            console.log(err);            
+            console.log("No data");            
           }
         )
       } 
@@ -34,13 +34,13 @@ export class CategoriaAtractivoServiceProvider {
   getCategoria(id){
     return new Promise(
       resolve => {
-        this.http.get("http://127.0.0.1/servidorPortalTuristico/getCategoria"+id)
+        this.http.get("http://desarrollosigm.ibarra.gob.ec/servidorPortalTuristico/index.php/getCategoria"+id)
         .subscribe(
           data =>{
             resolve(data);
           },
           err=>{
-            console.log(err);            
+            console.log("No data");            
           }
         )
       } 

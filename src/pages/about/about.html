@@ -1,0 +1,28 @@
+<ion-header no-border>
+  <ion-navbar color='danger'>
+      <ion-buttons style="display: inline-block">
+          <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </ion-buttons>
+    <ion-title style="display: inline-block; margin-top: 10px">ACERCA IBARRA</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-card  style="background-color: rgb(254, 254, 255);" *ngFor="let item of datos" style="border-radius: 2%">
+        <img [src]="'http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/slider/' + item.a_img" style="height: 35vh;" />
+        <ion-card-content>
+            <ion-card-title style="font-size: 1.0em;">
+                <strong style="margin-right: 12px">{{item.a_titulo}}</strong>
+            </ion-card-title>
+            <p style="text-align: justify" *ngIf="!isTextOpened">{{item.a_descripcion_corta}} <a *ngIf="!isTextOpened" (click)="isTextOpened=true" > Ver más</a> </p>
+            <!-- <p margin style="text-align: justify" *ngIf="isTextOpened"></p> -->
+            <!-- <div [innerHTML]="item.a_parrafo" *ngIf="!isTextOpened"> <a *ngIf="!isTextOpened" (click)="isTextOpened=true" >Ver más</a></div>             -->
+            <div [innerHTML]="item.a_parrafo" *ngIf="isTextOpened"></div>
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>
+

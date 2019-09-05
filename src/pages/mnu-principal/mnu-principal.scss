@@ -1,10 +1,14 @@
 page-mnu-principal {
+  ion-slides {
+    height: auto;
+  }
+
   h1{
     font-size: 1em;
     text-align: right;
   }
   .inner{
-    width: 2000px;
+    width: 20000px;
     height: 110%;
     ion-card{
       display: inline-block;
@@ -84,6 +88,36 @@ page-mnu-principal {
         margin-right: 15px;
     }
 
+}
+
+.item.item-trns {
+	border-color: rgba(0, 0, 0, 0);
+	background-color: rgba(0, 0, 0, 0);
+	color: black; 
+}
+
+ion-card {
+  position: relative;
+  text-align: left;
+}
+
+.card-title {
+  position: absolute;
+  top: 80%;
+  font-size: 0.9em;
+  width: 100%;
+  font-weight: bold;
+  color: #fff;
+  padding-left: 10px;
+}
+
+.card-subtitle {
+  font-size: 1.0em;
+  position: absolute;
+  top: 90%;
+  width: 100%;
+  color: #fff;
+  padding-left: 10px;
 }
   
 }

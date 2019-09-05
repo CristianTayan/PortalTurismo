@@ -3,15 +3,16 @@ import { IonicPageModule } from 'ionic-angular';
 import { MnuPrincipalPage } from './mnu-principal';
 import { StarRatingModule } from 'ionic3-star-rating';
 import { Ionic2RatingModule } from 'ionic2-rating';
-
+import { TranslateModule } from '@ngx-translate/core'
 @NgModule({
   declarations: [
-    MnuPrincipalPage,
+    // MnuPrincipalPage,
   ],
   imports: [
-    IonicPageModule.forChild(MnuPrincipalPage),
+    // IonicPageModule.forChild(MnuPrincipalPage),
     StarRatingModule,
-    Ionic2RatingModule
+    Ionic2RatingModule,
+    TranslateModule
   ],
 
 })

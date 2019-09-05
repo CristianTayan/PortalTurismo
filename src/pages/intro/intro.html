@@ -1,0 +1,34 @@
+<ion-content>
+    <ion-slides pager (ionSlideDidChange)="slideChanged()" (ionSlideDrag)="slideMoved()">
+        <ion-slide>
+          <h1>En Ibarra</h1>
+          <div class="diag" style="background: url('assets/img/whitebg.svg') no-repeat">
+            <ion-icon name="images" color="danger"  [@bounce]='state' (@bounce.done)="animationDone($event)" ></ion-icon>
+          </div>
+          <div  [@bounce]='state'>
+            <h2>Bienvenido a IBARRA TURISMO</h2>
+            <p>Disfruta de nuestros ATRACTIVOS, sitios naturales, parques, museos, iglesias, etc..</p>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="diag" style="background: url('assets/img/whitebg.svg') no-repeat">
+            <ion-icon name="restaurant" color="danger"  [@bounce]='state' (@bounce.done)="animationDone($event)" ></ion-icon>
+          </div>
+          <div  [@bounce]='state'>
+            <h2>Disfruta nuestros servicios</h2>
+            <p>Conoce todos los SERVICIOS que ofrece nuestro cantón San Miguel de Ibarra.</p>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="diag" style="background: url('assets/img/whitebg.svg') no-repeat">
+            <ion-icon name="map" color="danger"  [@bounce]='state' (@bounce.done)="animationDone($event)"></ion-icon>
+          </div>
+          <div  [@bounce]='state'>
+            <h2>Viaja por nuestras RUTAS</h2>
+            <p>Conoce sitios maravillosos, paisajes, museos y comida típica del cantón Ibarra.</p>
+          </div>
+        </ion-slide>
+      </ion-slides>
+      <button (click)="skip()" id="skip">{{ skipMsg }}</button>
+  <!-- <button ion-button block clear  id="skip" (click)="irInicio()">Omitir</button> -->
+</ion-content>

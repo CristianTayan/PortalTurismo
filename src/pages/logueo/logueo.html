@@ -1,0 +1,49 @@
+<ion-header no-border>
+  <ion-navbar transparent>
+      <ion-buttons style="display: inline-block">
+          <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </ion-buttons>
+    <ion-title style="display: inline-block; margin-top: 10px">Iniciar sesión</ion-title>
+  </ion-navbar>
+</ion-header>
+  <ion-content>
+      <div id="loginup">
+          <img src="assets/img/Logo_-ibarra_escudo.png" style="width:45%;"/>
+      </div>
+      
+    <ion-list class="list" inset>
+      <form #formulario="ngForm" [formGroup]="registerForm">
+        <ion-item class="itemlogin">
+          <ion-label floating>Correo electrónico</ion-label>
+          <ion-input type="email" required name="email" ngModel
+          formControlName="email" [class.invalid]="!registerForm.controls.email.valid && blur"></ion-input>
+        </ion-item>
+
+        <ion-item class="itemlogin">
+            <ion-label floating>Contraseña</ion-label>
+            <ion-input type="password" required name="password" ngModel
+            formControlName="password" [class.invalid]="!registerForm.controls.password.valid && blur"></ion-input>
+          </ion-item>
+        <ion-item no-lines no-padding> 
+          <button ion-button round large [disabled]="registerForm.invalid" no-padding no-margin style="background:#df0c0c; color:#ffffff; font-family: Roboto; width:100%;" (click)="iniciarSesion(formulario)">
+                Login
+          </button>
+        </ion-item>
+          
+        <ion-item no-lines no-padding>
+          <button ion-button round large [disabled]="registerForm.invalid" no-padding no-margin style="background:#0cdfc3; color:#ffffff; font-family: Roboto; width:100%;" (click)="registrarUsuario(formulario)">
+                Registrarse
+          </button>
+        </ion-item>
+
+        <ion-item no-lines >
+          <button ion-button block clear (click)="goToResetPassword()">
+            He olvidado mi contraseña
+          </button>
+        </ion-item>
+      </form>
+    </ion-list>
+    <!-- <h6 style="text-align:center; color:#444444">No tienes una cuenta? <span  style="text-decoration:underline;">Registrate</span></h6> -->
+    </ion-content>

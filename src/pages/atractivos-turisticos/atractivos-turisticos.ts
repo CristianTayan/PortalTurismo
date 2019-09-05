@@ -42,9 +42,14 @@ export class AtractivosTuristicosPage {
     })
   }
 
-  AbrirAtractivos(at_id){
+  AbrirAtractivos(at_id, at_nombre, at_video_atractivo, at_latitud, at_longitud, at_img_atractivo){
     this.navCtrl.push(AtractivoPage,{
-       id : at_id
+       id : at_id,
+       nombre: at_nombre,
+       web: at_video_atractivo,
+       latitud: at_latitud,
+       longitud: at_longitud,
+       img: at_img_atractivo
     });
   }
 

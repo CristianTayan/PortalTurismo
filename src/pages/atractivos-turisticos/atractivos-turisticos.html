@@ -1,13 +1,8 @@
-<ion-header no-border>
+<ion-header>
 
-  <ion-navbar >
-      <!-- <ion-buttons>
-          <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-          </button>
-        </ion-buttons> -->
-        <ion-title >ATRACTIVOS TURÍSTICOS</ion-title>
-      </ion-navbar>
+  <ion-navbar color='secondary'>
+    <ion-title >ATRACTIVOS TURÍSTICOS</ion-title>
+  </ion-navbar>
 
 </ion-header>
 
@@ -21,8 +16,8 @@
       refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
-    <ion-card *ngFor="let atractivo of atractivos" (click)="AbrirAtractivos(atractivo.at_id)" style="background-color: rgb(254, 254, 255);">
-        <img src="{{atractivo.at_img_atractivo}}" style="height: 35vh;"/>
+    <ion-card *ngFor="let atractivo of atractivos" (click)="AbrirAtractivos(atractivo.at_id, atractivo.at_nombre, atractivo.at_video_atractivo, atractivo.at_latitud, atractivo.at_longitud, atractivo.at_img_atractivo)" style="background-color: rgb(254, 254, 255);">
+        <img [src]="'http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/atractivos/' + atractivo.at_img_atractivo" style="height: 35vh;"/>
         <ion-card-content>
           <ion-card-title style="font-size: 1.0em;">
             <strong>{{atractivo.at_nombre}}</strong>
@@ -35,9 +30,16 @@
                         starIconName="star" 
                         nullable="false"> 
                 </rating>
-          <p style="text-align : justify;">
-            {{atractivo.at_descripcion_corta}}
-          </p>
+                <hr *ngIf="atractivo.at_descripcion_corta">
+                <p style="text-align: justify" *ngIf="atractivo.at_descripcion_corta">{{atractivo.at_descripcion_corta}} </p>
+                <hr>
+                <button ion-button block color='secondary' (click)="AbrirAtractivos(atractivo.at_id, atractivo.at_nombre, atractivo.at_video_atractivo, atractivo.at_latitud, atractivo.at_longitud, atractivo.at_img_atractivo)" >Ver más
+                  <ion-icon name="map" style="margin-left: 10px"></ion-icon>
+              </button>
+                <!-- <div [innerHTML]="atractivo.at_descripcion_larga"></div> -->
+          <!-- <p style="text-align : justify;">
+              <ion-icon name="paper" color='primary' style="margin-right: 10px"></ion-icon> {{atractivo.at_descripcion_corta}}
+          </p> -->
           <div *ngIf="ocultar">
               <p>
                   {{atractivo.at_contacto}}
@@ -52,12 +54,5 @@
               </p>
             </div>
         </ion-card-content>
-        <!-- <div style="padding-left: 5%;padding-bottom: 10px">
-            <button ion-button round small padding color="danger" (click)="AbrirAtractivos(atractivo.at_id)">
-            Ver lugar.</button>
-        </div> -->
-      </ion-card>
-
-      
-      
+      </ion-card>   
 </ion-content>

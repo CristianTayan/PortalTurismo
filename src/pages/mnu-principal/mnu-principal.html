@@ -1,19 +1,12 @@
 <ion-header no-border >
     <ion-navbar color='danger' transparent >
-        <ion-buttons style="display: inline-block; color: #EC327D">
-            <button ion-button menuToggle>
-              <ion-icon name="menu"></ion-icon>
-            </button>
-          </ion-buttons>
-      <ion-title *ngIf="!isSerarchbarOpened" style="display: inline-block; margin-top: 10px;"></ion-title>
-      <!-- <ion-searchbar *ngIf="isSerarchbarOpened" autofocus  (search)="onSearch($event)" showCancelButton="true" (ionCancel)="isSerarchbarOpened=false"></ion-searchbar>
-      <ion-buttons end>
-          <button ion-button icon-only color="royal" *ngIf="!isSerarchbarOpened" (click)="isSerarchbarOpened=true">
-            <ion-icon name="search"></ion-icon>
+        <ion-buttons>  
+        <button ion-button menuToggle>
+            <ion-icon name="menu" style="color: #000000"></ion-icon>
           </button>
-        </ion-buttons> -->
+        </ion-buttons>
         <ion-buttons end>
-          <button ion-button icon-only color="royal" (click)="buscarServicios()">
+          <button ion-button icon-only style="color: #000000" (click)="buscarServicios()">
             <ion-icon name="search"></ion-icon>
           </button>
         </ion-buttons>
@@ -21,69 +14,59 @@
     </ion-navbar>
   </ion-header>
   
-  <ion-content  style="margin-top: -17%; height: 109.5vh; background-color: #f7f7f7">
-      <ion-slides autoplay="3000" loop="true" speed="1000" style="height: 40%;" effect="fade">
-        <ion-slide>
-          <img src="https://res.cloudinary.com/ibarra-travel/image/upload/v1538068001/tren-salinas.png" style="filter : saturate(180%) brightness(75%); width: 100%; height: 300px; position: relative;
-          display: inline-block; 
-          text-align: center; "/>
-          <h1 style="position: absolute;top: 75%;left: 10px; color:white">Ibarra - Imbabura</h1>
-          <p style="position: absolute;top: 82%;left: 10px;"><b style="color:white">Tren de la libertad</b></p>
-        </ion-slide>
-        <ion-slide>  
-          <img src="https://ibarraesturismo.files.wordpress.com/2018/01/tren.jpg?w=685" style="filter : saturate(180%) brightness(75%); width: 100%; height: 300px; position: relative;
-          display: inline-block;
-          text-align: center;"/>
-          <h1 style="position: absolute;top: 75%;left: 10px; color:white">Ibarra - Imbabura</h1>
-          <p style="position: absolute;top: 82%;left: 10px;"><b style="color:white">Ruta del tren</b></p>
-        </ion-slide>
-        <ion-slide>
-          <img src="http://2.bp.blogspot.com/_xGDzy7pXkIg/TMzXOh4jYzI/AAAAAAAAAAY/QPBgdU8l4Gk/s1600/20.jpg" style="filter : saturate(180%) brightness(75%); width: 100%; height: 300px; position: relative;
-          display: inline-block; 
-          text-align: center; "/>
-          <h1 style="position: absolute;top: 75%;left: 10px; color:white">Ibarra - Imbabura</h1>
-          <p style="position: absolute;top: 82%;left: 10px;"><b style="color:white">Ibarra es gatronomía</b></p>
-        </ion-slide>  
-        <ion-slide>
-          <img src="https://ibarraesturismo.files.wordpress.com/2018/01/esq-elcoco.gif?w=685" style="filter : saturate(180%) brightness(75%); width: 100%; height: 300px; position: relative;
-          display: inline-block;
-          text-align: center;"/>
-          <h1 style="position: absolute;top: 75%;left: 10px; color:white">Ibarra - Imbabura</h1>
-          <p style="position: absolute;top: 82%;left: 10px"><b style="color:white">Esquina del coco</b></p>
-          </ion-slide>  
-      </ion-slides> 
-    <div>
+  <ion-content  style="background-color: #f7f7f7">
+    <div style="text-align: center">
+      <h6>{{'Bienvenido a ' | translate }}Ibarra</h6>
+    </div>
+    <ion-slides *ngIf="sliderImages && sliderImages.length" autoplay="5000" class="slideroption" pager="true"   loop="true" speed="300">
+      <ion-slide   *ngFor="let item of sliderImages">
+        <img [src]="'http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/slider/' + item.sl_imagen" style="height: 100%; width: 100%"/>
+        <div style="background-color: #000000;width: 100%; height: 30%;">
+          <div  class="card-title" [innerHTML]="item.sl_descripcion"></div>
+      </div>
+      </ion-slide>
+    </ion-slides>
+      
+    <div> 
+      <ion-item class="item item-trns text-center" style="width: 200px; font-size: 0.9em; margin-left: 45%">
+        <ion-label>{{ 'Idioma' | translate }} </ion-label>
+        <ion-select [(ngModel)]="idioma" (ionChange)="cambioIdioma($event)">
+          <ion-option value="es">Español</ion-option>
+          <ion-option value="en">English</ion-option>
+        </ion-select>
+      </ion-item>       
       <ion-row padding>
         <ion-col >
-          <button ion-fab mini (click)="abrirRestaurantesPage()" color='primary' style="margin-left: 15px;"><ion-icon name="restaurant"></ion-icon> </button>
-          <p style="text-align: center">Restaurantes</p>
+          <button ion-fab mini (click)="abrirRestaurantesPage()" color='danger' style="margin-left: 15px;"><ion-icon name="restaurant"></ion-icon> </button>
+          <p style="text-align: center">{{'Restaurantes'|translate}}</p>
         </ion-col>
         <ion-col>
-          <button ion-fab mini color='danger' style="margin-left: 15px;"><ion-icon name="wine"></ion-icon> </button>
-          <p style="text-align: center">Diversión</p>          
+          <button ion-fab mini color='primary' (click)="goToVidaNocturna()" style="margin-left: 15px;"><ion-icon name="wine"></ion-icon> </button>
+          <p style="text-align: center">{{'Diversión' | translate}}</p>          
         </ion-col>
         <ion-col>
-          <button ion-fab mini color='yellow' style="margin-left: 15px;"><ion-icon name="pricetag" style="color: white"></ion-icon> </button>
-          <p style="text-align: center">Compras</p>            
+          <button ion-fab mini color='yellow' (click)="goToRutas()" style="margin-left: 15px;"><ion-icon name="walk" style="color: white"></ion-icon> </button>
+          <p style="text-align: center">{{'Rutas' | translate}}</p>            
           </ion-col>
           <ion-col>
-          <button ion-fab mini color='secondary' (click)="abrirListaServicios()" style="margin-left: 15px;"><ion-icon name="more"></ion-icon> </button>
-          <p style="text-align: center">Más</p>            
+          <button ion-fab mini color='secondary' (click)="abrirCategoriaServicios()"  style="margin-left: 15px;"><ion-icon name="bookmark"></ion-icon> </button>
+          <p style="text-align: center">{{'Servicios' | translate}}</p>            
           </ion-col>
       </ion-row>
       <br>
       <ion-row>
         <ion-col>
-          <h1 style="color: #0AC7B4; text-align: left; margin-left: 12px"><ion-icon name="camera"></ion-icon> Qué visitar en Ibarra</h1>
+          <h1 style="color: #0AC7B4; text-align: left; margin-left: 12px"><ion-icon name="camera"></ion-icon> {{'Qué visitar en Ibarra' | translate}}</h1>
         </ion-col>
         <ion-col>
-            <h1 (click)="abrirCategorias()" >{{numAtractivos}} lugares más ></h1>
+            <h1 (click)="abrirCategorias()" >{{numAtractivos}} {{'lugares más' | translate}} ></h1>
         </ion-col>
       </ion-row>     
       <ion-scroll scrollX="true" style="width: 100%; height: 220px;">
           <div class="inner" style="padding-left: 5px">
-            <ion-card *ngFor="let atractivo of  atractivos" (click)="AbrirAtractivos(atractivo.at_id)" style="width: 170px;border-radius: 4px ;">
-              <img src="{{atractivo.at_img_atractivo}}" height="120" style=" filter : brightness( 125% )"/>
+            <ion-card *ngFor="let atractivo of  atractivos" (click)="AbrirAtractivo(atractivo.at_id, atractivo.at_nombre, atractivo.at_video_atractivo, atractivo.at_latitud, atractivo.at_longitud, atractivo.at_img_atractivo, atractivo.at_red_social, atractivo.at_contacto)" style="width: 170px;border-radius: 4px ;">
+              <img [src]="'http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/atractivos/' + atractivo.at_img_atractivo" *ngIf="atractivo.at_img_atractivo" height="120" style=" filter : brightness( 125% )"/>
+              <img src="assets/img/noimage.jpg" *ngIf="!atractivo.at_img_atractivo" height="120" style=" filter : brightness( 125% )"/>
               <ion-card-content style="margin-left: -20px; margin-top: -12px; height: 83px;">
                     <ion-item style="padding-left: 10px;">
                         <p style="color: grey; font-size: 11px;">{{atractivo.ta_id}}</p>                        
@@ -104,19 +87,20 @@
 
         <ion-row>
           <ion-col>
-            <h1 style="color: #33B5E5; text-align: left; margin-left: 12px"><ion-icon name="podium"></ion-icon> HOTELES</h1>
+            <h1 style="color: #33B5E5; text-align: left; margin-left: 12px"><ion-icon name="podium"></ion-icon> {{'HOTELES'|translate}}</h1>
           </ion-col>
           <ion-col>
-              <h1 (click)="abrirCategorias()" >{{numHoteles}} hoteles más ></h1>
+              <h1 >{{numHoteles}} {{'hoteles más'|translate}} ></h1>
           </ion-col>
         </ion-row>
         <ion-scroll scrollX="true" style="width: 100%; height: 220px;">
           <div class="inner" style="padding-left: 5px">
-            <ion-card *ngFor="let hotel of  hoteles" (click)="AbrirServicio(hotel.st_id, hotel.st_pagina_web, hotel.st_latitud, hotel.st_longitud)" style="width: 170px; border-radius: 4px ;">
-              <img src="{{hotel.st_img_servicio}}" height="120" style=" filter : brightness( 125% )"/>
+            <ion-card *ngFor="let hotel of  hoteles" (click)="AbrirServicio(hotel.st_id, hotel.st_nombre, hotel.st_pagina_web, hotel.st_latitud, hotel.st_longitud, hotel.st_celular, hotel.st_red_social, hotel.st_video_servicio, hotel.st_img_servicio)" style="width: 170px; border-radius: 4px ;">
+              <img [src]="'http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/servicios/' + hotel.st_img_servicio" *ngIf="hotel.st_img_servicio" height="120" style=" filter : brightness( 125% )"/>
+              <img src="assets/img/noimage.jpg" *ngIf="!hotel.st_img_servicio" height="120" style=" filter : brightness( 125% )"/>              
               <ion-card-content style="margin-left: -20px; margin-top: -12px; height: 83px;">
                 <ion-item style="padding-left: 10px">
-                    <p style="color: grey;  font-size: 11px;" >{{hotel.cat_id}}</p>                      
+                    <p style="color: grey;  font-size: 11px;" >'{{hotel.cat_id}}'</p>                      
                     <h6 style="color: #000000"><strong>{{hotel.st_nombre}}</strong></h6>
                     <rating [(ngModel)]="hotel.st_rating" 
                       readOnly="true"
@@ -134,16 +118,17 @@
             
         <ion-row>
           <ion-col>
-            <h1 style="color: #33B5E5; text-align: left; margin-left: 12px"><ion-icon name="home"></ion-icon> HOSTALES</h1>
+            <h1 style="color: #33B5E5; text-align: left; margin-left: 12px"><ion-icon name="home"></ion-icon> {{'HOSTERIAS'|translate}}</h1>
           </ion-col>
           <ion-col>
-              <h1 (click)="abrirCategorias()" >{{numHostales}} hostales más ></h1>
+              <h1 >{{numHostales}} {{'hosterias más'|translate}} ></h1>
           </ion-col>
         </ion-row>
         <ion-scroll scrollX="true" style="width: 100%; height: 220px;">
           <div class="inner" style="padding-left: 5px">
-            <ion-card *ngFor="let hostal of  hostales" (click)="AbrirServicio(hostal.st_id, hostal.st_pagina_web, hostal.st_latitud, hostal.st_longitud)" style="width: 170px; border-radius: 4px ;">
-              <img src="{{hostal.st_img_servicio}}" height="120" style=" filter : brightness( 125% )"/>
+            <ion-card *ngFor="let hostal of  hostales" (click)="AbrirServicio(hostal.st_id, hostal.st_nombre, hostal.st_pagina_web, hostal.st_latitud, hostal.st_longitud, hostal.st_celular, hostal.st_red_social, hostal.st_video_servicio, hostal.st_img_servicio)" style="width: 170px; border-radius: 4px ;">
+              <img [src]="'http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/servicios/' + hostal.st_img_servicio" *ngIf="hostal.st_img_servicio" height="120" style=" filter : brightness( 125% )"/>
+              <img src="assets/img/noimage.jpg" *ngIf="!hostal.st_img_servicio" height="120" style=" filter : brightness( 125% )"/>
               <ion-card-content style="margin-left: -20px; margin-top: -12px; height: 83px;">
                 <ion-item style="padding-left: 10px">
                   <p style="color: grey;  font-size: 11px;">{{hostal.cat_id}}</p>                      
@@ -163,21 +148,22 @@
         </ion-scroll>
         <ion-row>
           <ion-col>
-            <h1 style="color: #FF6565; text-align: left; margin-left: 12px"><ion-icon name="restaurant"></ion-icon> RESTAURANTES</h1>
+            <h1 style="color: #FF6565; text-align: left; margin-left: 12px"><ion-icon name="restaurant"></ion-icon> {{'RESTAURANTES'|translate}}</h1>
           </ion-col>
           <ion-col>
-              <h1 (click)="abrirCategorias()" >{{numRestaurantes}} restaurantes más ></h1>
+              <h1 (click)="abrirRestaurantesPage()" >{{numRestaurantes}} {{'restaurantes más'|translate}} ></h1>
           </ion-col>
         </ion-row>
         <ion-scroll scrollX="true" style="width: 100%; height: 220px;">
           <div class="inner" style="padding-left: 5px">
-            <ion-card *ngFor="let restaurant of  restaurantes" (click)="AbrirServicio(restaurant.st_id, restaurant.st_pagina_web, restaurant.st_latitud, restaurant.st_longitud)" style="width: 170px; border-radius: 4px ;">
-              <img src="{{restaurant.st_img_servicio}}" height="120" style=" filter : brightness( 125% )"/>
+            <ion-card *ngFor="let item of  restaurantes" (click)="AbrirServicio(item.st_id, item.st_nombre, item.st_pagina_web, item.st_latitud, item.st_longitud, item.st_celular, item.st_red_social, item.st_video_servicio, item.st_img_servicio)" style="width: 170px; border-radius: 4px ;">
+              <img [src]="'http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/servicios/' + item.st_img_servicio" *ngIf="item.st_img_servicio" height="120" style=" filter : brightness( 125% )"/>
+              <img src="assets/img/noimage.jpg" *ngIf="!item.st_img_servicio" height="120" style=" filter : brightness( 125% )"/>              
               <ion-card-content style="margin-left: -20px; margin-top: -12px; height: 83px;">
                 <ion-item style="padding-left: 10px">
-                  <p style="color: grey;  font-size: 11px;">{{restaurant.cat_id}}</p>                      
-                  <h6 style="color: #000000"><strong>{{restaurant.st_nombre}}</strong></h6>
-                  <rating [(ngModel)]="restaurant.st_rating" 
+                  <p style="color: grey;  font-size: 11px;">{{item.cat_id}}</p>                      
+                  <h6 style="color: #000000"><strong>{{item.st_nombre}}</strong></h6>
+                  <rating [(ngModel)]="item.st_rating" 
                       readOnly="true"
                       max="5"
                       emptyStarIconName="star-outline" 
@@ -191,7 +177,66 @@
           </div>
         </ion-scroll>
 
+        <ion-row>
+          <ion-col>
+            <h1 style="color: #FF6565; text-align: left; margin-left: 12px"><ion-icon name="disc"></ion-icon> {{'DIVERSIÓN'|translate}}</h1>
+          </ion-col>
+          <ion-col>
+              <h1 (click)="goToVidaNocturna()" >{{numBares}} {{'lugares más' | translate}} ></h1>
+          </ion-col>
+        </ion-row>
+
+        <ion-scroll scrollX="true" style="width: 100%; height: 220px;">
+          <div class="inner" style="padding-left: 5px">
+            <ion-card *ngFor="let bar of  bares" (click)="AbrirServicio(bar.st_id, bar.st_nombre, bar.st_pagina_web, bar.st_latitud, bar.st_longitud, bar.st_celular,bar.st_red_social, bar.st_video_servicio, bar.st_img_servicio)" style="width: 170px; border-radius: 4px ;">
+              <img [src]="'http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/servicios/' + bar.st_img_servicio" *ngIf="bar.st_img_servicio" height="120" style=" filter : brightness( 125% )"/>
+              <img src="assets/img/noimage.jpg" *ngIf="!bar.st_img_servicio" height="120" style=" filter : brightness( 125% )"/>                            
+              <ion-card-content style="margin-left: -20px; margin-top: -12px; height: 83px;">
+                <ion-item style="padding-left: 10px">
+                  <p style="color: grey;  font-size: 11px;">{{bar.cat_id}}</p>                      
+                  <h6 style="color: #000000"><strong>{{bar.st_nombre}}</strong></h6>
+                  <rating [(ngModel)]="bar.st_rating" 
+                      readOnly="true"
+                      max="5"
+                      emptyStarIconName="star-outline" 
+                      halfStarIconName="star-half" 
+                      starIconName="star" 
+                      nullable="true"> 
+                  </rating>
+                </ion-item>
+              </ion-card-content>
+            </ion-card>        
+          </div>
+        </ion-scroll>
+
+        <ion-row>
+            <ion-col>
+              <h1 style="color: #0AC7B4; text-align: left; margin-left: 12px"><ion-icon name="walk"></ion-icon> {{'Descubre las rutas'|translate}}</h1>
+            </ion-col>
+            <ion-col>
+                <h1 (click)=goToRutas() >{{'Todas las rutas'|translate}}></h1>
+            </ion-col>
+          </ion-row>
+  
+          <ion-scroll scrollX="true" style="width: 100%; height: 220px;">
+            <div class="inner" style="padding-left: 5px">
+              <ion-card *ngFor="let ruta of  rutas" (click)="verIntinerario(ruta.rt_id)" style="width: 170px; border-radius: 4px ;">
+                <img [src]="'http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/rutas/' + ruta.rt_img_ruta" *ngIf="ruta.rt_img_ruta" height="120" style=" filter : brightness( 125% )"/>
+                <img src="assets/img/noimage.jpg" *ngIf="!ruta.rt_img_ruta" height="120" style=" filter : brightness( 125% )"/>                                            
+                <ion-card-content style="margin-left: -20px; margin-top: -12px; height: 83px;">
+                  <ion-item style="padding-left: 10px">
+                    <p style="color: grey;  font-size: 11px;">Conoce la:</p>                      
+                    <p style="color: #000000"><strong>{{ruta.rt_nombre_ruta}}</strong></p>
+                  </ion-item>
+                </ion-card-content>
+              </ion-card>        
+            </div>
+          </ion-scroll>
+           <br><br><br>
+
     </div>  
+
+   
   </ion-content>
   
   

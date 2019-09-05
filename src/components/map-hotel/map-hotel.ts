@@ -1,13 +1,14 @@
 import {NavParams } from 'ionic-angular';
 import { Component, ViewChild } from '@angular/core';
 
-declare var google;
+declare const google:any;
 
 @Component({
   selector: 'map-hotel',
   templateUrl: 'map-hotel.html'
 })
 export class MapHotelComponent {
+  
   @ViewChild("map") mapElement;
   map: any;
   latitud = this.navParams.get('latitud');

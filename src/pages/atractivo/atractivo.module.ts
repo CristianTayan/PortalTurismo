@@ -1,14 +1,14 @@
 import { Ionic2RatingModule } from 'ionic2-rating';
 import { NgModule } from '@angular/core';
-import { IonicPageModule } from 'ionic-angular';
-import { AtractivoPage } from './atractivo';
+// import { IonicPageModule } from 'ionic-angular';
+// import { AtractivoPage } from './atractivo';
 
 @NgModule({
   declarations: [
-    AtractivoPage,
+    // AtractivoPage,
   ],
   imports: [
-    IonicPageModule.forChild(AtractivoPage),
+    // IonicPageModule.forChild(AtractivoPage),
     Ionic2RatingModule
   ],
 })

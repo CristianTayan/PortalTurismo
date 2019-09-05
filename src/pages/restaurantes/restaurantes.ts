@@ -1,3 +1,4 @@
+import { RutaServicioPage } from './../ruta-servicio/ruta-servicio';
 import { ServicioPage } from './../servicio/servicio';
 import { ServiciosTuristicosServiceProvider } from './../../providers/servicios-turisticos-service/servicios-turisticos-service';
 import { Component } from '@angular/core';
@@ -16,16 +17,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'restaurantes.html',
 })
 export class RestaurantesPage {
-  restaurantes:string[];
+  public isSearchbarOpened = false;
+  restaurantes;
   errorMessage: string;
   descending: boolean = false;
   order: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private servicioService: ServiciosTuristicosServiceProvider) {
+  
   }
 
   ionViewDidLoad() {
-    this.getRestaurantes();
+    this.getRestaurantes();    
   }
 
   getRestaurantes(){
@@ -33,19 +36,33 @@ export class RestaurantesPage {
     .subscribe(
       restaurantes => this.restaurantes = restaurantes,
        error =>  this.errorMessage = <any>error);
+      
   }
   sort(){
     this.descending = !this.descending;
     this.order = this.descending ? 1 : -1;
   }
 
-  AbrirServicio(st_id, st_pagina_web, st_latitud, st_longitud){
+  AbrirServicio(st_id, st_nombre, st_pagina_web, st_latitud, st_longitud, st_celular,st_red_social, st_video_servicio, st_img_servicio){
     this.navCtrl.push(ServicioPage,{
        id : st_id,
+       nombre : st_nombre,
        web: st_pagina_web,
        latitud: st_latitud,
-       longitud: st_longitud      
+       longitud: st_longitud,
+       celular: st_celular,
+       redsocial : st_red_social,
+       video : st_video_servicio,
+       img: st_img_servicio   
     });
+  }
+
+  pasarCoordenadasRuta(st_latitud, st_longitud, st_nombre){
+    this.navCtrl.push(RutaServicioPage,{
+      latitud:st_latitud,
+      longitud:st_longitud,
+      nombre: st_nombre
+    })
   }
 
 }

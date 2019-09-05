@@ -1,0 +1,40 @@
+<!--
+  Generated template for the IntinerarioPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color='secondary'>
+    <ion-title>Itinerario</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-card *ngFor="let ruta of rutas"  style="background-color: rgb(254, 254, 255);">
+        <img [src]="'http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/rutas/' + ruta.ir_imagen" (click)="pasarCoordenadasRuta(ruta.ir_latitud, ruta.ir_longitud, ruta.ir_nombre_lugar)" style="height: 35vh;" />
+        <ion-card-content>
+            <ion-card-title style="font-size: 1.0em;">
+                <strong style="margin-right: 12px">{{ruta.ir_nombre_lugar}}</strong>({{ruta.ir_ubicacion}})
+            </ion-card-title>
+                <div [innerHTML]="ruta.id_descripcion"></div>
+            <hr>
+            <button ion-button color='whatsapp' (click)=" pasarCoordenadasRuta(ruta.ir_latitud, ruta.ir_longitud, ruta.ir_nombre_lugar)">Como llegar
+                <ion-icon name="pin" style="margin-left: 10px" (click)='Compartir()'></ion-icon>
+            </button>
+            <!-- <button ion-button color='danger' (click)="AbrirServicio(servicio.st_id, servicio.st_nombre, servicio.st_pagina_web, servicio.st_latitud, servicio.st_longitud, servicio.st_img_servicio)">Ver más
+                <ion-icon name="map" style="margin-left: 10px"></ion-icon>
+            </button> -->
+
+            <div *ngIf="ocultar">
+                <p>
+                    {{servicio.st_contacto}} {{servicio.st_descripcion_larga}} {{servicio.st_longitud}} {{servicio.st_latitud}} {{servicio.st_email}} {{servicio.st_direccion}} {{servicio.st_comollegar}} {{servicio.st_red_social}} {{servicio.st_video_atractivo}}
+                </p>
+            </div>
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>

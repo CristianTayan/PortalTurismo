@@ -3,7 +3,7 @@ import { ServiciosTuristicosServiceProvider } from './../../providers/servicios-
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
-import { ListaServiciosPage } from '../lista-servicios/lista-servicios';
+// import { ListaServiciosPage } from '../lista-servicios/lista-servicios';
 
 
 @IonicPage()
@@ -36,18 +36,24 @@ export class BuscarServicioPage {
     this.order = this.descending ? 1 : -1;
   }
   
-  allServicios(){
-    this.navCtrl.push(ListaServiciosPage, {
-       servicioList: this.servicioList
-    });
-  }
+  // allServicios(){
+  //   this.navCtrl.push(ListaServiciosPage, {
+  //      servicioList: this.servicioList
+  //   });
+  // }
 
-  AbrirServicio(st_id, st_pagina_web, st_latitud, st_longitud){
+  AbrirServicio(st_id, st_nombre, st_pagina_web, st_latitud, st_longitud, st_celular,st_red_social, st_video_servicio, st_img_servicio){
     this.navCtrl.push(ServicioPage,{
        id : st_id,
+       nombre : st_nombre,
        web: st_pagina_web,
        latitud: st_latitud,
-       longitud: st_longitud      
+       longitud: st_longitud,
+       celular: st_celular,
+       redsocial : st_red_social,
+       video : st_video_servicio,
+       img: st_img_servicio   
     });
   }
+  
 }

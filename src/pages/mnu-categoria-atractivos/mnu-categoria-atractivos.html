@@ -5,12 +5,12 @@
             <ion-icon name="menu"></ion-icon>
           </button>
         </ion-buttons>
-    <ion-title style="display: inline-block; margin-top: 10px">CATEGORÍAS</ion-title>
+    <ion-title style="display: inline-block; margin-top: 10px">ATRACTIVOS</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content style="margin-top: -17%; height: 109.5vh;"> 
   <ion-card *ngFor="let categoria of categorias" (click)="getAtractivoporCategoria(categoria.atr_id_tipo)" style="margin-left:0%; margin-top: -1%; margin-bottom: 0%; width: 100%">
-    <img src="{{categoria.atr_img}}" style="border-radius: 1px ; filter : brightness( 80% ); height: 35vh;"/>
+    <img [src]="'http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/atractivos/' + categoria.atr_img_tipo"  style="border-radius: 1px ; filter : brightness( 80% ); height: 35vh;"/>
     <div class="card-title">
         <strong>
           {{categoria.atr_nombre_tipo}}

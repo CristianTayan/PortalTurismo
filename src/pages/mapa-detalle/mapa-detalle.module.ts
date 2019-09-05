@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { MapaDetallePage } from './mapa-detalle';
+// import { MapaDetallePage } from './mapa-detalle';
 
 @NgModule({
   declarations: [
-    MapaDetallePage,
+    // MapaDetallePage,
   ],
   imports: [
-    IonicPageModule.forChild(MapaDetallePage),
+    // IonicPageModule.forChild(MapaDetallePage),
   ],
 })
 export class MapaDetallePageModule {}

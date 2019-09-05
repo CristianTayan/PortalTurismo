@@ -1,15 +1,35 @@
+<div *ngIf="showSplash" class="splash">
+    <div class="sk-cube-grid">
+        <div class="sk-cube sk-cube1"></div>
+        <div class="sk-cube sk-cube2"></div>
+        <div class="sk-cube sk-cube3"></div>
+        <div class="sk-cube sk-cube4"></div>
+        <div class="sk-cube sk-cube5"></div>
+        <div class="sk-cube sk-cube6"></div>
+        <div class="sk-cube sk-cube7"></div>
+        <div class="sk-cube sk-cube8"></div>
+        <div class="sk-cube sk-cube9"></div>
+    </div>  
+    <br>
+    <div>
+        <h6 style="color: white; padding-right: 15px"><b>IBARRA TURISMO</b></h6>
+    </div> 
+</div>
 <ion-menu [content]="contenido">
     <ion-header>
         <ion-toolbar style="height: 150px;">
-            <img src="../assets/imgs/Logo_-ibarra_escudo.png" alt="">
+            <img src="assets/img/Logo_-ibarra_escudo.png" alt="">
         </ion-toolbar>
     </ion-header>
-    <ion-content style="background-color: rgb(237, 237, 238);">
+    <ion-content class="menu-content" style="background-color: rgb(237, 237, 238);">
         <ion-list >
-            <button ion-item (click)="openPage(home)" style="background-color: rgb(237, 237, 238);"><strong style="color:#C40319;"><ion-icon name="home" padding></ion-icon> Home</strong></button>
-            <button ion-item (click)="openPage(cat)" style="background-color: rgb(237, 237, 238);"><strong style="color:#C40319;"><ion-icon name="bookmark" padding></ion-icon>Atractivos Turísticos</strong></button>
-            <button ion-item (click)="openPage(map)" style="background-color: rgb(237, 237, 238);"><strong style="color:#C40319;"><ion-icon name="map" padding></ion-icon>Ver Mapa</strong></button>
-            <button ion-item (click)="openPage(opt)" style="background-color: rgb(237, 237, 238);"><strong style="color:#C40319;"><ion-icon name="settings" padding></ion-icon>Configuración</strong> </button>  
+            <button  ion-item (click)="openPage(home)" style="background-color: rgb(237, 237, 238);"><strong style="color:#C40319;"><ion-icon name="home" padding></ion-icon>Inicio</strong></button>
+            <button  ion-item (click)="openPage(about)" style="background-color: rgb(237, 237, 238);"><strong style="color:#C40319;"><ion-icon name="bookmark" padding></ion-icon>Acerca de Ibarra</strong></button>
+            <button  ion-item (click)="openPage(reasons)" style="background-color: rgb(237, 237, 238);"><strong style="color:#C40319;"><ion-icon name="locate" padding></ion-icon>Mapa de Ibarra</strong></button>
+            <button *ngIf="usuarioEstaConectado" ion-item (click)="openPage(perfil)" style="background-color: rgb(237, 237, 238);"><strong style="color:#C40319;"><ion-icon name="settings" padding></ion-icon>Perfil</strong> </button>
+            <button *ngIf="!usuarioEstaConectado" ion-item (click)="openPage(login)" style="background-color: rgb(237, 237, 238);"><strong style="color:#C40319;"><ion-icon name="settings" padding></ion-icon>Iniciar Sesión</strong> </button>  
+            <button *ngIf="usuarioEstaConectado" ion-item (click)="terminarSesion()" style="background-color: rgb(237, 237, 238);"><strong style="color:#C40319;"><ion-icon name="settings" padding></ion-icon>Terminar Sesión</strong> </button>  
+              
         </ion-list>
     </ion-content>
 </ion-menu>
