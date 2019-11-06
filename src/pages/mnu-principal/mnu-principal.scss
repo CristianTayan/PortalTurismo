@@ -1,4 +1,10 @@
 page-mnu-principal {
+  .texto-encima{
+    position: absolute;
+    top: 5px;
+    right: -2px;
+}
+
   ion-slides {
     height: auto;
   }
@@ -56,14 +62,14 @@ page-mnu-principal {
     margin-top: 0px;
     padding: 0px;
     height: 15px;
-  
+
     &.rating li {
       padding: 0px 0px !important;
       background: none;
       color: #FF6565;
       height: 15px;
 
-  
+
       ion-icon {
         font-size: 13px;
       }
@@ -74,7 +80,7 @@ page-mnu-principal {
   }
 
   shrinking-segment-header {
- 
+
     background-color: #363636;
     color: #fff;
     display: flex;
@@ -93,7 +99,7 @@ page-mnu-principal {
 .item.item-trns {
 	border-color: rgba(0, 0, 0, 0);
 	background-color: rgba(0, 0, 0, 0);
-	color: black; 
+	color: black;
 }
 
 ion-card {
@@ -119,5 +125,5 @@ ion-card {
   color: #fff;
   padding-left: 10px;
 }
-  
+
 }

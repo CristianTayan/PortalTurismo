@@ -77,12 +77,8 @@ export class AtractivoPage {
 
   ionViewDidLoad(){
     this.at_contacto = this.navParams.get('contacto');
-    console.log(this.at_contacto);
-    
     this.at_red_social = this.navParams.get('redsocial');
     this.at_video_atractivo = this.navParams.get('web');
-    console.log(this.at_video_atractivo);
-    
     this.calcularDistancia();
     this.imagenesAtractivo();
     this.getValue();
@@ -199,8 +195,7 @@ export class AtractivoPage {
   calificarAtractivo(at_id, at_nombre){
     this.navCtrl.push(CalificarAtractivoPage,{
       id : at_id,
-      nombre:at_nombre,
-      // nombre:at_nombre
+      nombre:at_nombre
     })
   }
   

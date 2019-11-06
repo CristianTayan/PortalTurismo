@@ -4,10 +4,10 @@ import { VisitReasonsPage } from './visit-reasons';
 
 @NgModule({
   declarations: [
-    VisitReasonsPage,
+    // VisitReasonsPage,
   ],
   imports: [
-    IonicPageModule.forChild(VisitReasonsPage),
+    // IonicPageModule.forChild(VisitReasonsPage),
   ],
 })
 export class VisitReasonsPageModule {}

@@ -1,3 +1,6 @@
+import { PerfilPage } from './../pages/perfil/perfil';
+import { VisitReasonsPage } from './../pages/visit-reasons/visit-reasons';
+import { AboutPage } from './../pages/about/about';
 import { LogueoPage } from './../pages/logueo/logueo';
 import { IntroPage } from './../pages/intro/intro';
 import { AuthServiceProvider } from './../providers/auth-service/auth-service';
@@ -9,33 +12,34 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TranslateService } from '@ngx-translate/core';
 import firebase, { initializeApp } from "firebase";
 import { Storage } from '@ionic/Storage';
-import {timer} from 'rxjs/observable/timer'
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = IntroPage;
+  rootPage: any = IntroPage;
   home = MnuPrincipalPage;
-  about = "AboutPage";
-  reasons = "VisitReasonsPage";
+  about = AboutPage;
+  reasons = VisitReasonsPage;
   login = LogueoPage;
-  perfil = "PerfilPage";
+  perfil = PerfilPage;
+  emprendimientos: String = 'EmprendimientosPage';
 
   @ViewChild('contenido') menu: NavController
 
   usuarioEstaConectado = false;
 
-  showSplash = true;
+  // showSplash = true;
 
 
-  constructor(public authService:AuthServiceProvider ,public platform: Platform,public statusBar: StatusBar,public splashScreen: SplashScreen, public menuCtrl:MenuController,private translateService: TranslateService, private storage: Storage) {
-    
+  constructor(public authService: AuthServiceProvider, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public menuCtrl: MenuController, private translateService: TranslateService, private storage: Storage, private iab: InAppBrowser) {
+
     platform.ready().then(() => {
       this.translateService.setDefaultLang('es');
       this.translateService.use('es');
       splashScreen.hide();
-      timer(2000).subscribe(()=>this.showSplash = false)
+      // timer(2000).subscribe(()=>this.showSplash = false)
     });
 
     firebase.initializeApp({
@@ -48,12 +52,12 @@ export class MyApp {
     })
 
     firebase.auth().onAuthStateChanged(
-      usuario =>{
-        if(usuario != null){
+      usuario => {
+        if (usuario != null) {
           this.usuarioEstaConectado = true;
           // this.menu.setRoot(this.home);
         }
-        else{
+        else {
           this.usuarioEstaConectado = false;
           // this.menu.setRoot(this.login);
         }
@@ -61,14 +65,18 @@ export class MyApp {
     )
   }
 
-  openPage(pagina){
+  openPage(pagina) {
     this.menu.setRoot(pagina);
     this.menuCtrl.close();
   }
 
-  terminarSesion(){
-   this.authService.terminarSesion();
-   this.storage.clear();
+  eventos() {
+    this.iab.create("https://portalciudadano.ibarra.gob.ec/AgendaCultural/", "_blank");
+  }
+
+  terminarSesion() {
+    this.authService.terminarSesion();
+    this.storage.clear();
   }
 }
 

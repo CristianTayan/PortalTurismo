@@ -63,11 +63,11 @@ export class MnuPrincipalPage {
   constructor(public navCtrl: NavController, public events: Events, public navParams: NavParams, private atractivosService: AtractivosTuristicosServiceProvider,
               public servicioService: ServiciosTuristicosServiceProvider, private androidFullScreen: AndroidFullScreen, private translateService: TranslateService,
               private toast: ToastController, private network: Network,public fbDatabase: AngularFireDatabase,public afAuth: AngularFireAuth, public platform : Platform,
-              private loadingCtrl: LoadingController, private slider: DataProvider) {   
+              private loadingCtrl: LoadingController, private slider: DataProvider) {
     this.atractivosService.getAtractivos()
     .then(
      data => {
-       this.atractivos = data; 
+       this.atractivos = data;
      });
 
      firebase.auth().onAuthStateChanged(function(user) {
@@ -77,8 +77,8 @@ export class MnuPrincipalPage {
         // No user is signed in.
       }
     });
-     
-     
+
+
   }
 
   ionViewDidLoad(){
@@ -95,7 +95,7 @@ export class MnuPrincipalPage {
     // this.presentLoadingDefault();
     this.getSliderData();
 
-    
+
   }
 
   getSliderData(){
@@ -114,29 +114,29 @@ export class MnuPrincipalPage {
       loading.dismiss();
     }, 5000);
   }
-  
-  
+
+
   cambioIdioma(selectedValue){
     this.translateService.use(selectedValue);
   }
-    
+
   ionViewDidEnter() {
     this.network.onConnect().subscribe(data => {
       this.displayNetworkUpdate(data.type);
     }, error => console.error(error));
-   
+
     this.network.onDisconnect().subscribe(data => {
       this.displayNetworkError(data.type);
     }, error => console.error(error));
   }
-  
+
   displayNetworkUpdate(connectionState: string){
     let networkType = this.network.type;
     this.toast.create({
       message: `Ahora estas ${connectionState} via ${networkType}`,
       duration: 3000
     }).present();
-  } 
+  }
 
   displayNetworkError(connectionState: string){
     this.toast.create({
@@ -149,7 +149,7 @@ export class MnuPrincipalPage {
     this.atractivosService.getAtractivos()
     .then(
      data => {
-      this.numAtractivos = Object.keys(data).length 
+      this.numAtractivos = Object.keys(data).length
      });
   }
 
@@ -166,7 +166,7 @@ export class MnuPrincipalPage {
        web: at_video_atractivo,
        latitud: at_latitud,
        longitud: at_longitud,
-       img: at_img_atractivo, 
+       img: at_img_atractivo,
        contacto: at_contacto,
        redsocial: at_red_social
     });
@@ -182,7 +182,7 @@ export class MnuPrincipalPage {
 
   onSearch(event){
     console.log(event.target.value);
-    
+
   }
   buscarServicios(){
     this.navCtrl.push(BuscarServicioPage);
@@ -193,6 +193,7 @@ export class MnuPrincipalPage {
     .subscribe(
       data => {
         this.hoteles = data;
+        console.log(this.hoteles);
       }
     )
   }
@@ -211,6 +212,7 @@ export class MnuPrincipalPage {
     .subscribe(
       data => {
         this.hostales = data;
+        console.log(this.hostales);
       }
     )
   }
@@ -232,7 +234,7 @@ export class MnuPrincipalPage {
       }
     )
   }
-  
+
 
   numeroRestaurantes(){
     this.servicioService.getRestaurantes()
@@ -247,7 +249,7 @@ export class MnuPrincipalPage {
     this.servicioService.getVidaNocturna()
     .subscribe(
       data => {
-        this.bares = data;        
+        this.bares = data;
       }
     )
   }
@@ -271,7 +273,7 @@ export class MnuPrincipalPage {
        celular: st_celular,
        redsocial : st_red_social,
        video : st_video_servicio,
-       img: st_img_servicio   
+       img: st_img_servicio
     });
   }
 
@@ -279,7 +281,7 @@ export class MnuPrincipalPage {
     this.servicioService.getRutas()
     .subscribe(
       data => {
-        this.rutas = data;        
+        this.rutas = data;
       }
     )
   }
@@ -287,7 +289,7 @@ export class MnuPrincipalPage {
   abrirRestaurantesPage(){
     this.navCtrl.push(RestaurantesPage);
   }
-  
+
   goToVidaNocturna(){
     this.navCtrl.push(VidaNocturnaPage);
   }

@@ -1,3 +1,6 @@
+import { PerfilPage } from './../pages/perfil/perfil';
+import { VisitReasonsPage } from './../pages/visit-reasons/visit-reasons';
+import { AboutPage } from './../pages/about/about';
 import { CalificarAtractivoPage } from './../pages/calificar-atractivo/calificar-atractivo';
 import { FIREBASE_CONFIG } from './firebase.credentials';
 import { ServiciosCategoriaPage } from './../pages/servicios-categoria/servicios-categoria';
@@ -15,13 +18,11 @@ import { ServicioPage } from './../pages/servicio/servicio';
 import { StarRatingModule } from 'ionic3-star-rating';
 import { AtractivoPage } from './../pages/atractivo/atractivo';
 import { MapaDetallePage } from './../pages/mapa-detalle/mapa-detalle';
-// import { ConfiguracionPage } from './../pages/configuracion/configuracion';
 import { MnuCategoriaAtractivosPage } from './../pages/mnu-categoria-atractivos/mnu-categoria-atractivos';
 import { MapaPage } from './../pages/mapa/mapa';
-// import { AtractivoDetallePage } from './../pages/atractivo-detalle/atractivo-detalle';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule, IonicPageModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
@@ -41,7 +42,6 @@ import { GoogleMaps } from '@ionic-native/google-maps';
 import { RutasPage } from '../pages/rutas/rutas';
 import { RutaIntinerarioPage } from '../pages/ruta-intinerario/ruta-intinerario';
 import { CallNumber } from '@ionic-native/call-number';
-import { AndroidFullScreen } from'@ionic-native/android-full-screen'
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 import { Base64 } from '@ionic-native/base64';
 import { EditComentPage } from '../pages/edit-coment/edit-coment';
@@ -63,26 +63,24 @@ import { IntroPage } from '../pages/intro/intro';
 import { MnuPrincipalPage } from '../pages/mnu-principal/mnu-principal';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { LogueoPage } from '../pages/logueo/logueo';
+import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, "./assets/i18n/", ".json");
 }
 
-
-
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    // AtractivoDetallePage,
+    AboutPage,
     MapaPage,
     MnuCategoriaAtractivosPage,
-    // ConfiguracionPage,
+    VisitReasonsPage,
     MapaDetallePage,
     AtractivoPage,
     ServicioPage,
     MapHotelComponent,
-    // ListaServiciosPage,
     BuscarServicioPage,
     SearchPipe,
     SortPipe,
@@ -101,13 +99,15 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     MnuCategoriaServiciosPage,
     ServiciosCategoriaPage,
     LogueoPage,
+    PerfilPage,
     ResetPasswordPage,
     CalificarAtractivoPage,
     AtractivosTuristicosPage
-    
+
 
   ],
   imports: [
+    IonicPageModule.forChild(IntroPage),
     BrowserModule,
     HttpModule,
     IonicStorageModule.forRoot(),
@@ -121,8 +121,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
           deps: [HttpClient]
       }
   }),
-    // MnuPrincipalPageModule,
-    // AtractivosTuristicosPageModule,
     StarRatingModule,
     Ionic2RatingModule,
     BrowserModule,
@@ -130,21 +128,21 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AngularFireDatabaseModule,
     IonicImageViewerModule,
     AngularFireModule.initializeApp(FIREBASE_CONFIG)
-    
+
 
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    // AtractivoDetallePage,
+    AboutPage,
     MnuCategoriaAtractivosPage,
     MapaPage,
-    // ConfiguracionPage,
+    VisitReasonsPage,
+    PerfilPage,
     MapaDetallePage,
     AtractivoPage,
     ServicioPage,
-    // ListaServiciosPage,
     BuscarServicioPage,
     RestaurantesPage,
     CalificarServicioPage,
@@ -153,8 +151,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     VidaNocturnaPage,
     RutasPage,
     IntroPage,
-    // AboutPage,
-    // VisitReasonsPage,
     IntinerarioPage,
     RutaIntinerarioPage,
     EditComentPage,
@@ -162,7 +158,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ServiciosCategoriaPage,
     MnuPrincipalPage,
     LogueoPage,
-    // PerfilPage,
     ResetPasswordPage,
     CalificarAtractivoPage,
     AtractivosTuristicosPage
@@ -175,6 +170,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     SplashScreen,
     Geolocation,
     Camera,
+    AndroidFullScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CategoriaAtractivoServiceProvider,
     AtractivosTuristicosServiceProvider,
@@ -182,15 +178,11 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     SocialSharing,
     GoogleMaps,
     CallNumber,
-    AndroidFullScreen,
     AuthServiceProvider,
     Base64,
     Network,
     UserServiceProvider,
     DataProvider
-    // AuthServiceProvider
-  
-    
   ]
 })
 export class AppModule {}

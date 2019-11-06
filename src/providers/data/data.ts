@@ -21,14 +21,14 @@ export class DataProvider {
       resolve => {
         this.http.get("http://desarrollosigm.ibarra.gob.ec/servidorPortalTuristico/index.php/getAbout")
         .subscribe(
-          data =>{    
+          data =>{
             resolve(data);
           },
           err=>{
-            console.log("No data");            
+            console.log("No data");
           }
         )
-      } 
+      }
     );
   }
 
@@ -37,14 +37,30 @@ export class DataProvider {
       resolve => {
         this.http.get("http://desarrollosigm.ibarra.gob.ec/servidorPortalTuristico/index.php/getSliderData")
         .subscribe(
-          data =>{    
+          data =>{
             resolve(data);
           },
           err=>{
-            console.log("No data");            
+            console.log("No data");
           }
         )
-      } 
+      }
+    )
+  }
+
+  getEmprendimientos(){
+    return new Promise(
+      resolve => {
+        this.http.get("http://desarrollosigm.ibarra.gob.ec/servidorPortalTuristico/index.php/getEmprendimientos")
+        .subscribe(
+          data =>{
+            resolve(data);
+          },
+          err=>{
+            console.log("No data");
+          }
+        )
+      }
     )
   }
 
