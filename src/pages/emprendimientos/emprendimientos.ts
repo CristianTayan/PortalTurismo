@@ -1,3 +1,4 @@
+import { EmprendimientoPage } from './../emprendimiento/emprendimiento';
 import { DataProvider } from './../../providers/data/data';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -17,19 +18,24 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class EmprendimientosPage {
   emprendimientos;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public data: DataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public datos: DataProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad EmprendimientosPage');
+    this.getEmprendimientos();
   }
 
   getEmprendimientos(){
-    this.data.getEmprendimientos()
-    .then(data =>{
-      this.emprendimientos = data;
-      console.log(this.emprendimientos);
+    this.datos.getEmprendimientos().then(res => {
+      this.emprendimientos = res;
 
+    })
+  };
+  getEmprendimiento(em_id, em_latitud, em_longitud){
+    this.navCtrl.push(EmprendimientoPage,{
+      id : em_id,
+      latitud : em_latitud,
+      longitud : em_longitud
     })
   }
 

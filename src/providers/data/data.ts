@@ -64,4 +64,17 @@ export class DataProvider {
     )
   }
 
+  getEmprendimiento(id){
+    return new Promise(
+      resolve => {
+        this.http.get("http://desarrollosigm.ibarra.gob.ec/servidorPortalTuristico/index.php/getEmprendimiento/"+id)
+        .subscribe(
+          data =>{
+            resolve(data);
+          }
+        )
+      }
+    );
+  }
+
 }

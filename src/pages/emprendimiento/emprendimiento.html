@@ -1,0 +1,106 @@
+<ion-header no-border>
+  <ion-navbar color='danger'>
+      <ion-buttons style="display: inline-block">
+          <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </ion-buttons>
+    <ion-title style="display: inline-block; margin-top: 10px">{{nombre}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-card style="margin-left:0%; margin-top: -1%; margin-bottom: 0%; width: 100%">
+    <div parallax>
+        <img  src="http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/emprendimientos/{{em_img_servicio}}"  imageViewer>
+    </div>
+  </ion-card>
+  <ion-card *ngFor="let servicio of emprendimiento" style="background-color: rgb(253, 252, 252);margin-left:0%; margin-top: 0%; margin-bottom: 0%; width: 100%; ">
+    <ion-item>
+      <h2 style=" color:black">{{servicio.em_emprendimiento}}</h2>
+
+      <p style=" color:rgb(7, 7, 7); font-size: 0.9em">{{distancia}} km</p>
+    </ion-item>
+    <ion-card-content>
+
+        <div padding style="padding-top: 0%">
+            <ion-segment [(ngModel)]="menus">
+              <ion-segment-button value="Informacion">
+                Información
+              </ion-segment-button>
+            </ion-segment>
+          </div>
+
+          <div [ngSwitch]="menus">
+            <ion-list *ngSwitchCase="'Informacion'" >
+              <ion-row>
+                <ion-col col-6 style="text-align: center" (click)="compartir()">
+                  <ion-icon name="logo-whatsapp" color='primary' style="font-size: 25px" item-center></ion-icon>
+                  <p>Compartir</p>
+                </ion-col>
+                <ion-col col-6 style="text-align: center" (click)="callJoint()">
+                  <ion-icon name="call" color='primary' style="font-size: 25px" item-center></ion-icon>
+                  <p>Llamar</p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                  <!-- <button ion-button outline block>Reservar una habitación</button> -->
+              </ion-row>
+              <hr *ngIf="servicio.em_descripcion">
+              <ion-row *ngFor="let servicio of emprendimiento">
+                <ion-col col-12>
+                    <div [innerHTML]="servicio.em_descripcion"></div>
+                </ion-col>
+              </ion-row>
+              <hr *ngIf="servicio.em_direccion">
+              <ion-row *ngIf="servicio.em_direccion" >
+                  <ion-col col-2>
+                    <ion-icon name="pin" color='primary' item-start small ></ion-icon>
+                  </ion-col>
+                  <ion-col col-10>
+                    <p style="text-align : justify;">{{servicio.em_direccion}}</p>
+                  </ion-col>
+                </ion-row>
+                <hr>
+                <ion-row >
+                    <ion-col col-2>
+                      <ion-icon name="call" color='secondary' item-start small ></ion-icon>
+                    </ion-col>
+                    <ion-col col-10>
+                      <p style="text-align : justify;">{{servicio.em_celular}} - {{servicio.em_telefono}}</p>
+                    </ion-col>
+                  </ion-row>
+                  <hr *ngIf="servicio.em_email">
+                  <ion-row *ngIf="servicio.em_email">
+                    <ion-col col-2>
+                      <ion-icon name="mail" color='yellow' item-start small ></ion-icon>
+                    </ion-col>
+                    <ion-col col-10>
+                      <p style="text-align : justify;">{{servicio.em_email}}</p>
+                    </ion-col>
+                  </ion-row>
+                  <hr *ngIf="servicio.em_red_social">
+                  <ion-row *ngIf="servicio.em_red_social" (click)="openLinkFb()">
+                    <ion-col col-2>
+                      <ion-icon name="logo-facebook" color='primary' item-start small ></ion-icon>
+                    </ion-col>
+                    <ion-col col-10>
+                      <p style="text-align : justify;">{{servicio.em_red_social}}</p>
+                    </ion-col>
+                  </ion-row>
+                  <hr *ngIf="servicio.em_video_servicio">
+                  <ion-row *ngIf="servicio.em_video_servicio"  (click)="openLinkYt()">
+                    <ion-col col-2>
+                      <ion-icon name="logo-youtube" color='danger' item-start small ></ion-icon>
+                    </ion-col>
+                    <ion-col col-10>
+                      <p style="text-align : justify;">{{servicio.em_video_servicio}}</p>
+                    </ion-col>
+                  </ion-row>
+                  <map-emprendimiento></map-emprendimiento>
+            </ion-list>
+          </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

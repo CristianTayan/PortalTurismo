@@ -1,3 +1,4 @@
+import { EmprendimientosPage } from './../pages/emprendimientos/emprendimientos';
 import { PerfilPage } from './../pages/perfil/perfil';
 import { VisitReasonsPage } from './../pages/visit-reasons/visit-reasons';
 import { AboutPage } from './../pages/about/about';
@@ -24,7 +25,7 @@ export class MyApp {
   reasons = VisitReasonsPage;
   login = LogueoPage;
   perfil = PerfilPage;
-  emprendimientos: String = 'EmprendimientosPage';
+  emprendimientos= EmprendimientosPage;
 
   @ViewChild('contenido') menu: NavController
 
@@ -38,6 +39,7 @@ export class MyApp {
     platform.ready().then(() => {
       this.translateService.setDefaultLang('es');
       this.translateService.use('es');
+      this.statusBar.styleLightContent;
       splashScreen.hide();
       // timer(2000).subscribe(()=>this.showSplash = false)
     });

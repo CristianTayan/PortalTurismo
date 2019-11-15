@@ -10,6 +10,25 @@
   </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+    <ion-card *ngFor="let servicio of emprendimientos"  style="background-color: rgb(254, 254, 255);">
+        <img class="contenedor" [src]="'http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/emprendimientos/' + servicio.em_img_servicio" *ngIf="servicio.em_img_servicio" (click)="AbrirServicio(servicio.st_id, servicio.em_emprendimiento, servicio.st_pagina_web, servicio.em_latitud, servicio.em_longitud, servicio.st_celular, servicio.em_img_servicio)" style="height: 35vh;" />
+        <img src="assets/img/noimage.jpg" *ngIf="!servicio.em_img_servicio" (click)="AbrirServicio(servicio.st_id, servicio.em_emprendimiento, servicio.st_pagina_web, servicio.em_latitud, servicio.em_longitud, servicio.st_celular, servicio.em_img_servicio)" style="height: 35vh;" />
+        <ion-card-content>
+            <ion-card-title style="font-size: 1.0em;">
+                <strong style="margin-right: 12px">{{servicio.em_emprendimiento}}</strong>
+            </ion-card-title>
+                <!-- <ion-icon name="paper" color='primary' style="margin-right: 10px"></ion-icon> -->
+                <div [innerHTML]="servicio.em_descripcion"></div>
+            <hr>
+            <!-- <button ion-button color='whatsapp' (click)=" pasarCoordenadasRuta(servicio.em_latitud, servicio.em_longitud,servicio.em_emprendimiento)">Como llegar
+                <ion-icon name="pin" style="margin-left: 10px"></ion-icon>
+            </button> -->
+            <button ion-button block color='danger' (click)="getEmprendimiento(servicio.em_id, servicio.em_latitud, servicio.em_longitud)">Ver más
+                <ion-icon name="map" style="margin-left: 10px"></ion-icon>
+            </button>
 
+
+        </ion-card-content>
+    </ion-card>
 </ion-content>

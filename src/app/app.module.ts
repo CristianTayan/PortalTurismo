@@ -1,3 +1,6 @@
+import { EmprendimientosPage } from './../pages/emprendimientos/emprendimientos';
+import { EmprendimientoPage } from './../pages/emprendimiento/emprendimiento';
+import { MapEmprendimientoComponent } from './../components/map-emprendimiento/map-emprendimiento';
 import { PerfilPage } from './../pages/perfil/perfil';
 import { VisitReasonsPage } from './../pages/visit-reasons/visit-reasons';
 import { AboutPage } from './../pages/about/about';
@@ -85,7 +88,10 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     SearchPipe,
     SortPipe,
     RestaurantesPage,
+    EmprendimientoPage,
     MapaServiciosComponent,
+    MapEmprendimientoComponent,
+    EmprendimientosPage,
     CalificarServicioPage,
     RutaAtractivoPage,
     RutaServicioPage,
@@ -106,6 +112,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
 
   ],
+
   imports: [
     IonicPageModule.forChild(IntroPage),
     BrowserModule,
@@ -139,6 +146,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     MnuCategoriaAtractivosPage,
     MapaPage,
     VisitReasonsPage,
+    EmprendimientoPage,
+    EmprendimientosPage,
     PerfilPage,
     MapaDetallePage,
     AtractivoPage,
