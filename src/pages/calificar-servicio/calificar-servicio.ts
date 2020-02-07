@@ -34,27 +34,28 @@ export class CalificarServicioPage {
   apellido;
   perfil;
   imguser;
+  idioma = localStorage.getItem('idioma');
 
   // commentForm: FormGroup;
 
 
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams, 
+    public navCtrl: NavController,
+    public navParams: NavParams,
     public toastCtrl: ToastController,
     // public formBuilder: FormBuilder,
     private servicios: ServiciosTuristicosServiceProvider,
     public alertCtrl: AlertController,
     private camera: Camera,
     private storage: Storage) {
-                  
+
   }
 
   ionViewDidLoad() {
     this.getValue();
     console.log(this.st_nombre);
     ;
-    
+
   }
 
   getPicture(){
@@ -69,8 +70,8 @@ export class CalificarServicioPage {
       // this.image = 'data:image/jpeg;base64,${imageData}';
       this.image = 'data:image/jpeg;base64,' + imageData;
       console.log(this.image);
-      
-      
+
+
     })
     .catch(error =>{
       console.error( error );
@@ -92,8 +93,8 @@ export class CalificarServicioPage {
       // this.image = 'data:image/jpeg;base64,${imageData}';
       this.image = 'data:image/jpeg;base64,' + imageData;
       console.log(this.image);
-      
-      
+
+
     })
     .catch(error =>{
       console.error( error );
@@ -116,7 +117,7 @@ export class CalificarServicioPage {
       this.imguser = data.image;
       this.nombre= data.nombre;
       this.apellido = data.apellido;
-      console.log(this.perfil); 
+      console.log(this.perfil);
     })
   }
 
@@ -130,18 +131,18 @@ export class CalificarServicioPage {
     datos["st_fecha"] =  now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate()+ " "+now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
     datos["username"] = this.username;
     datos["user_image"] = this.imguser;
-    
+
     this.servicios.addComentario(datos)
     .then(
       data =>{
         swal("Gracias!", "por tu opinion!", "success");
-        this.navCtrl.pop();        
+        this.navCtrl.pop();
       }
     ).catch(
       error => {
         console.log(error);
-        
+
       }
-    )       
+    )
   }
 }

@@ -20,6 +20,7 @@ export class MnuCategoriaServiciosPage {
   errorMessage: string;
   descending: boolean = false;
   order: number;
+  idioma = localStorage.getItem('idioma');
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public servicios:ServiciosTuristicosServiceProvider) {
    this.getCategorias();
@@ -41,10 +42,11 @@ export class MnuCategoriaServiciosPage {
     this.order = this.descending ? 1 : -1;
   }
 
-  serviciosPorCategoria(cat_id, cat_nombre){
+  serviciosPorCategoria(cat_id, cat_nombre, cat_nombre_ingles){
     this.navCtrl.push(ServiciosCategoriaPage,{
       id:cat_id,
-      nombre:cat_nombre
+      nombre:cat_nombre,
+      nombre_ingles: cat_nombre_ingles
     })
   }
 

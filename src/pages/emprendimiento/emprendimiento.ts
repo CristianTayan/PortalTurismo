@@ -33,6 +33,7 @@ export class EmprendimientoPage {
   em_img_servicio;
   menus: string = "Informacion";
   distancia;
+  idioma = localStorage.getItem('idioma');
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public dataService: DataProvider,
     private _haversineService: HaversineService,

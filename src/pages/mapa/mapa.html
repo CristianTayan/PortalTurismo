@@ -5,7 +5,8 @@
           <ion-icon name="menu"></ion-icon>
         </button>
       </ion-buttons>
-    <ion-title *ngIf="!isSerarchbarOpened" style="display: inline-block; margin-top: 10px">MAPA DE IBARRA</ion-title>
+    <ion-title *ngIf="idioma == 'es'" style="display: inline-block; margin-top: 10px">MAPA DE IBARRA</ion-title>
+    <ion-title *ngIf="idioma == 'en'" style="display: inline-block; margin-top: 10px">MAP OF IBARRA</ion-title>
     <ion-searchbar *ngIf="isSerarchbarOpened" autofocus (search)="onSearch($event)" showCancelButton="true" (ionCancel)="isSerarchbarOpened=false"></ion-searchbar>
     <ion-buttons end>
         <button ion-button icon-only color="royal" *ngIf="!isSerarchbarOpened" (click)="isSerarchbarOpened=true">

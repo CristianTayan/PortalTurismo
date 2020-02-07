@@ -15,15 +15,16 @@ export class AtractivosTuristicosPage {
   atractivos;
   ta_id;
   ocultar: boolean = true;
+  idioma = localStorage.getItem('idioma');
 
-   constructor(public navCtrl: NavController, 
-                public navParams: NavParams, 
+   constructor(public navCtrl: NavController,
+                public navParams: NavParams,
                 public atractivosService: AtractivosTuristicosServiceProvider,
                 public toast: ToastController) {
       this.ocultar = !this.ocultar;
       this.ta_id = this.navParams.get('ta_id');
-      this.getAtractivos();   
-      
+      this.getAtractivos();
+
   }
 
   presentToast() {

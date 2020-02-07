@@ -16,7 +16,8 @@
 
 <ion-content style="background-color: #f7f7f7">
   <div style="text-align: center">
-    <h6>{{'Bienvenido a ' | translate }}Ibarra</h6>
+    <h6 *ngIf="lenguaje == 'es'"> Bienvenido a Ibarra</h6>
+    <h6 *ngIf="lenguaje == 'en'"> Welcome to Ibarra</h6>
   </div>
   <ion-slides *ngIf="sliderImages && sliderImages.length" autoplay="5000" class="slideroption" pager="true" loop="true"
     speed="300">
@@ -31,7 +32,8 @@
 
   <div>
     <ion-item class="item item-trns text-center" style="width: 200px; font-size: 0.9em; margin-left: 45%">
-      <ion-label>{{ 'Idioma' | translate }} </ion-label>
+      <!-- <ion-label *ngIf="lenguaje == 'es'">Idioma </ion-label> -->
+      <ion-label >Language </ion-label>
       <ion-select [(ngModel)]="idioma" (ionChange)="cambioIdioma($event)">
         <ion-option value="es">Español</ion-option>
         <ion-option value="en">English</ion-option>
@@ -42,42 +44,58 @@
         <button ion-fab mini (click)="abrirRestaurantesPage()" color='danger' style="margin-left: 15px;">
           <ion-icon name="restaurant"></ion-icon>
         </button>
-        <p style="text-align: center">{{'Restaurantes'|translate}}</p>
+        <p style="text-align: center" *ngIf="lenguaje == 'es'">Restaurantes</p>
+        <p style="text-align: center" *ngIf="lenguaje == 'en'">Restaurants</p>
       </ion-col>
       <ion-col>
         <button ion-fab mini color='primary' (click)="goToVidaNocturna()" style="margin-left: 15px;">
           <ion-icon name="wine"></ion-icon>
         </button>
-        <p style="text-align: center">{{'Diversión' | translate}}</p>
+        <p style="text-align: center" *ngIf="lenguaje == 'es'">Diversión</p>
+        <p style="text-align: center" *ngIf="lenguaje == 'en'">Fun</p>
       </ion-col>
       <ion-col>
         <button ion-fab mini color='yellow' (click)="goToRutas()" style="margin-left: 15px;">
           <ion-icon name="walk" style="color: white"></ion-icon>
         </button>
-        <p style="text-align: center">{{'Rutas' | translate}}</p>
+        <p style="text-align: center" *ngIf="lenguaje == 'es'">Rutas</p>
+        <p style="text-align: center" *ngIf="lenguaje == 'en'">Routes</p>
       </ion-col>
       <ion-col>
         <button ion-fab mini color='secondary' (click)="abrirCategoriaServicios()" style="margin-left: 15px;">
           <ion-icon name="bookmark"></ion-icon>
         </button>
-        <p style="text-align: center">{{'Servicios' | translate}}</p>
+        <p style="text-align: center" *ngIf="lenguaje == 'es'">Servicios</p>
+        <p style="text-align: center" *ngIf="lenguaje == 'en'">Services</p>
       </ion-col>
     </ion-row>
     <br>
-    <ion-row>
+    <ion-row *ngIf="lenguaje == 'es'">
       <ion-col>
         <h1 style="color: #0AC7B4; text-align: left; margin-left: 12px">
-          <ion-icon name="camera"></ion-icon> {{'Qué visitar en Ibarra' | translate}}
+          <ion-icon name="camera"></ion-icon>Qué visitar en Ibarra
         </h1>
       </ion-col>
       <ion-col>
-        <h1 (click)="abrirCategorias()">{{numAtractivos}} {{'lugares más' | translate}} ></h1>
+        <h1 (click)="abrirCategorias()">{{numAtractivos}} lugares más ></h1>
       </ion-col>
     </ion-row>
+
+    <ion-row *ngIf="lenguaje == 'en'">
+      <ion-col>
+        <h1 style="color: #0AC7B4; text-align: left; margin-left: 12px">
+          <ion-icon name="camera"></ion-icon> What to visit in Ibarra
+        </h1>
+      </ion-col>
+      <ion-col>
+        <h1 (click)="abrirCategorias()">{{numAtractivos}} places more ></h1>
+      </ion-col>
+    </ion-row>
+
     <ion-scroll scrollX="true" style="width: 100%; height: 220px;">
       <div class="inner" style="padding-left: 5px">
         <ion-card *ngFor="let atractivo of  atractivos"
-          (click)="AbrirAtractivo(atractivo.at_id, atractivo.at_nombre, atractivo.at_video_atractivo, atractivo.at_latitud, atractivo.at_longitud, atractivo.at_img_atractivo, atractivo.at_red_social, atractivo.at_contacto)"
+          (click)="AbrirAtractivo(atractivo.at_id, atractivo.at_nombre, atractivo.at_nombre_ingles, atractivo.at_video_atractivo, atractivo.at_latitud, atractivo.at_longitud, atractivo.at_img_atractivo, atractivo.at_red_social, atractivo.at_contacto)"
           style="width: 170px;border-radius: 4px ;">
           <img
             [src]="'http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/atractivos/' + atractivo.at_img_atractivo"
@@ -86,8 +104,14 @@
             style=" filter : brightness( 125% )" />
           <ion-card-content style="margin-left: -20px; margin-top: -12px; height: 83px;">
             <ion-item style="padding-left: 10px;">
-              <p style="color: grey; font-size: 11px;">{{atractivo.ta_id}}</p>
-              <h6 style="color: #000000"><strong>{{atractivo.at_nombre}}</strong></h6>
+              <p *ngIf="lenguaje == 'es'" style="color: grey; font-size: 11px;">{{atractivo.ta_id}}</p>
+              <p *ngIf="lenguaje == 'en' && atractivo.ta_id =='SITIOS NATURALES'" style="color: grey; font-size: 11px;">NATURAL SITES</p>
+              <p *ngIf="lenguaje == 'en' && atractivo.ta_id =='IGLESIAS'" style="color: grey; font-size: 11px;">CHURCHES</p>
+              <p *ngIf="lenguaje == 'en' && atractivo.ta_id =='PARQUES'" style="color: grey; font-size: 11px;">PARKS</p>
+              <p *ngIf="lenguaje == 'en' && atractivo.ta_id =='MONUMENTOS MUSEOS'" style="color: grey; font-size: 11px;">MONUMENTS MUSEUMS</p>
+              <p *ngIf="lenguaje == 'en' && atractivo.ta_id =='MUSICA Y DANZA'" style="color: grey; font-size: 11px;">MUSIC AND DANCE</p>
+              <h6 style="color: #000000" *ngIf="lenguaje == 'es'" ><strong>{{atractivo.at_nombre}}</strong></h6>
+              <h6 style="color: #000000" *ngIf="lenguaje == 'en'" ><strong>{{atractivo.at_nombre_ingles}}</strong></h6>
               <rating [(ngModel)]="atractivo.at_rating" readOnly="true" max="5" emptyStarIconName="star-outline"
                 halfStarIconName="star-half" starIconName="star" nullable="true">
               </rating>
@@ -97,16 +121,28 @@
       </div>
     </ion-scroll>
 
-    <ion-row>
+    <ion-row *ngIf="lenguaje == 'es'" >
       <ion-col>
-        <h1 style="color: #33B5E5; text-align: left; margin-left: 12px">
-          <ion-icon name="podium"></ion-icon> {{'HOTELES'|translate}}
+        <h1  style="color: #33B5E5; text-align: left; margin-left: 12px">
+          <ion-icon name="podium"></ion-icon> HOTELES
         </h1>
       </ion-col>
       <ion-col>
-        <h1>{{numHoteles}} {{'hoteles más'|translate}} ></h1>
+        <h1>{{numHoteles}} hoteles más ></h1>
       </ion-col>
     </ion-row>
+
+    <ion-row *ngIf="lenguaje == 'en'" >
+      <ion-col>
+        <h1  style="color: #33B5E5; text-align: left; margin-left: 12px">
+          <ion-icon name="podium"></ion-icon> HOTELS
+        </h1>
+      </ion-col>
+      <ion-col>
+        <h1>{{numHoteles}} hotels more ></h1>
+      </ion-col>
+    </ion-row>
+
     <ion-scroll scrollX="true" style="width: 100%; height: 220px;">
       <div class="inner" style="padding-left: 5px">
         <ion-card *ngFor="let hotel of  hoteles"
@@ -116,17 +152,25 @@
             *ngIf="hotel.st_img_servicio" height="120" style=" filter : brightness( 125% )" />
           <img src="assets/img/noimage.jpg" *ngIf="!hotel.st_img_servicio" height="120"
             style=" filter : brightness( 125% )" />
-            <div class="texto-encima">
+            <div *ngIf="lenguaje == 'es'" class="texto-encima">
               <ion-badge *ngIf="hotel.st_categoria == 5" color="danger">{{hotel.st_categoria}} estrellas</ion-badge>
               <ion-badge *ngIf="hotel.st_categoria == 4" color="facebook">{{hotel.st_categoria}} estrellas</ion-badge>
               <ion-badge *ngIf="hotel.st_categoria == 3" color="whatsapp">{{hotel.st_categoria}} estrellas</ion-badge>
               <ion-badge *ngIf="hotel.st_categoria == 2" color="whatsapp">{{hotel.st_categoria}} estrellas</ion-badge>
               <ion-badge *ngIf="hotel.st_categoria == 1" color="whatsapp">{{hotel.st_categoria}} estrellas</ion-badge>
             </div>
+            <div *ngIf="lenguaje == 'en'" class="texto-encima">
+              <ion-badge *ngIf="hotel.st_categoria == 5" color="danger">{{hotel.st_categoria}} stars</ion-badge>
+              <ion-badge *ngIf="hotel.st_categoria == 4" color="facebook">{{hotel.st_categoria}} stars</ion-badge>
+              <ion-badge *ngIf="hotel.st_categoria == 3" color="whatsapp">{{hotel.st_categoria}} stars</ion-badge>
+              <ion-badge *ngIf="hotel.st_categoria == 2" color="whatsapp">{{hotel.st_categoria}} stars</ion-badge>
+              <ion-badge *ngIf="hotel.st_categoria == 1" color="whatsapp">{{hotel.st_categoria}} stars</ion-badge>
+            </div>
           <ion-card-content style="margin-left: -20px; margin-top: -12px; height: 83px;">
             <ion-item item-start style="padding-left: 10px">
-              <p style="color: grey;  font-size: 11px;">{{hotel.cat_id}}</p>
-              <h6 style="color: #000000"><strong>{{hotel.st_nombre}}</strong></h6>
+              <p style="color: grey;  font-size: 11px;">HOTEL</p>
+              <h6  style="color: #000000"><strong>{{hotel.st_nombre}}</strong></h6>
+              <!-- <h6 *ngIf="lenguaje == 'en'" style="color: #000000"><strong>{{hotel.st_nombre_ingles}}</strong></h6> -->
               <rating [(ngModel)]="hotel.st_rating" readOnly="true" max="5" emptyStarIconName="star-outline"
                 halfStarIconName="star-half" starIconName="star" nullable="true">
               </rating>
@@ -136,7 +180,7 @@
       </div>
     </ion-scroll>
 
-    <ion-row>
+    <ion-row *ngIf="lenguaje == 'es'">
       <ion-col>
         <h1 style="color: #33B5E5; text-align: left; margin-left: 12px">
           <ion-icon name="home"></ion-icon> {{'HOSTERIAS'|translate}}
@@ -146,6 +190,18 @@
         <h1>{{numHostales}} {{'hosterias más'|translate}} ></h1>
       </ion-col>
     </ion-row>
+
+    <ion-row *ngIf="lenguaje == 'en'">
+      <ion-col>
+        <h1 style="color: #33B5E5; text-align: left; margin-left: 12px">
+          <ion-icon name="home"></ion-icon> HOSTERIES
+        </h1>
+      </ion-col>
+      <ion-col>
+        <h1>{{numHostales}} hosteries more ></h1>
+      </ion-col>
+    </ion-row>
+
     <ion-scroll scrollX="true" style="width: 100%; height: 220px;">
       <div class="inner" style="padding-left: 5px">
         <ion-card *ngFor="let hostal of  hostales"
@@ -156,17 +212,26 @@
             *ngIf="hostal.st_img_servicio" height="120" style=" filter : brightness( 125% )" />
           <img src="assets/img/noimage.jpg" *ngIf="!hostal.st_img_servicio" height="120"
             style=" filter : brightness( 125% )" />
-            <div class="texto-encima">
-                <ion-badge *ngIf="hostal.st_categoria == 5" color="danger">{{hostal.st_categoria}} estrellas</ion-badge>
-                <ion-badge *ngIf="hostal.st_categoria == 4" color="facebook">{{hostal.st_categoria}} estrellas</ion-badge>
-                <ion-badge *ngIf="hostal.st_categoria == 3" color="whatsapp">{{hostal.st_categoria}} estrellas</ion-badge>
-                <ion-badge *ngIf="hostal.st_categoria == 2" color="whatsapp">{{hostal.st_categoria}} estrellas</ion-badge>
-                <ion-badge *ngIf="hostal.st_categoria == 1" color="whatsapp">{{hostal.st_categoria}} estrellas</ion-badge>
-              </div>
+            <div *ngIf="lenguaje == 'es'" class="texto-encima">
+              <ion-badge *ngIf="hostal.st_categoria == 5" color="danger">{{hostal.st_categoria}} estrellas</ion-badge>
+              <ion-badge *ngIf="hostal.st_categoria == 4" color="facebook">{{hostal.st_categoria}} estrellas</ion-badge>
+              <ion-badge *ngIf="hostal.st_categoria == 3" color="whatsapp">{{hostal.st_categoria}} estrellas</ion-badge>
+              <ion-badge *ngIf="hostal.st_categoria == 2" color="whatsapp">{{hostal.st_categoria}} estrellas</ion-badge>
+              <ion-badge *ngIf="hostal.st_categoria == 1" color="whatsapp">{{hostal.st_categoria}} estrellas</ion-badge>
+            </div>
+            <div *ngIf="lenguaje == 'en'" class="texto-encima">
+              <ion-badge *ngIf="hostal.st_categoria == 5" color="danger">{{hostal.st_categoria}} stars</ion-badge>
+              <ion-badge *ngIf="hostal.st_categoria == 4" color="facebook">{{hostal.st_categoria}} stars</ion-badge>
+              <ion-badge *ngIf="hostal.st_categoria == 3" color="whatsapp">{{hostal.st_categoria}} stars</ion-badge>
+              <ion-badge *ngIf="hostal.st_categoria == 2" color="whatsapp">{{hostal.st_categoria}} stars</ion-badge>
+              <ion-badge *ngIf="hostal.st_categoria == 1" color="whatsapp">{{hostal.st_categoria}} stars</ion-badge>
+            </div>
           <ion-card-content style="margin-left: -20px; margin-top: -12px; height: 83px;">
             <ion-item style="padding-left: 10px">
-              <p style="color: grey;  font-size: 11px;">{{hostal.cat_id}}</p>
-              <h6 style="color: #000000"><strong>{{hostal.st_nombre}}</strong></h6>
+              <p *ngIf="lenguaje == 'es'" style="color: grey;  font-size: 11px;">{{ hostal.cat_id }}</p>
+              <p *ngIf="lenguaje == 'en'" style="color: grey;  font-size: 11px;">HOSTERIES</p>
+              <h6 *ngIf="lenguaje == 'es'" style="color: #000000"><strong>{{hostal.st_nombre}}</strong></h6>
+              <h6 *ngIf="lenguaje == 'en'" style="color: #000000"><strong>{{hostal.st_nombre}}</strong></h6>
               <rating [(ngModel)]="hostal.st_rating" readOnly="true" max="5" emptyStarIconName="star-outline"
                 halfStarIconName="star-half" starIconName="star" nullable="true">
               </rating>
@@ -175,16 +240,28 @@
         </ion-card>
       </div>
     </ion-scroll>
-    <ion-row>
+    <ion-row *ngIf="lenguaje == 'es'">
       <ion-col>
         <h1 style="color: #FF6565; text-align: left; margin-left: 12px">
-          <ion-icon name="restaurant"></ion-icon> {{'RESTAURANTES'|translate}}
+          <ion-icon name="restaurant"></ion-icon> RESTAURANTES
         </h1>
       </ion-col>
       <ion-col>
-        <h1 (click)="abrirRestaurantesPage()">{{numRestaurantes}} {{'restaurantes más'|translate}} ></h1>
+        <h1 (click)="abrirRestaurantesPage()">{{numRestaurantes}} restaurantes ></h1>
       </ion-col>
     </ion-row>
+
+    <ion-row *ngIf="lenguaje == 'en'">
+      <ion-col>
+        <h1 style="color: #FF6565; text-align: left; margin-left: 12px">
+          <ion-icon name="restaurant"></ion-icon> RESTAURANTS
+        </h1>
+      </ion-col>
+      <ion-col>
+        <h1 (click)="abrirRestaurantesPage()">{{numRestaurantes}} restaurants more ></h1>
+      </ion-col>
+    </ion-row>
+
     <ion-scroll scrollX="true" style="width: 100%; height: 220px;">
       <div class="inner" style="padding-left: 5px">
         <ion-card *ngFor="let item of  restaurantes"
@@ -194,10 +271,25 @@
             *ngIf="item.st_img_servicio" height="120" style=" filter : brightness( 125% )" />
           <img src="assets/img/noimage.jpg" *ngIf="!item.st_img_servicio" height="120"
             style=" filter : brightness( 125% )" />
+            <div *ngIf="lenguaje == 'es'" class="texto-encima">
+              <ion-badge *ngIf="item.st_categoria == 5" color="danger">{{item.st_categoria}} estrellas</ion-badge>
+              <ion-badge *ngIf="item.st_categoria == 4" color="facebook">{{item.st_categoria}} estrellas</ion-badge>
+              <ion-badge *ngIf="item.st_categoria == 3" color="whatsapp">{{item.st_categoria}} estrellas</ion-badge>
+              <ion-badge *ngIf="item.st_categoria == 2" color="whatsapp">{{item.st_categoria}} estrellas</ion-badge>
+              <ion-badge *ngIf="item.st_categoria == 1" color="whatsapp">{{item.st_categoria}} estrellas</ion-badge>
+            </div>
+            <div *ngIf="lenguaje == 'en'" class="texto-encima">
+              <ion-badge *ngIf="item.st_categoria == 5" color="danger">{{item.st_categoria}} stars</ion-badge>
+              <ion-badge *ngIf="item.st_categoria == 4" color="facebook">{{item.st_categoria}} stars</ion-badge>
+              <ion-badge *ngIf="item.st_categoria == 3" color="whatsapp">{{item.st_categoria}} stars</ion-badge>
+              <ion-badge *ngIf="item.st_categoria == 2" color="whatsapp">{{item.st_categoria}} stars</ion-badge>
+              <ion-badge *ngIf="item.st_categoria == 1" color="whatsapp">{{item.st_categoria}} stars</ion-badge>
+            </div>
           <ion-card-content style="margin-left: -20px; margin-top: -12px; height: 83px;">
             <ion-item style="padding-left: 10px">
               <p style="color: grey;  font-size: 11px;">{{item.cat_id}}</p>
-              <h6 style="color: #000000"><strong>{{item.st_nombre}}</strong></h6>
+              <h6 style="color: #000000" *ngIf="lenguaje == 'es'"><strong>{{item.st_nombre}}</strong></h6>
+              <h6 style="color: #000000" *ngIf="lenguaje == 'en'"><strong>{{item.st_nombre_ingles}}</strong></h6>
               <rating [(ngModel)]="item.st_rating" readOnly="true" max="5" emptyStarIconName="star-outline"
                 halfStarIconName="star-half" starIconName="star" nullable="true">
               </rating>
@@ -207,14 +299,25 @@
       </div>
     </ion-scroll>
 
-    <ion-row>
+    <ion-row *ngIf="lenguaje == 'es'">
       <ion-col>
         <h1 style="color: #FF6565; text-align: left; margin-left: 12px">
-          <ion-icon name="disc"></ion-icon> {{'DIVERSIÓN'|translate}}
+          <ion-icon name="disc"></ion-icon> DIVERSIÓN
         </h1>
       </ion-col>
       <ion-col>
-        <h1 (click)="goToVidaNocturna()">{{numBares}} {{'lugares más' | translate}} ></h1>
+        <h1 (click)="goToVidaNocturna()">{{numBares}} lugares más ></h1>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="lenguaje == 'en'">
+      <ion-col>
+        <h1 style="color: #FF6565; text-align: left; margin-left: 12px">
+          <ion-icon name="disc"></ion-icon> FUNNY
+        </h1>
+      </ion-col>
+      <ion-col>
+        <h1 (click)="goToVidaNocturna()">{{numBares}} places more más ></h1>
       </ion-col>
     </ion-row>
 
@@ -229,7 +332,8 @@
             style=" filter : brightness( 125% )" />
           <ion-card-content style="margin-left: -20px; margin-top: -12px; height: 83px;">
             <ion-item style="padding-left: 10px">
-              <p style="color: grey;  font-size: 11px;">{{bar.cat_id}}</p>
+              <p  *ngIf="lenguaje == 'es'" style="color: grey;  font-size: 11px;">{{bar.cat_id}}</p>
+              <p  *ngIf="lenguaje == 'en'" style="color: grey;  font-size: 11px;">BARS AND DISCOTECS</p>
               <h6 style="color: #000000"><strong>{{bar.st_nombre}}</strong></h6>
               <rating [(ngModel)]="bar.st_rating" readOnly="true" max="5" emptyStarIconName="star-outline"
                 halfStarIconName="star-half" starIconName="star" nullable="true">
@@ -240,14 +344,25 @@
       </div>
     </ion-scroll>
 
-    <ion-row>
+    <ion-row *ngIf="lenguaje == 'es'">
       <ion-col>
         <h1 style="color: #0AC7B4; text-align: left; margin-left: 12px">
-          <ion-icon name="walk"></ion-icon> {{'Descubre las rutas'|translate}}
+          <ion-icon name="walk"></ion-icon> Descubre las rutas
         </h1>
       </ion-col>
       <ion-col>
-        <h1 (click)=goToRutas()>{{'Todas las rutas'|translate}}></h1>
+        <h1 (click)=goToRutas()>Todas las rutas></h1>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="lenguaje == 'en'">
+      <ion-col>
+        <h1 style="color: #0AC7B4; text-align: left; margin-left: 12px">
+          <ion-icon name="walk"></ion-icon> Discover the routes
+        </h1>
+      </ion-col>
+      <ion-col>
+        <h1 (click)=goToRutas()>All routes></h1>
       </ion-col>
     </ion-row>
 
@@ -261,8 +376,10 @@
             style=" filter : brightness( 125% )" />
           <ion-card-content style="margin-left: -20px; margin-top: -12px; height: 83px;">
             <ion-item style="padding-left: 10px">
-              <p style="color: grey;  font-size: 11px;">Conoce la:</p>
-              <p style="color: #000000"><strong>{{ruta.rt_nombre_ruta}}</strong></p>
+              <p *ngIf="lenguaje == 'es'" style="color: grey;  font-size: 11px;">Conoce:</p>
+              <p *ngIf="lenguaje == 'en'" style="color: grey;  font-size: 11px;">Known:</p>
+              <p *ngIf="lenguaje == 'es'" style="color: #000000"><strong>{{ruta.rt_nombre_ruta}}</strong></p>
+              <p *ngIf="lenguaje == 'en'" style="color: #000000"><strong>{{ruta.rt_nombre_ruta_ingles}}</strong></p>
             </ion-item>
           </ion-card-content>
         </ion-card>

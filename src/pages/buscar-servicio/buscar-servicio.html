@@ -1,6 +1,7 @@
 <ion-header no-border>
   <ion-navbar color="light" transparent>
-     <ion-title>Lista de servicios</ion-title>
+     <ion-title *ngIf="idioma == 'es'">Lista de servicios</ion-title>
+     <ion-title *ngIf="idioma == 'en'">Services list</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -14,8 +15,10 @@
             <img item-start [src]="'http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/servicios/' + item.st_img_servicio" *ngIf="item.st_img_servicio">            
             <img item-start src="assets/img/noimage1.jpg" *ngIf="!item.st_img_servicio">
           </ion-avatar>
-          <h5 style="font-weight: bold">{{ item.st_nombre }}</h5>
-          <p style="font-size: 0.7em">Dirección: {{item.st_direccion}}</p>
+          <h5 *ngIf="idioma == 'es'" style="font-weight: bold">{{ item.st_nombre }}</h5>
+          <h5 *ngIf="idioma == 'en'" style="font-weight: bold">{{ item.st_nombre_ingles }}</h5>
+          <p *ngIf="idioma == 'es'" style="font-size: 0.7em">Dirección: {{item.st_direccion}}</p>
+          <p *ngIf="idioma == 'en'" style="font-size: 0.7em">Direction: {{item.st_direccion}}</p>
           <p> ({{item.cat_id}})</p>
         </ion-item>
 

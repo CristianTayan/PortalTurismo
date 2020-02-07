@@ -5,7 +5,8 @@
             <ion-icon name="menu"></ion-icon>
           </button>
         </ion-buttons>
-    <ion-title style="display: inline-block; margin-top: 10px">Iniciar sesión</ion-title>
+    <ion-title *ngIf="idioma == 'es'" style="display: inline-block; margin-top: 10px">Iniciar sesión</ion-title>
+    <ion-title *ngIf="idioma == 'en'" style="display: inline-block; margin-top: 10px">Login</ion-title>
   </ion-navbar>
 </ion-header>
   <ion-content>
@@ -16,13 +17,13 @@
     <ion-list class="list" inset>
       <form #formulario="ngForm" [formGroup]="registerForm">
         <ion-item class="itemlogin">
-          <ion-label floating>Correo electrónico</ion-label>
+          <ion-label floating>Email</ion-label>
           <ion-input type="email" required name="email" ngModel
           formControlName="email" [class.invalid]="!registerForm.controls.email.valid && blur"></ion-input>
         </ion-item>
 
         <ion-item class="itemlogin">
-            <ion-label floating>Contraseña</ion-label>
+            <ion-label floating>Password</ion-label>
             <ion-input type="password" required name="password" ngModel
             formControlName="password" [class.invalid]="!registerForm.controls.password.valid && blur"></ion-input>
           </ion-item>
@@ -33,14 +34,20 @@
         </ion-item>
           
         <ion-item no-lines no-padding>
-          <button ion-button round large [disabled]="registerForm.invalid" no-padding no-margin style="background:#0cdfc3; color:#ffffff; font-family: Roboto; width:100%;" (click)="registrarUsuario(formulario)">
+          <button  *ngIf="idioma == 'es'" ion-button round large [disabled]="registerForm.invalid" no-padding no-margin style="background:#0cdfc3; color:#ffffff; font-family: Roboto; width:100%;" (click)="registrarUsuario(formulario)">
                 Registrarse
           </button>
+          <button  *ngIf="idioma == 'en'" ion-button round large [disabled]="registerForm.invalid" no-padding no-margin style="background:#0cdfc3; color:#ffffff; font-family: Roboto; width:100%;" (click)="registrarUsuario(formulario)">
+            Register
+      </button>
         </ion-item>
 
         <ion-item no-lines >
-          <button ion-button block clear (click)="goToResetPassword()">
+          <button *ngIf="idioma == 'es'" ion-button block clear (click)="goToResetPassword()">
             He olvidado mi contraseña
+          </button>
+          <button *ngIf="idioma == 'en'" ion-button block clear (click)="goToResetPassword()">
+            I forgot my password
           </button>
         </ion-item>
       </form>

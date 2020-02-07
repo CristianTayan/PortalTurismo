@@ -17,6 +17,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class EmprendimientosPage {
   emprendimientos;
+  idioma = localStorage.getItem('idioma');
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public datos: DataProvider) {
   }

@@ -7,7 +7,8 @@
 <ion-header>
 
   <ion-navbar color='secondary'>
-    <ion-title>Itinerario</ion-title>
+    <ion-title *ngIf = "idioma == 'es'">Itinerario</ion-title>
+    <ion-title *ngIf = "idioma == 'en'">Itinerary</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -22,7 +23,10 @@
             </ion-card-title>
                 <div [innerHTML]="ruta.id_descripcion"></div>
             <hr>
-            <button ion-button color='whatsapp' (click)=" pasarCoordenadasRuta(ruta.ir_latitud, ruta.ir_longitud, ruta.ir_nombre_lugar)">Como llegar
+            <button *ngIf = "idioma == 'es'" ion-button color='whatsapp' (click)=" pasarCoordenadasRuta(ruta.ir_latitud, ruta.ir_longitud, ruta.ir_nombre_lugar)">Como llegar
+                <ion-icon name="pin" style="margin-left: 10px" (click)='Compartir()'></ion-icon>
+            </button>
+            <button *ngIf = "idioma == 'en'" ion-button color='whatsapp' (click)=" pasarCoordenadasRuta(ruta.ir_latitud, ruta.ir_longitud, ruta.ir_nombre_lugar)">How to arrive
                 <ion-icon name="pin" style="margin-left: 10px" (click)='Compartir()'></ion-icon>
             </button>
             <!-- <button ion-button color='danger' (click)="AbrirServicio(servicio.st_id, servicio.st_nombre, servicio.st_pagina_web, servicio.st_latitud, servicio.st_longitud, servicio.st_img_servicio)">Ver más

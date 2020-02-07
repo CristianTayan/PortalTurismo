@@ -8,7 +8,7 @@ import { BuscarServicioPage } from './../buscar-servicio/buscar-servicio';
 import { ServicioPage } from './../servicio/servicio';
 import { AtractivoPage } from './../atractivo/atractivo';
 import { AtractivosTuristicosServiceProvider } from './../../providers/atractivos-turisticos-service/atractivos-turisticos-service';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, Platform, LoadingController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
 import { MnuCategoriaAtractivosPage } from '../mnu-categoria-atractivos/mnu-categoria-atractivos';
@@ -21,7 +21,8 @@ import { AngularFireDatabase, AngularFireObject} from 'angularfire2/database';
 import firebase from 'firebase';
 import { Observable } from 'rxjs';
 import { DataProvider } from '../../providers/data/data';
-
+import { Storage } from '@ionic/Storage';
+import { Content } from 'ionic-angular';
 
 /**
  * Generated class for the MnuPrincipalPage page.
@@ -38,6 +39,7 @@ import { DataProvider } from '../../providers/data/data';
 })
 
 export class MnuPrincipalPage {
+  @ViewChild(Content) contenido: Content;
   perfilData: AngularFireObject<Perfil>
   public isTextOpened = false;
   public isSearchbarOpened = false;
@@ -56,14 +58,16 @@ export class MnuPrincipalPage {
   rutas;
   usuarios;
   sliderImages;
+  idioma = "";
 
   perfilList: Observable<any[]>;
   slidesPerView : number = 1;
+  lenguaje = localStorage.getItem('idioma');
 
   constructor(public navCtrl: NavController, public events: Events, public navParams: NavParams, private atractivosService: AtractivosTuristicosServiceProvider,
               public servicioService: ServiciosTuristicosServiceProvider, private androidFullScreen: AndroidFullScreen, private translateService: TranslateService,
               private toast: ToastController, private network: Network,public fbDatabase: AngularFireDatabase,public afAuth: AngularFireAuth, public platform : Platform,
-              private loadingCtrl: LoadingController, private slider: DataProvider) {
+              private loadingCtrl: LoadingController, private slider: DataProvider, private storage: Storage) {
     this.atractivosService.getAtractivos()
     .then(
      data => {
@@ -79,6 +83,22 @@ export class MnuPrincipalPage {
     });
 
 
+  }
+
+  getAtractivos(){
+    this.atractivosService.getAtractivos()
+    .then(
+     data => {
+       this.atractivos = data;
+     });
+
+     firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        let fireBaseUser = firebase.auth().currentUser.email;
+      } else {
+        // No user is signed in.
+      }
+    });
   }
 
   ionViewDidLoad(){
@@ -97,6 +117,8 @@ export class MnuPrincipalPage {
 
 
   }
+
+
 
   getSliderData(){
     this.slider.getSiderData()
@@ -118,9 +140,17 @@ export class MnuPrincipalPage {
 
   cambioIdioma(selectedValue){
     this.translateService.use(selectedValue);
+    localStorage.setItem('idioma', this.idioma);
+    this.navCtrl.setRoot(MnuPrincipalPage);
   }
 
   ionViewDidEnter() {
+    this.getHoteles();
+    this.getRestaurantes();
+    this.getRutas();
+    this.getVidaNocturna();
+    this.getAtractivos();
+
     this.network.onConnect().subscribe(data => {
       this.displayNetworkUpdate(data.type);
     }, error => console.error(error));
@@ -159,10 +189,11 @@ export class MnuPrincipalPage {
     });
   }
 
-  AbrirAtractivo(at_id, at_nombre, at_video_atractivo, at_latitud, at_longitud, at_img_atractivo, at_contacto, at_red_social){
+  AbrirAtractivo(at_id, at_nombre, at_nombre_ingles, at_video_atractivo, at_latitud, at_longitud, at_img_atractivo, at_contacto, at_red_social){
     this.navCtrl.push(AtractivoPage,{
        id : at_id,
        nombre : at_nombre,
+       nombre_ingles : at_nombre_ingles,
        web: at_video_atractivo,
        latitud: at_latitud,
        longitud: at_longitud,
@@ -193,7 +224,7 @@ export class MnuPrincipalPage {
     .subscribe(
       data => {
         this.hoteles = data;
-        console.log(this.hoteles);
+        // console.log(this.hoteles);
       }
     )
   }
@@ -212,7 +243,7 @@ export class MnuPrincipalPage {
     .subscribe(
       data => {
         this.hostales = data;
-        console.log(this.hostales);
+        // console.log(this.hostales);
       }
     )
   }

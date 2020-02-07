@@ -22,6 +22,7 @@ export class RestaurantesPage {
   errorMessage: string;
   descending: boolean = false;
   order: number;
+  idioma = localStorage.getItem('idioma');
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private servicioService: ServiciosTuristicosServiceProvider) {
   

@@ -20,6 +20,7 @@ import { CategoriaAtractivoServiceProvider } from '../../providers/categoria-atr
 export class MnuCategoriaAtractivosPage {
   categorias;
   atractivos;
+  idioma = localStorage.getItem('idioma');
   constructor(public navCtrl: NavController, public atractivosService: AtractivosTuristicosServiceProvider, public navParams: NavParams, public categoriaService: CategoriaAtractivoServiceProvider) {
     this.categoriaService.getCategorias()
       .then(
@@ -30,7 +31,7 @@ export class MnuCategoriaAtractivosPage {
       .catch(
         error => {
           console.log(error);
-          
+
         }
       )
 
@@ -39,6 +40,6 @@ export class MnuCategoriaAtractivosPage {
   getAtractivoporCategoria(at_id){
     this.navCtrl.push(AtractivosTuristicosPage,{
       ta_id : at_id
-    })   
+    })
  }
 }

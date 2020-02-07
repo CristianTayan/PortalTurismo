@@ -20,6 +20,9 @@ export class ServiciosCategoriaPage {
   services;
   cat_id = this.navParams.get('id');
   cat_nombre = this.navParams.get('nombre');
+  cat_nombre_ingles = this.navParams.get('nombre_ingles');
+  idioma = localStorage.getItem('idioma');
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public servicios: ServiciosTuristicosServiceProvider) {
     this.ServiciosPorCategoria();
   }

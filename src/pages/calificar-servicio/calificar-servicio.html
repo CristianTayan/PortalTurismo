@@ -7,9 +7,9 @@
 <ion-header>
 
   <ion-navbar color='primary'>
-    <ion-title>Calificar {{st_nombre}}</ion-title>
+    <ion-title *ngIf="idioma == 'es'">Calificar {{st_nombre}}</ion-title>
+    <ion-title *ngIf="idioma == 'en'">Rate {{st_nombre}}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
@@ -21,7 +21,8 @@
           <img src="{{imguser}}">
         </ion-avatar>
         <h6>{{username}}</h6>
-        <p style="font-size: 0.7em">Publicado de forma pública</p>
+        <p style="font-size: 0.7em" *ngIf="idioma == 'es'">Publicado de forma pública</p>
+        <p style="font-size: 0.7em" *ngIf="idioma == 'es'">Public for all</p>
       </ion-item>
   <ion-item >
     <rating [(ngModel)]="sigm_rating" 
@@ -35,13 +36,16 @@
     
   </ion-item>
     <ion-item >
-        <ion-label floating>Comparte detalles de tu experiencia</ion-label>
+      <ion-label floating *ngIf= "idioma == 'es'">Comparte detalles de tu experiencia</ion-label>
+      <ion-label floating *ngIf= "idioma == 'en'">Share your experience</ion-label>
     <ion-input type="text" [(ngModel)]="simg_descripcion" ></ion-input>
     </ion-item>
     <ion-item >
-      <button ion-button round color="secondary" (click)="getPicture()"><ion-icon name="camera" style="margin-right: 10px"></ion-icon> Toma una foto</button>
-      <button ion-button round color="whatsapp" (click)="getPictureGallery()"><ion-icon name="images" style="margin-right: 10px"></ion-icon> Abrir Galería</button>
-      <!-- <button item-end ion-button round  style="background:#df0c0c; color:#ffffff; font-family: Roboto; width:40%;" (click)="getPicture()"><ion-icon name="images"></ion-icon> Toma una foto</button> -->
+      <button *ngIf= "idioma == 'es'" ion-button round color="secondary" (click)="getPicture()"><ion-icon name="camera" style="margin-right: 10px"></ion-icon> Toma una foto</button>
+      <button *ngIf= "idioma == 'en'" ion-button round color="secondary" (click)="getPicture()"><ion-icon name="camera" style="margin-right: 10px"></ion-icon> Take photo</button>
+      <button *ngIf= "idioma == 'es'" ion-button round color="whatsapp" (click)="getPictureGallery()"><ion-icon name="images" style="margin-right: 10px"></ion-icon> Abrir Galería</button>
+      <button *ngIf= "idioma == 'en'" ion-button round color="whatsapp" (click)="getPictureGallery()"><ion-icon name="images" style="margin-right: 10px"></ion-icon> Open Gallery</button>
+     <!-- <button item-end ion-button round  style="background:#df0c0c; color:#ffffff; font-family: Roboto; width:40%;" (click)="getPicture()"><ion-icon name="images"></ion-icon> Toma una foto</button> -->
     </ion-item>
     <ion-item >
         <img [src]="image" [(ngModel)]="image" *ngIf="image" />
@@ -49,7 +53,8 @@
   <ion-item>
     <br>
     
-    <button ion-button block round (click)='calificar()' >Publicar</button>
+    <button *ngIf= "idioma == 'es'" ion-button block round (click)='calificar()' >Publicar</button>
+    <button *ngIf= "idioma == 'en'" ion-button block round (click)='calificar()' >Post</button>
   </ion-item>
 
   

@@ -1,188 +1,209 @@
 <ion-header>
-    <ion-navbar color="primary">
-        <ion-title >{{nombre_servicio}}</ion-title>
-    </ion-navbar>
+  <ion-navbar color="primary">
+    <ion-title>{{nombre_servicio}}</ion-title>
+  </ion-navbar>
 
 </ion-header>
 
 <ion-content>
   <ion-card style="margin-left:0%; margin-top: -1%; margin-bottom: 0%; width: 100%">
     <div parallax>
-        <img  src="http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/servicios/{{img_servicio}}"  imageViewer>
+      <img src="http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/servicios/{{img_servicio}}" imageViewer>
     </div>
   </ion-card>
-  <ion-card *ngFor="let servicio of servicios" style="background-color: rgb(253, 252, 252);margin-left:0%; margin-top: 0%; margin-bottom: 0%; width: 100%; ">
+  <ion-card *ngFor="let servicio of servicios"
+    style="background-color: rgb(253, 252, 252);margin-left:0%; margin-top: 0%; margin-bottom: 0%; width: 100%; ">
     <!-- <img src="{{servicio.st_img_servicio}}" style="filter : brightness( 75% ); width: 100%; width: 100%; height: 300px; position: relative;
     display: inline-block;
     text-align: center;"/> -->
     <ion-item>
-      <h2 style=" color:black">{{servicio.st_nombre}}</h2>
-      
+      <h2 *ngIf="idioma == 'es'" style=" color:black">{{servicio.st_nombre}}</h2>
+      <h2 *ngIf="idioma == 'es'" style=" color:black">{{servicio.st_nombre_ingles}}</h2>
+
       <p style=" color:rgb(7, 7, 7); font-size: 0.9em">{{distancia}} km</p>
     </ion-item>
-    <rating [(ngModel)]="servicio.st_rating" 
-            readOnly="true"
-            max="5"
-            emptyStarIconName="star-outline" 
-            halfStarIconName="star-half" 
-            starIconName="star" 
-            nullable="true"> 
-        </rating>
+    <rating [(ngModel)]="servicio.st_rating" readOnly="true" max="5" emptyStarIconName="star-outline"
+      halfStarIconName="star-half" starIconName="star" nullable="true">
+    </rating>
     <ion-card-content>
-     
-        <div padding style="padding-top: 0%">
-            <ion-segment [(ngModel)]="menus">
-              <ion-segment-button value="Informacion">
-                Información
-              </ion-segment-button>
-              <ion-segment-button value="Comentarios">
-                Comentarios
-              </ion-segment-button>
-              <ion-segment-button value="Fotos">
-                Galería
-              </ion-segment-button>
-            </ion-segment>
+
+      <div *ngIf="idioma == 'es'" padding style="padding-top: 0%">
+        <ion-segment [(ngModel)]="menus">
+          <ion-segment-button value="Informacion">
+            Información
+          </ion-segment-button>
+          <ion-segment-button value="Comentarios">
+            Comentarios
+          </ion-segment-button>
+          <ion-segment-button value="Fotos">
+            Galería
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+
+      <div *ngIf="idioma == 'en'" padding style="padding-top: 0%">
+        <ion-segment [(ngModel)]="menus">
+          <ion-segment-button value="Informacion">
+            Information
+          </ion-segment-button>
+          <ion-segment-button value="Comentarios">
+            Comments
+          </ion-segment-button>
+          <ion-segment-button value="Fotos">
+            Galery
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+
+      <div [ngSwitch]="menus">
+        <ion-list *ngSwitchCase="'Fotos'">
+          <div class="images">
+            <div class="one-image" *ngFor="let servicio of comentarios">
+              <img *ngIf="servicio.simg_ruta"
+                [src]="'http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/servicios/' + servicio.simg_ruta"
+                height="130" imageViewer>
+            </div>
+            <div class="one-image" *ngFor="let item of comentarios">
+              <img *ngIf="item.simg_base64" src="{{item.simg_base64}}" style="filter : brightness( 75% );" height="130"
+                imageViewer>
+            </div>
           </div>
-          
-          <div [ngSwitch]="menus">
-            <ion-list *ngSwitchCase="'Fotos'">
-                <div class="images" >
-                    <div class="one-image" *ngFor="let servicio of comentarios">
-                      <img *ngIf="servicio.simg_ruta" [src]="'http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/servicios/' + servicio.simg_ruta" height="130" imageViewer>
-                    </div>
-                    <div class="one-image" *ngFor="let item of comentarios">
-                      <img *ngIf="item.simg_base64" src="{{item.simg_base64}}" style="filter : brightness( 75% );" height="130" imageViewer>
-                    </div>
-                  </div>
-            </ion-list>
-          
-            <ion-list *ngSwitchCase="'Informacion'" >
-              <ion-row>
-                <ion-col col-3 style="text-align: center" (click)=" pasarCoordenadasRuta(servicio.st_latitud, servicio.st_longitud,servicio.st_nombre)">
-                  <ion-icon name="compass" color='primary' style="font-size: 25px" item-center></ion-icon>
-                  <p>Ubicación</p>
-                </ion-col>
-                <ion-col col-3 style="text-align: center" (click)="compartir()">
-                  <ion-icon name="logo-whatsapp" color='primary' style="font-size: 25px" item-center></ion-icon>
-                  <p>Compartir</p>
-                </ion-col>
-                <ion-col col-3 style="text-align: center" *ngIf="!st_pagina_web" (click)="nofile()">
-                  <ion-icon name="globe" color='primary' style="font-size: 25px" item-center></ion-icon>
-                  <p>Sitio Web</p>
-                </ion-col>
-                <ion-col col-3 style="text-align: center" *ngIf="st_pagina_web" (click)="openLink()">
-                    <ion-icon name="globe" color='primary' style="font-size: 25px" item-center></ion-icon>
-                    <p>Sitio Web</p>
-                  </ion-col>
-                <ion-col col-3 style="text-align: center" (click)="callJoint()">
-                  <ion-icon name="call" color='primary' style="font-size: 25px" item-center></ion-icon>
-                  <p>Llamar</p>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                  <!-- <button ion-button outline block>Reservar una habitación</button> -->
-              </ion-row>
-              <hr *ngIf="servicio.st_descripcion">
-              <ion-row *ngFor="let servicio of servicios">
-                <ion-col col-12>
-                    <div [innerHTML]="servicio.st_descripcion"></div>                 
-                </ion-col>
-              </ion-row>
-              <hr *ngIf="servicio.st_direccion">
-              <ion-row *ngIf="servicio.st_direccion" >
-                  <ion-col col-2>
-                    <ion-icon name="pin" color='primary' item-start small ></ion-icon>
-                  </ion-col>
-                  <ion-col col-10>
-                    <p style="text-align : justify;">{{servicio.st_direccion}}</p>                  
-                  </ion-col>
-                </ion-row>
-                <hr>
-                <ion-row >
-                    <ion-col col-2>
-                      <ion-icon name="call" color='secondary' item-start small ></ion-icon>
-                    </ion-col>
-                    <ion-col col-10>
-                      <p style="text-align : justify;">{{servicio.st_celular}} - {{servicio.st_telefono}}</p>                  
-                    </ion-col>
-                  </ion-row>
-                  <hr *ngIf="servicio.st_email">
-                  <ion-row *ngIf="servicio.st_email">
-                    <ion-col col-2>
-                      <ion-icon name="mail" color='yellow' item-start small ></ion-icon>
-                    </ion-col>
-                    <ion-col col-10>
-                      <p style="text-align : justify;">{{servicio.st_email}}</p>                  
-                    </ion-col>
-                  </ion-row>
-                  <hr *ngIf="servicio.st_red_social">
-                  <ion-row *ngIf="servicio.st_red_social" (click)="openLinkFb()">
-                    <ion-col col-2>
-                      <ion-icon name="logo-facebook" color='primary' item-start small ></ion-icon>
-                    </ion-col>
-                    <ion-col col-10>
-                      <p style="text-align : justify;">{{servicio.st_red_social}}</p>                  
-                    </ion-col>
-                  </ion-row>
-                  <hr *ngIf="servicio.st_video_servicio">
-                  <ion-row *ngIf="servicio.st_video_servicio"  (click)="openLinkYt()">
-                    <ion-col col-2>
-                      <ion-icon name="logo-youtube" color='danger' item-start small ></ion-icon>
-                    </ion-col>
-                    <ion-col col-10>
-                      <p style="text-align : justify;">{{servicio.st_video_servicio}}</p>                  
-                    </ion-col>
-                  </ion-row>
-                  <map-hotel></map-hotel>
-                  <!-- <div id="map" #map  style="margin-left:-5%; margin-bottom: 0%; width: 110%; "></div> -->
+        </ion-list>
 
-            </ion-list>
+        <ion-list *ngSwitchCase="'Informacion'">
+          <ion-row>
+            <ion-col col-3 style="text-align: center"
+              (click)=" pasarCoordenadasRuta(servicio.st_latitud, servicio.st_longitud,servicio.st_nombre)">
+              <ion-icon name="compass" color='primary' style="font-size: 25px" item-center></ion-icon>
+              <p *ngIf="idioma == 'es'">Ubicación</p>
+              <p *ngIf="idioma == 'en'">Ubication</p>
+            </ion-col>
+            <ion-col col-3 style="text-align: center" (click)="compartir()">
+              <ion-icon name="logo-whatsapp" color='primary' style="font-size: 25px" item-center></ion-icon>
+              <p *ngIf="idioma == 'es'">Compartir</p>
+              <p *ngIf="idioma == 'en'">Share</p>
+            </ion-col>
+            <ion-col col-3 style="text-align: center" *ngIf="!st_pagina_web" (click)="nofile()">
+              <ion-icon name="globe" color='primary' style="font-size: 25px" item-center></ion-icon>
+              <p *ngIf="idioma == 'es'">Sitio web</p>
+              <p *ngIf="idioma == 'en'">Web site</p>
+            </ion-col>
+            <ion-col col-3 style="text-align: center" *ngIf="st_pagina_web" (click)="openLink()">
+              <ion-icon name="globe" color='primary' style="font-size: 25px" item-center></ion-icon>
+              <p *ngIf="idioma == 'es'">Sitio web</p>
+              <p *ngIf="idioma == 'en'">Web site</p>
+            </ion-col>
+            <ion-col col-3 style="text-align: center" (click)="callJoint()">
+              <ion-icon name="call" color='primary' style="font-size: 25px" item-center></ion-icon>
+              <p *ngIf="idioma == 'es'">Llamar</p>
+              <p *ngIf="idioma == 'en'">Call</p>
+            </ion-col>
+          </ion-row>
 
-            <ion-list *ngSwitchCase="'Comentarios'">
-                <ion-item *ngIf="!usuarioEstaConectado">
-                    <h6 style="color:#b1b2b4">Para comentar por favor inicie sesión</h6>
-                    <button ion-button block round (click)="iniciarSesion()">Iniciar Sesión</button>
-                  </ion-item>
+          <hr *ngIf="servicio.st_descripcion">
+          <ion-row *ngFor="let servicio of servicios">
+            <ion-col col-12>
+              <div *ngIf="idioma == 'es'" [innerHTML]="servicio.st_descripcion"></div>
+              <div *ngIf="idioma == 'en'" [innerHTML]="servicio.st_descripcion_ingles"></div>
+            </ion-col>
+          </ion-row>
+          <hr *ngIf="servicio.st_direccion">
+          <ion-row *ngIf="servicio.st_direccion">
+            <ion-col col-2>
+              <ion-icon name="pin" color='primary' item-start small></ion-icon>
+            </ion-col>
+            <ion-col col-10>
+              <p style="text-align : justify;">{{servicio.st_direccion}}</p>
+            </ion-col>
+          </ion-row>
+          <hr>
+          <ion-row>
+            <ion-col col-2>
+              <ion-icon name="call" color='secondary' item-start small></ion-icon>
+            </ion-col>
+            <ion-col col-10>
+              <p style="text-align : justify;">{{servicio.st_celular}} - {{servicio.st_telefono}}</p>
+            </ion-col>
+          </ion-row>
+          <hr *ngIf="servicio.st_email">
+          <ion-row *ngIf="servicio.st_email">
+            <ion-col col-2>
+              <ion-icon name="mail" color='yellow' item-start small></ion-icon>
+            </ion-col>
+            <ion-col col-10>
+              <p style="text-align : justify;">{{servicio.st_email}}</p>
+            </ion-col>
+          </ion-row>
+          <hr *ngIf="servicio.st_red_social">
+          <ion-row *ngIf="servicio.st_red_social" (click)="openLinkFb()">
+            <ion-col col-2>
+              <ion-icon name="logo-facebook" color='primary' item-start small></ion-icon>
+            </ion-col>
+            <ion-col col-10>
+              <p style="text-align : justify;">{{servicio.st_red_social}}</p>
+            </ion-col>
+          </ion-row>
+          <hr *ngIf="servicio.st_video_servicio">
+          <ion-row *ngIf="servicio.st_video_servicio" (click)="openLinkYt()">
+            <ion-col col-2>
+              <ion-icon name="logo-youtube" color='danger' item-start small></ion-icon>
+            </ion-col>
+            <ion-col col-10>
+              <p style="text-align : justify;">{{servicio.st_video_servicio}}</p>
+            </ion-col>
+          </ion-row>
+          <map-hotel></map-hotel>
+          <!-- <div id="map" #map  style="margin-left:-5%; margin-bottom: 0%; width: 110%; "></div> -->
 
-                  <ion-item  *ngIf="usuarioEstaConectado">
-                      <ion-avatar item-start *ngIf="image">
-                        <img src="{{image}}" >
-                      </ion-avatar>
-                      <ion-avatar item-start *ngIf="image == null" >
-                        <img src="assets/img/nouser.png" (click)="getPictureGallery()" alt="">                      
-                      </ion-avatar>
-                      
-                        <h6 padding>{{username}}</h6>
-                        <rating [(ngModel)]="servicio.st_rating" 
-                          readOnly="false"
-                          max="5"
-                          emptyStarIconName="star-outline" 
-                          halfStarIconName="star-half" 
-                          starIconName="star" 
-                          nullable="true"> 
-                        </rating>
-                        <button color="secondary"ion-button block (click)='goCalificarServicio(servicio.st_id, servicio.st_nombre)' >Describir tu experiencia</button>
-                      </ion-item>
-                  <hr>
-                  <ion-item >
-                    <b ion-start>Reseñas</b>
-                  </ion-item>     
-                <ion-card *ngFor="let item of comentarios"  style="border-radius: 2%">   
-                  <ion-item *ngIf="item.simg_base64">
-                      <ion-avatar item-start>
-                        <img src="{{item.user_image}}">
-                      </ion-avatar>
-                      <ion-icon *ngIf="item.user_image == image" item-end name="more" (click)="deleteComment(item.simg_id,item.simg_descripcion,item.sigm_fecha,item.simg_ruta)"></ion-icon>
-                      <h6>{{item.username}}</h6>
-                      <p style="font-size: 0.7em">{{item.st_fecha}}</p>
-                    </ion-item>
-                    <img *ngIf="item.simg_base64 != null" src="{{item.simg_base64}}" style="filter : brightness( 75% );" imageViewer>
-                    <ion-card-content *ngIf="item.simg_base64">
-                      <p>{{item.simg_descripcion}}</p>
-                    </ion-card-content>
-                  </ion-card>
-              </ion-list>
-          </div>    
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'Comentarios'">
+          <ion-item *ngIf="!usuarioEstaConectado">
+            <h6 style="color:#b1b2b4" *ngIf="idioma == 'es'">Para comentar por favor inicie sesión</h6>
+            <h6 style="color:#b1b2b4" *ngIf="idioma == 'en'">For comment please login</h6>
+            <button ion-button block round (click)="iniciarSesion()" *ngIf="idioma == 'es'">Iniciar Sesión</button>
+            <button ion-button block round (click)="iniciarSesion()" *ngIf="idioma == 'en'">Login</button>
+          </ion-item>
+
+          <ion-item *ngIf="usuarioEstaConectado">
+            <ion-avatar item-start *ngIf="image">
+              <img src="{{image}}">
+            </ion-avatar>
+            <ion-avatar item-start *ngIf="image == null">
+              <img src="assets/img/nouser.png" (click)="getPictureGallery()" alt="">
+            </ion-avatar>
+
+            <h6 padding>{{username}}</h6>
+            <rating [(ngModel)]="servicio.st_rating" readOnly="false" max="5" emptyStarIconName="star-outline"
+              halfStarIconName="star-half" starIconName="star" nullable="true">
+            </rating>
+            <button color="secondary" ion-button block
+              (click)='goCalificarServicio(servicio.st_id, servicio.st_nombre)'>Describir tu experiencia</button>
+          </ion-item>
+          <hr>
+          <ion-item>
+            <b ion-start *ngIf="idioma == 'es'">Reseñas</b>
+            <b ion-start *ngIf="idioma == 'en'">Reviews</b>
+          </ion-item>
+          <ion-card *ngFor="let item of comentarios" style="border-radius: 2%">
+            <ion-item *ngIf="item.simg_base64">
+              <ion-avatar item-start>
+                <img src="{{item.user_image}}">
+              </ion-avatar>
+              <ion-icon *ngIf="item.user_image == image" item-end name="more"
+                (click)="deleteComment(item.simg_id,item.simg_descripcion,item.sigm_fecha,item.simg_ruta)"></ion-icon>
+              <h6>{{item.username}}</h6>
+              <p style="font-size: 0.7em">{{item.st_fecha}}</p>
+            </ion-item>
+            <img *ngIf="item.simg_base64 != null" src="{{item.simg_base64}}" style="filter : brightness( 75% );"
+              imageViewer>
+            <ion-card-content *ngIf="item.simg_base64">
+              <p>{{item.simg_descripcion}}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-list>
+        
+      </div>
     </ion-card-content>
   </ion-card>
 </ion-content>

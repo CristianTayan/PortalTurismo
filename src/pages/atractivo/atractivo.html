@@ -1,7 +1,10 @@
 <ion-header >
 
-  <ion-navbar color="secondary">
-    <ion-title>{{nombre_atractivo}}</ion-title>
+  <ion-navbar color="secondary" >
+    <div *ngFor= "let item of atractivos">
+      <ion-title *ngIf="lenguaje == 'es'">{{item.at_nombre}}</ion-title>
+      <ion-title *ngIf="lenguaje == 'en'">{{item.at_nombre_ingles}}</ion-title>
+    </div>    
   </ion-navbar>
 
 </ion-header>
@@ -13,12 +16,13 @@
     </div>
   </ion-card>
   <ion-card *ngFor="let atractivo of atractivos"
-    style="background-color: rgb(253, 252, 252);margin-left:0%; margin-top: 0%; margin-bottom: 0%; width: 100%; ">
+    style="background-color: rgb(253, 252, 252);margin-left:0%; margin-top: 0%; margin-bottom: 0%; width: 100%; " >
     <!-- <img src="{{atractivo.at_img_servicio}}" style="filter : brightness( 75% ); width: 100%; width: 100%; height: 300px; position: relative;
     display: inline-block;
     text-align: center;"/> -->
     <ion-item>
-      <h2 style=" color:black">{{atractivo.at_nombre}}</h2>
+      <h2 *ngIf="lenguaje == 'es'" style=" color:black">{{atractivo.at_nombre}}</h2>
+      <h2 *ngIf="lenguaje == 'en'" style=" color:black">{{atractivo.at_nombre_ingles}}</h2>
 
       <p style=" color:rgb(7, 7, 7); font-size: 0.9em">{{distance}} km</p>
     </ion-item>
@@ -26,7 +30,7 @@
       halfStarIconName="star-half" starIconName="star" nullable="true">
     </rating>
     <ion-card-content>
-      <div padding style="padding-top: 0%">
+      <div padding style="padding-top: 0%" *ngIf="lenguaje == 'es'">
         <ion-segment color='secondary' [(ngModel)]="menus">
           <ion-segment-button value="Informacion">
             Información
@@ -40,7 +44,21 @@
         </ion-segment>
       </div>
 
-      <div [ngSwitch]="menus">
+      <div padding style="padding-top: 0%" *ngIf="lenguaje == 'en'">
+        <ion-segment color='secondary' [(ngModel)]="menus">
+          <ion-segment-button value="Informacion">
+            Information
+          </ion-segment-button>
+          <ion-segment-button value="Comentarios">
+            Comments
+          </ion-segment-button>
+          <ion-segment-button value="Fotos">
+            Galery
+          </ion-segment-button>
+        </ion-segment>
+      </div >
+
+      <div [ngSwitch]="menus" >
         <ion-list *ngSwitchCase="'Fotos'">
           <div class="images">
             <div class="one-image" *ngFor="let item of comentarios">
@@ -55,16 +73,18 @@
           </div>
         </ion-list>
 
-        <ion-list *ngSwitchCase="'Informacion'">
+        <ion-list  *ngSwitchCase="'Informacion'">
           <ion-row>
             <ion-col col-3 style="text-align: center"
               (click)=" pasarCoordenadasRuta(atractivo.at_latitud, atractivo.at_longitud,atractivo.at_nombre)">
               <ion-icon name="compass" color='secondary' style="font-size: 25px" item-center></ion-icon>
-              <p>Ubicación</p>
+              <p *ngIf = "lenguaje == 'es'">Ubicación</p>
+              <p *ngIf = "lenguaje == 'en'">Ubication</p>
             </ion-col>
             <ion-col col-3 style="text-align: center" (click)="compartir()">
               <ion-icon name="logo-whatsapp" color='secondary' style="font-size: 25px" item-center></ion-icon>
-              <p>Compartir</p>
+              <p *ngIf = "lenguaje == 'es'">Compartir</p>
+              <p *ngIf = "lenguaje == 'en'">Share</p>
             </ion-col>
             <ion-col col-3 style="text-align: center" *ngIf="!at_video_atractivo" (click)="nofile()">
               <ion-icon name="logo-youtube" color='secondary' style="font-size: 25px" item-center></ion-icon>
@@ -76,17 +96,20 @@
             </ion-col>
             <ion-col col-3 style="text-align: center" *ngIf="!at_contacto" (click)="nofile()">
               <ion-icon name="call" color='secondary' style="font-size: 25px" item-center></ion-icon>
-              <p>Llamar</p>
+              <p *ngIf = "lenguaje == 'es'">Llamar</p>
+              <p *ngIf = "lenguaje == 'en'">Call</p>
             </ion-col>
             <ion-col col-3 style="text-align: center" *ngIf="at_contacto" (click)="callJoint()">
               <ion-icon name="call" color='secondary' style="font-size: 25px" item-center></ion-icon>
-              <p>Llamar</p>
+              <p *ngIf = "lenguaje == 'es'">Llamar</p>
+              <p *ngIf = "lenguaje == 'en'">Call</p>
             </ion-col>
           </ion-row>
           <hr>
           <ion-row>
             <ion-col col-12>
-              <div [innerHTML]="atractivo.at_descripcion_larga"></div>
+              <div *ngIf= "lenguaje == 'es'" [innerHTML]="atractivo.at_descripcion_larga"></div>
+              <div *ngIf= "lenguaje == 'en'" [innerHTML]="atractivo.at_descripcion_ingles"></div>
               <!-- <p style="text-align : justify;font-size: 1em">{{atractivo.at_descripcion_larga}}</p>                   -->
             </ion-col>
           </ion-row>
@@ -118,7 +141,7 @@
             </ion-col>
           </ion-row>
           <hr *ngIf="atractivo.at_red_social">
-          <ion-row *ngIf="atractivo.at_red_social">
+          <ion-row *ngIf="atractivo.at_red_social" (click)="openLinkFb()">
             <ion-col col-2>
               <ion-icon name="logo-facebook" color='primary' item-start small></ion-icon>
             </ion-col>
@@ -126,8 +149,8 @@
               <p style="text-align : justify;">{{atractivo.at_red_social}}</p>
             </ion-col>
           </ion-row>
-          <hr *ngIf="atractivo.at_video_atractivo">
-          <ion-row *ngIf="atractivo.at_video_atractivo">
+          <hr *ngIf="atractivo.at_video_atractivo" >
+          <ion-row *ngIf="atractivo.at_video_atractivo" click="openLink()" >
             <ion-col col-2>
               <ion-icon name="logo-youtube" color='danger' item-start small></ion-icon>
             </ion-col>
@@ -142,8 +165,10 @@
 
         <ion-list *ngSwitchCase="'Comentarios'">
           <ion-item *ngIf="!usuarioEstaConectado">
-            <h6 style="color:#b1b2b4">Para comentar por favor inicie sesión</h6>
-            <button ion-button block round (click)="iniciarSesion()">Iniciar Sesión</button>
+            <h6 style="color:#b1b2b4" *ngIf="lenguaje == 'es'">Para comentar por favor inicie sesión</h6>
+            <h6 style="color:#b1b2b4" *ngIf="lenguaje == 'en'">For comment please login</h6>
+            <button ion-button block round (click)="iniciarSesion()" *ngIf="lenguaje == 'es'">Iniciar Sesión</button>
+            <button ion-button block round (click)="iniciarSesion()" *ngIf="lenguaje == 'en'">Login</button>
           </ion-item>
           <ion-item *ngIf="usuarioEstaConectado">
             <ion-avatar item-start *ngIf="image">
@@ -163,7 +188,8 @@
           <!-- <h6>{{atractivo.at_id}}</h6> -->
           <hr>
           <ion-item>
-            <b ion-start>Reseñas</b>
+            <b ion-start *ngIf="lenguaje == 'es'">Reseñas</b>
+            <b ion-start *ngIf="lenguaje == 'en'">Reviews</b>
           </ion-item>
           <ion-card *ngFor="let com of comentarios" style="border-radius: 2%">
 

@@ -24,6 +24,7 @@ import swal from 'sweetalert';
 export class LogueoPage {
   userData = {"username":"", "password":""};
   registerForm: FormGroup;
+  idioma = localStorage.getItem('idioma');
 
   profileData: AngularFireObject<Perfil>
 

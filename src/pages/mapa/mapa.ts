@@ -20,6 +20,7 @@ export class MapaPage {
   atractivosList;
   center: L.PointTuple;
   map;
+  idioma = localStorage.getItem('idioma');
 
   redIcon = L.icon({
     iconUrl: 'https://images.vexels.com/media/users/3/131625/isolated/preview/35942a8a6bb75dc1842582deb7168bf8-orange-location-marker-infographic-by-vexels.png',
@@ -30,19 +31,19 @@ export class MapaPage {
     shadowSize: [41, 41]
   });
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, 
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams,
     public atractivosService: AtractivosTuristicosServiceProvider, private geolocation: Geolocation) {
     this.atractivosService.getAtractivos()
     .then(data => {
         this.atractivosList = data;
-        this.leafletMap(); 
-    }) 
+        this.leafletMap();
+    })
   }
 
   ionViewDidLoad() {
-        
+
     this.map = L.map('mapId').setView([0.336337, -78.122634], 12);
-    
+
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       attribution: '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).on('locationfound', (e) => {
@@ -62,7 +63,7 @@ export class MapaPage {
       L.marker([ resp.coords.latitude, resp.coords.longitude ],{icon: this.redIcon}).addTo(this.map)
       .bindPopup('Tu ubicación')
       .openPopup();
-      
+
      }).catch((error) => {
        console.log('Error getting location', error);
      });
@@ -72,12 +73,12 @@ export class MapaPage {
       .bindPopup("<b>"+atractivo.at_nombre+"</b>" + "<br> <img src='"+atractivo.at_img_atractivo+"' height='60' width='60'/>")
       .openPopup();
     }
-    
+
   }
 
   onSearch(event){
     console.log(event.target.value);
-    
-  } 
+
+  }
 
 }

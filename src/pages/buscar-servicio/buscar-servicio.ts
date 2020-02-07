@@ -16,9 +16,10 @@ export class BuscarServicioPage {
   errorMessage: string;
   descending: boolean = false;
   order: number;
- 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
+  idioma = localStorage.getItem('idioma');
+
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
               private servicios: ServiciosTuristicosServiceProvider) {}
 
   ionViewDidLoad(){
@@ -35,7 +36,7 @@ export class BuscarServicioPage {
     this.descending = !this.descending;
     this.order = this.descending ? 1 : -1;
   }
-  
+
   // allServicios(){
   //   this.navCtrl.push(ListaServiciosPage, {
   //      servicioList: this.servicioList
@@ -52,8 +53,8 @@ export class BuscarServicioPage {
        celular: st_celular,
        redsocial : st_red_social,
        video : st_video_servicio,
-       img: st_img_servicio   
+       img: st_img_servicio
     });
   }
-  
+
 }

@@ -1,26 +1,20 @@
 <ion-header>
 
   <ion-navbar color='secondary'>
-    <ion-title >ATRACTIVOS TURÍSTICOS</ion-title>
+    <ion-title *ngIf="idioma == 'es'">ATRACTIVOS TURÍSTICOS</ion-title>
+    <ion-title *ngIf="idioma == 'en'">TOURIST ATTRACTIONS</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content >
-  <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content
-      pullingIcon="arrow-dropdown"
-      pullingText="Pull to refresh"
-      refreshingSpinner="circles"
-      refreshingText="Refreshing...">
-    </ion-refresher-content>
-  </ion-refresher>
     <ion-card *ngFor="let atractivo of atractivos" (click)="AbrirAtractivos(atractivo.at_id, atractivo.at_nombre, atractivo.at_video_atractivo, atractivo.at_latitud, atractivo.at_longitud, atractivo.at_img_atractivo)" style="background-color: rgb(254, 254, 255);">
         <img [src]="'http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/atractivos/' + atractivo.at_img_atractivo" style="height: 35vh;"/>
         <ion-card-content>
           <ion-card-title style="font-size: 1.0em;">
-            <strong>{{atractivo.at_nombre}}</strong>
+            <strong *ngIf="idioma == 'es'">{{atractivo.at_nombre}}</strong>
+            <strong *ngIf="idioma == 'en'">{{atractivo.at_nombre_ingles}}</strong>
             </ion-card-title>
             <rating [(ngModel)]="atractivo.at_rating" 
                         readOnly="true"
@@ -33,9 +27,12 @@
                 <hr *ngIf="atractivo.at_descripcion_corta">
                 <p style="text-align: justify" *ngIf="atractivo.at_descripcion_corta">{{atractivo.at_descripcion_corta}} </p>
                 <hr>
-                <button ion-button block color='secondary' (click)="AbrirAtractivos(atractivo.at_id, atractivo.at_nombre, atractivo.at_video_atractivo, atractivo.at_latitud, atractivo.at_longitud, atractivo.at_img_atractivo)" >Ver más
+                <button *ngIf="idioma == 'es'" ion-button block color='secondary' (click)="AbrirAtractivos(atractivo.at_id, atractivo.at_nombre, atractivo.at_video_atractivo, atractivo.at_latitud, atractivo.at_longitud, atractivo.at_img_atractivo)" >Ver más
                   <ion-icon name="map" style="margin-left: 10px"></ion-icon>
               </button>
+              <button *ngIf="idioma == 'en'" ion-button block color='secondary' (click)="AbrirAtractivos(atractivo.at_id, atractivo.at_nombre, atractivo.at_video_atractivo, atractivo.at_latitud, atractivo.at_longitud, atractivo.at_img_atractivo)" >See more
+                <ion-icon name="map" style="margin-left: 10px"></ion-icon>
+            </button>
                 <!-- <div [innerHTML]="atractivo.at_descripcion_larga"></div> -->
           <!-- <p style="text-align : justify;">
               <ion-icon name="paper" color='primary' style="margin-right: 10px"></ion-icon> {{atractivo.at_descripcion_corta}}

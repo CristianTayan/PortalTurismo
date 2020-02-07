@@ -18,6 +18,7 @@ export class AboutPage {
 
   datos;
   public isTextOpened = false;
+  idioma = localStorage.getItem('idioma');
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public about: DataProvider) {
   }
@@ -30,11 +31,11 @@ export class AboutPage {
     this.about.getAbout()
     .then(
       data => {
-        this.datos = data;   
+        this.datos = data;
         console.log(this.datos);
-             
+
       }
-    )    
+    )
   }
 
 

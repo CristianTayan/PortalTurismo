@@ -25,7 +25,7 @@ export class PerfilPage {
   key:string ='datos';
   perfil;
   registerForm: FormGroup;
-  
+  idioma = localStorage.getItem('idioma');
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public afAuth: AngularFireAuth, public afDatabase: AngularFireDatabase, public camera: Camera, public formBuilder: FormBuilder, private storage: Storage,

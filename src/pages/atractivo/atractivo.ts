@@ -43,11 +43,13 @@ export class AtractivoPage {
   image ;
   username;
   nombre;
+  nombre_ingles;
   apellido;
   perfil;
+  lenguaje;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, 
-              private atractivosService: AtractivosTuristicosServiceProvider, private iab: InAppBrowser, 
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              private atractivosService: AtractivosTuristicosServiceProvider, private iab: InAppBrowser,
               private geolocation: Geolocation,
               private _haversineService: HaversineService,
               private socialSharing: SocialSharing,
@@ -57,9 +59,10 @@ export class AtractivoPage {
               public imageViewerCtrl: ImageViewerController) {
     this.at_id = navParams.get('id');
     this.Atractivo();
-   
+
     this.img_atractivo = this.navParams.get('img');
     this.nombre_atractivo = this.navParams.get('nombre');
+    this.nombre_ingles = this.navParams.get('nombre_ingles');
 
     firebase.auth().onAuthStateChanged(
       usuario =>{
@@ -76,17 +79,18 @@ export class AtractivoPage {
   }
 
   ionViewDidLoad(){
+    this.lenguaje = localStorage.getItem('idioma');
+    console.log(this.lenguaje);
     this.at_contacto = this.navParams.get('contacto');
-    this.at_red_social = this.navParams.get('redsocial');
     this.at_video_atractivo = this.navParams.get('web');
     this.calcularDistancia();
     this.imagenesAtractivo();
     this.getValue();
   }
 
-  ionViewDidEnter() { 
-    this.imagenesAtractivo(); 
-  } 
+  ionViewDidEnter() {
+    this.imagenesAtractivo();
+  }
 
   onClick(imageToView) {
     const viewer = this.imageViewerCtrl.create(imageToView)
@@ -100,7 +104,7 @@ export class AtractivoPage {
       this.image = data.image;
       this.nombre= data.nombre;
       this.apellido = data.apellido;
-      console.log(this.perfil); 
+      console.log(this.perfil);
     })
   }
 
@@ -108,11 +112,12 @@ export class AtractivoPage {
     this.atractivosService.getAtractivo(this.at_id)
     .then(
       data => {
-        this.atractivos = data;        
+        this.atractivos = data;
+        for(let item of this.atractivos){
+          this.at_red_social = item.at_red_social;
+        }
       });
   }
-
-
 
   openLinkFb(){
     this.iab.create(this.at_red_social,"_blank");
@@ -125,9 +130,9 @@ export class AtractivoPage {
     this.atractivosService.getImagenesAtractivo(this.at_id)
     .then(
       data => {
-        this.comentarios = data; 
+        this.comentarios = data;
         console.log(this.comentarios);
-               
+
       }
     )
   }
@@ -138,12 +143,12 @@ export class AtractivoPage {
 
   callJoint() {
     try {
-    this.callNumber.callNumber(this.at_contacto, true);            
+    this.callNumber.callNumber(this.at_contacto, true);
     } catch (error) {
       swal("Lo sentimos!", "no hemos encontrado número", "error");
     }
   }
-  
+
   pasarCoordenadas(at_longitud, at_latitud, at_nombre){
     this.navCtrl.push(MapaDetallePage,{
       latitud:at_latitud,
@@ -174,9 +179,9 @@ export class AtractivoPage {
     let kilometers = this._haversineService.getDistanceInKilometers(miUbicacion, destino);
     // let miles = this._haversineService.getDistanceInMiles(miUbicacion, destino);
     this.distance = Math.round(kilometers * 100) / 100
-   });    
+   });
   }
-  
+
   compartir(){
     let lat = this.navParams.get('latitud');
     let lng = this.navParams.get('longitud');
@@ -185,7 +190,7 @@ export class AtractivoPage {
     let message = "Hola..¡¡ Estoy en "+ this.nombre_atractivo+ " te envío la ubicación";
     let url = "http://www.google.com/maps/@"+lat+","+lng+",17z?hl=es"
     console.log(message,image, url);
-    this.socialSharing.shareViaWhatsApp(message,urlimage, url); 
+    this.socialSharing.shareViaWhatsApp(message,urlimage, url);
   }
 
   iniciarSesion(){
@@ -198,5 +203,5 @@ export class AtractivoPage {
       nombre:at_nombre
     })
   }
-  
+
 }

@@ -30,12 +30,13 @@ export class CalificarAtractivoPage {
   apellido;
   perfil;
   imguser;
+  idioma = localStorage.getItem('idioma');
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public camera: Camera, public storage:Storage, public atractivo: AtractivosTuristicosServiceProvider) {
   }
 
   ionViewDidLoad() {
-    this.getValue();   
+    this.getValue();
   }
 
   getPicture(){
@@ -50,8 +51,8 @@ export class CalificarAtractivoPage {
       // this.image = 'data:image/jpeg;base64,${imageData}';
       this.image = 'data:image/jpeg;base64,' + imageData;
       console.log(this.image);
-      
-      
+
+
     })
     .catch(error =>{
       console.error( error );
@@ -73,8 +74,8 @@ export class CalificarAtractivoPage {
       // this.image = 'data:image/jpeg;base64,${imageData}';
       this.image = 'data:image/jpeg;base64,' + imageData;
       console.log(this.image);
-      
-      
+
+
     })
     .catch(error =>{
       console.error( error );
@@ -88,7 +89,7 @@ export class CalificarAtractivoPage {
       this.imguser = data.image;
       this.nombre= data.nombre;
       this.apellido = data.apellido;
-      console.log(this.perfil); 
+      console.log(this.perfil);
     })
   }
 
@@ -102,7 +103,7 @@ export class CalificarAtractivoPage {
     datos["img_fecha"] =  now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate()+ " "+now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
     datos["username"] = this.username;
     datos["user_image"] = this.imguser;
-    
+
     this.atractivo.addComentario(datos)
     .then(
       data =>{
@@ -112,8 +113,8 @@ export class CalificarAtractivoPage {
     ).catch(
       error => {
         console.log(error);
-        
+
       }
-    )       
+    )
   }
 }

@@ -12,7 +12,7 @@
             <button  ion-item (click)="openPage(about)" style="background-color: rgb(237, 237, 238);"><strong style="color:#C40319;"><ion-icon name="bookmark" padding></ion-icon>Acerca de Ibarra</strong></button>
             <button  ion-item (click)="eventos()" style="background-color: rgb(237, 237, 238);"><strong style="color:#C40319;"><ion-icon name="list" padding></ion-icon>Eventos</strong></button>
             <button *ngIf="usuarioEstaConectado" ion-item (click)="openPage(perfil)" style="background-color: rgb(237, 237, 238);"><strong style="color:#C40319;"><ion-icon name="settings" padding></ion-icon>Perfil</strong> </button>
-            <button *ngIf="!usuarioEstaConectado" ion-item (click)="openPage(login)" style="background-color: rgb(237, 237, 238);"><strong style="color:#C40319;"><ion-icon name="settings" padding></ion-icon>Iniciar Sesión</strong> </button>
+            <button  ion-item (click)="openPage(login)" style="background-color: rgb(237, 237, 238);"><strong style="color:#C40319;"><ion-icon name="settings" padding></ion-icon>Iniciar Sesión</strong> </button>
             <button *ngIf="usuarioEstaConectado" ion-item (click)="terminarSesion()" style="background-color: rgb(237, 237, 238);"><strong style="color:#C40319;"><ion-icon name="settings" padding></ion-icon>Terminar Sesión</strong> </button>
 
         </ion-list>

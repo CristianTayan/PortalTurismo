@@ -14,7 +14,7 @@ import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
   selector: 'page-intro',
   templateUrl: 'intro.html',
   animations: [
-    
+
     trigger('bounce', [
           state('*', style({
               transform: 'translateX(0)'
@@ -36,6 +36,7 @@ export class IntroPage {
   @ViewChild(Slides) slides: Slides;
   skipMsg: string = "Omitir";
   state: string = 'x';
+  lenguaje = localStorage.getItem('idioma');
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -48,9 +49,9 @@ export class IntroPage {
   }
 
   slideMoved() {
-    if (this.slides.getActiveIndex() >= this.slides.getPreviousIndex()) 
+    if (this.slides.getActiveIndex() >= this.slides.getPreviousIndex())
       this.state = 'rightSwipe';
-    else 
+    else
       this.state = 'leftSwipe';
   }
 

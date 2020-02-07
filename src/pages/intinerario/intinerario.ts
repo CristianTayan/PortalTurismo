@@ -18,6 +18,7 @@ import { RutaIntinerarioPage } from '../ruta-intinerario/ruta-intinerario';
 export class IntinerarioPage {
   rt_id = this.navParams.get('id');
   rutas;
+  idioma = localStorage.getItem('idioma');
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private servicioService: ServiciosTuristicosServiceProvider) {
   }
@@ -30,9 +31,9 @@ export class IntinerarioPage {
   Intinerario(){
     this.servicioService.getIntinerario(this.rt_id)
     .then(data => {
-      this.rutas = data;    
+      this.rutas = data;
       console.log(this.rutas);
-       
+
     })
   }
 

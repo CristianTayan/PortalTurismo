@@ -29,16 +29,17 @@ export class EditComentPage {
   apellido;
   key:string ='datos';
   perfil;
+  lenguaje = localStorage.getItem('idioma');
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
               public servicios: ServiciosTuristicosServiceProvider,
               public viewCtrl: ViewController,
               private alertCtrl: AlertController,
               private storage: Storage) {
 
                 console.log(this.simg_id);
-                
+
   }
 
   ionViewDidLoad() {
@@ -56,7 +57,7 @@ export class EditComentPage {
       this.image = data.image;
       this.nombre= data.nombre;
       this.apellido = data.apellido;
-      console.log(this.perfil); 
+      console.log(this.perfil);
     })
   }
 
@@ -83,8 +84,8 @@ export class EditComentPage {
     });
     alert.present();
   }
- 
-  
+
+
 
   deleteComment(){
     this.servicios.deleteComent(this.simg_id)

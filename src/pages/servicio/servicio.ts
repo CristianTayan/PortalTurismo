@@ -44,6 +44,7 @@ export class ServicioPage {
   apellido;
   perfil;
   imgs;
+  idioma = localStorage.getItem('idioma');
 
   usuarioEstaConectado = false;
 
@@ -82,6 +83,8 @@ export class ServicioPage {
     this.getComentById();
     this.numeroComentarios();
     this.getValue();
+    console.log(this.usuarioEstaConectado);
+    
 
     firebase.auth().onAuthStateChanged(
       usuario => {

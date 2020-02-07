@@ -12,6 +12,7 @@ declare var google;
 })
 export class VisitReasonsPage {
   map: any;
+  idioma = localStorage.getItem('idioma');
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public imageViewerCtrl: ImageViewerController, private geolocation: Geolocation) {
   }

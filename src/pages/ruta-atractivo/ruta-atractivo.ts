@@ -28,6 +28,7 @@ export class RutaAtractivoPage {
   bounds: any = null;
   myLatLng: any;
   waypoints: any[];
+  idioma = localStorage.getItem('idioma');
   
 
   constructor(

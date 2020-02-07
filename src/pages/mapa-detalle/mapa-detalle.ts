@@ -24,18 +24,19 @@ export class MapaDetallePage {
   at_latitud ;
   at_longitud;
   at_nombre;
+  lenguaje = localStorage.getItem('idioma');
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation) {    
+  constructor(public navCtrl: NavController, public navParams: NavParams, private geolocation: Geolocation) {
     this.at_latitud = this.navParams.get('latitud');
     this.at_longitud = this.navParams.get('longitud');
-    this.at_nombre = this.navParams.get('nombre');      
+    this.at_nombre = this.navParams.get('nombre');
     this.leafletMap()
   }
 
   ionViewDidLoad() {
-        
+
     this.map = L.map('mapId').setView([0.336337, -78.122634], 12);
-    
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).on('locationfound', (e) => {
@@ -71,11 +72,11 @@ export class MapaDetallePage {
       control.hide();
       a.marker([latitud,longitud]).addTo(this.map)
       .bindPopup("<b>"+this.at_nombre,+"</b>" + "' height='60' width='60'/>"+"<button>Ver lugar</button>")
-      .openPopup(); 
+      .openPopup();
      }).catch((error) => {
        console.log('Error getting location', error);
-     });    
-          
+     });
+
   }
 
 }

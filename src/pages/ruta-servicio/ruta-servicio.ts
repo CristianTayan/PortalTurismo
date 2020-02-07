@@ -27,6 +27,7 @@ export class RutaServicioPage {
   bounds: any = null;
   myLatLng: any;
   waypoints: any[];
+  idioma = localStorage.getItem('idioma');
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,

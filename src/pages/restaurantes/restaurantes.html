@@ -5,7 +5,8 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title *ngIf="!isSerarchbarOpened" style="display: inline-block; margin-top: 10px">Restaurantes</ion-title>
+    <!-- <ion-title *ngIf="!isSerarchbarOpened" style="display: inline-block; margin-top: 10px">Restaurantes</ion-title>
+    <ion-title *ngIf="!isSerarchbarOpened" style="display: inline-block; margin-top: 10px">Restaurants</ion-title> -->
     <ion-searchbar *ngIf="isSerarchbarOpened" [(ngModel)]="terms" autofocus (search)="onSearch($event)" showCancelButton="true" (ionCancel)="isSerarchbarOpened=false"></ion-searchbar>
     <ion-buttons end>
       <button ion-button icon-only color="royal" *ngIf="!isSerarchbarOpened" (click)="isSerarchbarOpened=true">
@@ -24,19 +25,28 @@
         <img [src]="'http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/servicios/' + servicio.st_img_servicio" (click)="AbrirServicio(servicio.st_id, servicio.st_nombre, servicio.st_pagina_web, servicio.st_latitud, servicio.st_longitud, servicio.st_celular, servicio.st_red_social, servicio.st_video_servicio, servicio.st_img_servicio)" style="height: 35vh;" />
         <ion-card-content>
             <ion-card-title style="font-size: 1.0em;">
-                <strong style="margin-right: 12px">{{servicio.st_nombre}}</strong>({{servicio.cat_id}})
+                <strong *ngIf="idioma == 'es'" style="margin-right: 12px">{{servicio.st_nombre}} ({{servicio.cat_id}})</strong>
+                <strong *ngIf="idioma == 'en'" style="margin-right: 12px">{{servicio.st_nombre_ingles}} (RESTAURANTS)</strong>
             </ion-card-title>
             <rating [(ngModel)]="servicio.st_rating" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" nullable="false">
             </rating>
             <hr>
-            <div [innerHTML]="servicio.st_descripcion"></div>
+            <div *ngIf="idioma == 'es'" [innerHTML]="servicio.st_descripcion"></div>
+            <div *ngIf="idioma == 'en'" [innerHTML]="servicio.st_descripcion_ingles"></div>
             <hr>
-            <button ion-button color='whatsapp' (click)=" pasarCoordenadasRuta(servicio.st_latitud, servicio.st_longitud,servicio.st_nombre)">Como llegar
+            <button *ngIf="idioma == 'es'" ion-button color='whatsapp' (click)=" pasarCoordenadasRuta(servicio.st_latitud, servicio.st_longitud,servicio.st_nombre)">Como llegar
                 <ion-icon name="pin" style="margin-left: 10px" (click)='Compartir()'></ion-icon>
             </button>
-            <button ion-button color='danger' (click)="AbrirServicio(servicio.st_id, servicio.st_nombre, servicio.st_pagina_web, servicio.st_latitud, servicio.st_longitud, servicio.st_celular, servicio.st_red_social, servicio.st_video_servicio, servicio.st_img_servicio)">Ver más
+            <button *ngIf="idioma == 'en'" ion-button color='whatsapp' (click)=" pasarCoordenadasRuta(servicio.st_latitud, servicio.st_longitud,servicio.st_nombre)">How to arrive
+              <ion-icon name="pin" style="margin-left: 10px" (click)='Compartir()'></ion-icon>
+          </button>
+
+            <button *ngIf="idioma == 'es'" ion-button color='danger' (click)="AbrirServicio(servicio.st_id, servicio.st_nombre, servicio.st_pagina_web, servicio.st_latitud, servicio.st_longitud, servicio.st_celular, servicio.st_red_social, servicio.st_video_servicio, servicio.st_img_servicio)">Ver más
                 <ion-icon name="map" style="margin-left: 10px"></ion-icon>
             </button>
+            <button *ngIf="idioma == 'en'" ion-button color='danger' (click)="AbrirServicio(servicio.st_id, servicio.st_nombre, servicio.st_pagina_web, servicio.st_latitud, servicio.st_longitud, servicio.st_celular, servicio.st_red_social, servicio.st_video_servicio, servicio.st_img_servicio)">See more
+              <ion-icon name="map" style="margin-left: 10px"></ion-icon>
+          </button>
 
 
         </ion-card-content>
