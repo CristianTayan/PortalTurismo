@@ -68,6 +68,7 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
 import { LogueoPage } from '../pages/logueo/logueo';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
+
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, "./assets/i18n/", ".json");
 }

@@ -1,6 +1,7 @@
 <ion-header>
   <ion-navbar color='secondary' >
-    <ion-title><h5>Descubre nuestras rutas</h5></ion-title>
+    <ion-title *ngIf="idioma == 'es'"><h5>Descubre nuestras rutas</h5></ion-title>
+    <ion-title *ngIf="idioma == 'en'"><h5>Discover routes</h5></ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -13,11 +14,16 @@
         <img [src]="'http://sigm.ibarra.gob.ec/sigm8/_lib/file/imgportalturistico/rutas/' + ruta.rt_img_ruta" (click)="verIntinerario(ruta.rt_id)" style="height: 35vh;" />
         <ion-card-content>
             <ion-card-title style="font-size: 1.0em;">
-                <strong style="margin-right: 12px">{{ruta.rt_nombre_ruta}}</strong>
+                <strong *ngIf="idioma == 'es'" style="margin-right: 12px">{{ruta.rt_nombre_ruta}}</strong>
+                <strong *ngIf="idioma == 'en'" style="margin-right: 12px">{{ruta.rt_nombre_ruta_ingles}}</strong>
             </ion-card-title>
-            <div [innerHTML]="ruta.rt_descripcion"></div>
+            <div *ngIf="idioma == 'es'" [innerHTML]="ruta.rt_descripcion"></div>
+            <div *ngIf="idioma == 'en'" [innerHTML]="ruta.rt_descripcion_ingles"></div>
             <hr>
-            <button ion-button color='whatsapp' (click)="verIntinerario(ruta.rt_id)">Ver intinerario
+            <button *ngIf="idioma == 'es'" ion-button color='whatsapp' (click)="verIntinerario(ruta.rt_id)" block>Ver intinerario
+                <ion-icon name="book" style="margin-left: 10px" (click)='Compartir()'></ion-icon>
+            </button>
+            <button *ngIf="idioma == 'en'" ion-button color='whatsapp' (click)="verIntinerario(ruta.rt_id)" block>Intinerary
                 <ion-icon name="book" style="margin-left: 10px" (click)='Compartir()'></ion-icon>
             </button>
             <!-- <button ion-button color='danger' (click)="Abrirruta(ruta.st_id, ruta.st_nombre, ruta.st_pagina_web, ruta.st_latitud, ruta.st_longitud, ruta.st_img_ruta)">Ver más

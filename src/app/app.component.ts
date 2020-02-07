@@ -35,7 +35,7 @@ export class MyApp {
   idioma = localStorage.getItem('idioma');
 
   constructor(public authService: AuthServiceProvider, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public menuCtrl: MenuController, private translateService: TranslateService, private storage: Storage, private iab: InAppBrowser) {
-    localStorage.setItem('idioma', 'es');
+    // localStorage.setItem('idioma', 'es');
     platform.ready().then(() => {
       this.translateService.setDefaultLang('es');
       this.translateService.use('es');

@@ -19,12 +19,12 @@
                 <strong  *ngIf="idioma == 'es'" style="margin-right: 12px">{{item.a_titulo}}</strong>
                 <strong  *ngIf="idioma == 'en'" style="margin-right: 12px">{{item.a_titulo_ingles}}</strong>
             </ion-card-title>
-            <p *ngIf="idioma == 'es'" style="text-align: justify" *ngIf="!isTextOpened">{{item.a_descripcion_corta}} <a *ngIf="!isTextOpened" (click)="isTextOpened=true" > Ver más</a> </p>
-            <p *ngIf="idioma == 'en'" style="text-align: justify" *ngIf="!isTextOpened">{{item.a_descripcion_corta_ingles}} <a *ngIf="!isTextOpened" (click)="isTextOpened=true" > Ver más</a> </p>
+            <!-- <p *ngIf="idioma == 'es'" style="text-align: justify" *ngIf="!isTextOpened">{{item.a_descripcion_corta}} <a *ngIf="!isTextOpened" (click)="isTextOpened=true" > Ver más</a> </p>
+            <p *ngIf="idioma == 'en'" style="text-align: justify" *ngIf="!isTextOpened">{{item.a_descripcion_corta_ingles}} <a *ngIf="!isTextOpened" (click)="isTextOpened=true" > Ver más</a> </p> -->
             <!-- <p margin style="text-align: justify" *ngIf="isTextOpened"></p> -->
             <!-- <div [innerHTML]="item.a_parrafo" *ngIf="!isTextOpened"> <a *ngIf="!isTextOpened" (click)="isTextOpened=true" >Ver más</a></div>             -->
-            <div *ngIf="idioma == 'es'" [innerHTML]="item.a_parrafo" *ngIf="isTextOpened"></div>
-            <div *ngIf="idioma == 'en'" [innerHTML]="item.a_parrafo_ingles" *ngIf="isTextOpened"></div>
+            <div *ngIf="idioma == 'es'" [innerHTML]="item.a_parrafo"></div>
+            <div *ngIf="idioma == 'en'" [innerHTML]="item.a_parrafo_ingles"></div>
         </ion-card-content>
     </ion-card>
 

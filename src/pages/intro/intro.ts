@@ -43,6 +43,7 @@ export class IntroPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad IntroPage');
+    localStorage.setItem('idioma', 'es');
   }
   skip() {
     this.navCtrl.setRoot(MnuPrincipalPage);

@@ -140,7 +140,7 @@ export class MnuPrincipalPage {
 
   cambioIdioma(selectedValue){
     this.translateService.use(selectedValue);
-    localStorage.setItem('idioma', this.idioma);
+    localStorage.setItem('idioma', selectedValue);
     this.navCtrl.setRoot(MnuPrincipalPage);
   }
 

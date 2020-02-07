@@ -21,6 +21,14 @@
     "Descubre las rutas": "Discover routes",
     "Todas las rutas": "All routes",
     "a": "to",
-    "Bienvenido a ":"Welcome to "
+    "Bienvenido a ":"Welcome to ",
+    "Inicio":"Home",
+    "Mapa de Ibarra":"Ibarra map",
+    "Emprendimientos":"Ventures",
+    "Acerca de Ibarra":"About Ibarra",
+    "Eventos":"Events",
+    "Iniciar Sesión":"Login",
+    "Perfil":"Profile",
+    "Terminar Sesión": "Logout"
 
 }
