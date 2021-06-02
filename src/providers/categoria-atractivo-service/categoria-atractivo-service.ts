@@ -8,6 +8,8 @@ import 'rxjs/add/operator/map';
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
+
+
 @Injectable()
 export class CategoriaAtractivoServiceProvider {
 
@@ -18,7 +20,7 @@ export class CategoriaAtractivoServiceProvider {
   getCategorias(){
     return new Promise(
       resolve => {
-        this.http.get("http://desarrollosigm.ibarra.gob.ec/servidorPortalTuristico/index.php/getCategorias")
+        this.http.get("https://portalciudadano.ibarra.gob.ec/srvPortalTuristico/index.php/getCategorias")
         .subscribe(
           data =>{    
             resolve(data);
@@ -34,7 +36,7 @@ export class CategoriaAtractivoServiceProvider {
   getCategoria(id){
     return new Promise(
       resolve => {
-        this.http.get("http://desarrollosigm.ibarra.gob.ec/servidorPortalTuristico/index.php/getCategoria"+id)
+        this.http.get("https://portalciudadano.ibarra.gob.ec/srvPortalTuristico/index.php/getCategoria"+id)
         .subscribe(
           data =>{
             resolve(data);

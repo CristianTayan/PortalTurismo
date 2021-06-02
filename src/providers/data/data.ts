@@ -19,7 +19,7 @@ export class DataProvider {
   getAbout(){
     return new Promise(
       resolve => {
-        this.http.get("http://desarrollosigm.ibarra.gob.ec/servidorPortalTuristico/index.php/getAbout")
+        this.http.get("https://portalciudadano.ibarra.gob.ec/srvPortalTuristico/index.php/getAbout")
         .subscribe(
           data =>{
             resolve(data);
@@ -35,7 +35,7 @@ export class DataProvider {
   getSiderData(){
     return new Promise(
       resolve => {
-        this.http.get("http://desarrollosigm.ibarra.gob.ec/servidorPortalTuristico/index.php/getSliderData")
+        this.http.get("https://portalciudadano.ibarra.gob.ec/srvPortalTuristico/index.php/getSliderData")
         .subscribe(
           data =>{
             resolve(data);
@@ -51,7 +51,7 @@ export class DataProvider {
   getEmprendimientos(){
     return new Promise(
       resolve => {
-        this.http.get("http://desarrollosigm.ibarra.gob.ec/servidorPortalTuristico/index.php/getEmprendimientos")
+        this.http.get("https://portalciudadano.ibarra.gob.ec/srvPortalTuristico/index.php/getEmprendimientos")
         .subscribe(
           data =>{
             resolve(data);
@@ -67,7 +67,7 @@ export class DataProvider {
   getEmprendimiento(id){
     return new Promise(
       resolve => {
-        this.http.get("http://desarrollosigm.ibarra.gob.ec/servidorPortalTuristico/index.php/getEmprendimiento/"+id)
+        this.http.get("https://portalciudadano.ibarra.gob.ec/srvPortalTuristico/index.php/getEmprendimiento/"+id)
         .subscribe(
           data =>{
             resolve(data);

@@ -120,10 +120,10 @@ export class AtractivoPage {
   }
 
   openLinkFb(){
-    this.iab.create(this.at_red_social,"_blank");
+    this.iab.create(this.at_red_social,'_system', 'location=yes');
   }
   openLink(){
-    this.iab.create(this.at_video_atractivo,"_blank");
+    this.iab.create(this.at_video_atractivo,'_system', 'location=yes');
   }
 
   imagenesAtractivo(){

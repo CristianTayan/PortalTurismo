@@ -144,15 +144,15 @@ export class ServicioPage {
   }
 
   openLink() {
-    this.iab.create(this.st_pagina_web, "_blank");
+    this.iab.create(this.st_pagina_web, '_system', 'location=yes');
   }
 
   openLinkFb() {
-    this.iab.create(this.st_red_social, "_blank");
+    this.iab.create(this.st_red_social, '_system', 'location=yes');
   }
 
   openLinkYt() {
-    this.iab.create(this.st_video_servicio, "_blank");
+    this.iab.create(this.st_video_servicio, '_system', 'location=yes');
   }
 
   calcularDistancia() {

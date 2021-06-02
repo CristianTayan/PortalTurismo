@@ -22,10 +22,10 @@ export class AtractivosTuristicosServiceProvider {
 
   getAtractivos(){
 
-    // return this.http.get('http://desarrollosigm.ibarra.gob.ec/servidorPortalTuristico/index.php/getAtractivos');
+    // return this.http.get('https://portalciudadano.ibarra.gob.ec/srvPortalTuristico/index.php/getAtractivos');
     return new Promise(
       resolve => {
-        this.http.get("http://desarrollosigm.ibarra.gob.ec/servidorPortalTuristico/index.php/getAtractivos")
+        this.http.get("https://portalciudadano.ibarra.gob.ec/srvPortalTuristico/index.php/getAtractivos")
         .subscribe(
           data =>{    
             resolve(data);
@@ -41,7 +41,7 @@ export class AtractivosTuristicosServiceProvider {
   getAtractivo(at_id){
     return new Promise(
       resolve => {
-        this.http.get("http://desarrollosigm.ibarra.gob.ec/servidorPortalTuristico/index.php/getAtractivo/"+at_id)
+        this.http.get("https://portalciudadano.ibarra.gob.ec/srvPortalTuristico/index.php/getAtractivo/"+at_id)
         .subscribe(
           data  =>{
             resolve(data);
@@ -59,7 +59,7 @@ export class AtractivosTuristicosServiceProvider {
   getCategoriaAtractivo(id){
     return new Promise(
       resolve => {
-        this.http.get("http://desarrollosigm.ibarra.gob.ec/servidorPortalTuristico/index.php/getAtractivoCategoria/"+id)
+        this.http.get("https://portalciudadano.ibarra.gob.ec/srvPortalTuristico/index.php/getAtractivoCategoria/"+id)
         .subscribe(
           data =>{
             resolve(data);
@@ -75,7 +75,7 @@ export class AtractivosTuristicosServiceProvider {
   getImagenesAtractivo(at_id){
     return new Promise(
       resolve => {
-        this.http.get("http://desarrollosigm.ibarra.gob.ec/servidorPortalTuristico/index.php/getImagenes/"+at_id)
+        this.http.get("https://portalciudadano.ibarra.gob.ec/srvPortalTuristico/index.php/getImagenes/"+at_id)
         .subscribe(
           data  =>{
             resolve(data);
@@ -91,7 +91,7 @@ export class AtractivosTuristicosServiceProvider {
   addComentario(data){
     return new Promise(
       resolve=>{
-        this.http.post("http://desarrollosigm.ibarra.gob.ec/servidorPortalTuristico/index.php/addcomentatractivo", data)
+        this.http.post("https://portalciudadano.ibarra.gob.ec/srvPortalTuristico/index.php/addcomentatractivo", data)
         .subscribe(
           data  =>{
             resolve(data);            
